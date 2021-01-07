@@ -1,5 +1,5 @@
 import { Component } from "react";
-import "./login.scss"
+import "./login.scss";
 export default class App extends Component {
   render() {
     return (
