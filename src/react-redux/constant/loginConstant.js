@@ -1,0 +1,4 @@
+const SETUSER = 'SETUSER'
+const SETFLAG = 'SETFLAG'
+
+export {SETUSER,SETFLAG}

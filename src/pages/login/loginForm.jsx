@@ -38,10 +38,7 @@ function LoginForm(props) {
   return (
     <Form
       name="basic"
-      initialValues={{
-        userName: "一叶扁舟",
-        passWord: "123456zx",
-      }}
+      initialValues={props.userInfo}
       size="large"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
