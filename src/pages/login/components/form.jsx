@@ -1,3 +1,6 @@
+/*
+ * @description: 登录表单
+ */
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { saveCookie } from "@/utils/cookie.js";
@@ -5,8 +8,6 @@ import { message } from "antd";
 import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types'
 import './form.scss'
-
-/* 登录表单 */
 function LoginForm(props) {
   let icon = {
     color: "#c0c4cc",

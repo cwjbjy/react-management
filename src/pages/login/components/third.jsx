@@ -1,9 +1,12 @@
+/*
+ * @description: 第三方登录
+ */
 import QQ from "@/assets/images/login/QQ.png";
 import WB from "@/assets/images/login/wb.png";
 import WX from "@/assets/images/login/wx.png";
 import { message } from 'antd';
 import './third.scss';
-/* 第三方登录 */
+
 export default function LoginOther() {
   function thirdLogin() {
     message.warning({

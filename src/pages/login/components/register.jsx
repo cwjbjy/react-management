@@ -1,3 +1,6 @@
+/*
+ * @description: 注册表单
+ */
 import { Component } from "react";
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
@@ -6,7 +9,6 @@ import { message } from "antd";
 import { getTime } from "@/utils/comFunc";
 import PropTypes from 'prop-types'
 import './register.scss'
-/* 注册表单 */
 export default class RegisterForm extends Component {
   constructor() {
     super();
