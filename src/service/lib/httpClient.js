@@ -1,6 +1,6 @@
 import qs from 'qs'
 import enumAuth from './auth'
-
+import { readCookie } from "@/utils/cookie.js";
 class FetchClient {
     constructor() {
         this.headers = {}; //预留字段
@@ -22,12 +22,12 @@ class FetchClient {
         switch (auth) {
             case enumAuth.Level01: //需要token
                 headers = Object.assign({}, this.headers, {
-                    Authorization: `Basic ${this.token}`
+                    Authorization: `Basic ${readCookie('token')}`
                 });
                 break;
             case enumAuth.Level02: //前端固定token
                 headers = Object.assign({}, this.headers, {
-                    Authorization: `Basic 22222`
+                    Authorization: `Basic di5j8fy85vSAX88U`
                 });
                 break;
             case enumAuth.Level03: //不需要token
@@ -44,6 +44,7 @@ class FetchClient {
             });
             url = `${url}?${data}`
         } else {
+            //传输JSON数据格式
             if (Object.prototype.toString.call(data) !== '[object FormData]') {
                 data = JSON.stringify(data)
             }
@@ -84,7 +85,7 @@ class FetchClient {
      */
     async httpFactory(url = '', {
         data = null,
-        auth = enumAuth.Level03,
+        auth = enumAuth.Level01,
         method
     }) {
         let req = await this.interceptorsRequest(url, {
