@@ -4,6 +4,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { isValidPass } from "@/utils/rules.js";
 import { message } from "antd";
 import { getTime } from "@/utils/comFunc";
+import PropTypes from 'prop-types'
 export default class RegisterForm extends Component {
   constructor() {
     super();
@@ -17,6 +18,12 @@ export default class RegisterForm extends Component {
       passAgainHelp: null,
     };
   }
+
+  static propTypes={
+    loginAction:PropTypes.object.isRequired,
+    onRegister:PropTypes.func.isRequired
+  }
+
   componentDidMount() {
     this.setState({
       verifyCode: new window.GVerify("v_container"),

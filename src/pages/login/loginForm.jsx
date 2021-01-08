@@ -3,6 +3,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { saveCookie } from "@/utils/cookie.js";
 import { message } from "antd";
 import { withRouter } from "react-router-dom";
+import PropTypes from 'prop-types'
 function LoginForm(props) {
   let icon = {
     color: "#c0c4cc",
@@ -76,6 +77,11 @@ function LoginForm(props) {
       </Form.Item>
     </Form>
   );
+}
+
+LoginForm.propTypes={
+    userInfo:PropTypes.object,
+    loginAction:PropTypes.object.isRequired
 }
 
 export default withRouter(LoginForm);
