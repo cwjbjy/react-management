@@ -1,7 +1,7 @@
-import LoginForm from "./loginForm";
-import LoginOther from "./loginOther";
-import RegisterForm from './registerForm'
-import "./login.scss";
+import LoginForm from "./components/form";
+import LoginOther from "./components/third";
+import RegisterForm from './components/register'
+import "./index.scss";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

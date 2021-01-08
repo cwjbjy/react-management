@@ -5,6 +5,8 @@ import { isValidPass } from "@/utils/rules.js";
 import { message } from "antd";
 import { getTime } from "@/utils/comFunc";
 import PropTypes from 'prop-types'
+import './register.scss'
+/* 注册表单 */
 export default class RegisterForm extends Component {
   constructor() {
     super();
