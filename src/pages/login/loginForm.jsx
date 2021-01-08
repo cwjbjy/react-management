@@ -1,7 +1,9 @@
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { saveCookie } from "@/utils/cookie.js";
-export default function LoginForm(props) {
+import { message } from "antd";
+import { withRouter } from "react-router-dom";
+function LoginForm(props) {
   let icon = {
     color: "#c0c4cc",
   };
@@ -10,12 +12,28 @@ export default function LoginForm(props) {
   };
   const onFinish = (params) => {
     let formData = new FormData();
-    formData.append('userName', params.userName);
-    formData.append('passWord', params.passWord);
-    props.loginAction.login(formData).then(res=>{
-        saveCookie('token',res.value)
-        saveCookie('auth',res.auth)
-    })
+    formData.append("userName", params.userName);
+    formData.append("passWord", params.passWord);
+    props.loginAction
+      .login(formData)
+      .then((res) => {
+        saveCookie("token", res.value);
+        saveCookie("auth", res.auth);
+        props.history.push('/home')
+      })
+      .catch((err) => {
+        if (err.status === 400) {
+          message.error({
+            content: "密码错误",
+            className: "custom-message",
+          });
+        } else if (err.status === 401) {
+          message.error({
+            content: "用户名错误",
+            className: "custom-message",
+          });
+        }
+      });
   };
   return (
     <Form
@@ -62,3 +80,5 @@ export default function LoginForm(props) {
     </Form>
   );
 }
+
+export default withRouter(LoginForm);

@@ -5,12 +5,20 @@ export default class RegisterForm extends Component{
     constructor(){
         super()
         this.state={
-            verifyCode:null
+            verifyCode:null,
+            reg_name:'',
+            rge_pass:'',
+            rge_passAgain:''
         }
     }
     componentDidMount(){
         this.setState({
             verifyCode:new window.GVerify("v_container")
+        })
+    }
+    nameChange = (e)=>{
+        this.setState({
+            reg_name:e.target.value
         })
     }
     render() {
@@ -29,6 +37,8 @@ export default class RegisterForm extends Component{
         let icon={
             color:'#c0c4cc'
         }
+
+        let {reg_name,rge_pass,rge_passAgain} = this.state
         return (
           <Form
             name="basic"
@@ -38,36 +48,18 @@ export default class RegisterForm extends Component{
           >
             <Form.Item
               name="reg_name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your username!",
-                },
-              ]}
             >
-              <Input placeholder="请输入用户名" prefix={<UserOutlined style={{color:icon.color}} />}/>
+              <Input placeholder="请输入用户名" value={reg_name} onChange={this.nameChange} prefix={<UserOutlined style={{color:icon.color}} />}/>
             </Form.Item>
     
             <Form.Item
               name="rge_pass"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
             >
               <Input.Password placeholder="请输入8-16位由数字与字母组成的密码" prefix={<LockOutlined style={{color:icon.color}} />}/>
             </Form.Item>
     
             <Form.Item
               name="rge_passAgain"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
             >
               <Input.Password placeholder="请再次输入密码" prefix={<LockOutlined style={{color:icon.color}} />}/>
             </Form.Item>

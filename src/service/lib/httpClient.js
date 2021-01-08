@@ -75,8 +75,10 @@ class FetchClient {
                     })
                 }
             }
-            alert("网络错误，请稍后重试");
-            reject()
+            /* 全局处理网络请求异常 */
+            // alert("网络错误，请稍后重试");
+            /* 通过.catch方式捕获异常*/
+            reject(res)
         })
     }
 

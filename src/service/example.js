@@ -15,7 +15,8 @@ API.login = (params) => {
 
 API.register = (params) => {
     return HttpClient.post(`${auth_url}/register`, {
-        data:params
+        data:params,
+        auth:enumAuth.Level03
     })
 }
 
