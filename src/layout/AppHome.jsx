@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import Nav from '../components/nav/nav'
-import RouteView from '@/routes/RouteView.jsx'
+import RouteView from '@/routes/routeView.jsx'
 export default class AppHome extends Component{
     render(){
         return(
