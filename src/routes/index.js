@@ -1,15 +1,14 @@
-import React from "react";
-import { Route,Switch,Redirect } from "react-router-dom";
-import Login from '../pages/login/index.jsx'
+/*
+ * @description: 
+ */
+import { Suspense } from "react";
+import routes from './routes'
+import { Spin } from 'antd';
+import RouteView from './RouteView.jsx'
 
-import AppHome from "../layout/AppHome.jsx";
 
 export default (
-    <Switch>
-         <Route path='/' exact render={()=> (
-               <Redirect to='/login'/>
-        )}/>
-        <Route exact path="/login" component={Login}></Route>
-        <Route path="/home" component={AppHome}></Route>
-    </Switch>
+    <Suspense fallback={<Spin tip="Loading..." delay="300" size="large"/>}>
+        <RouteView routes={routes}/>
+    </Suspense>
 )

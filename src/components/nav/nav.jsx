@@ -7,11 +7,10 @@ export default class Nav extends Component {
   constructor() {
     super();
     this.state = {
-      current: "login",
+      current: "homePage",
     };
   }
   handleClick = (e) => {
-    console.log("click ", e);
     this.setState({ current: e.key });
   };
 
@@ -19,14 +18,14 @@ export default class Nav extends Component {
     const { current } = this.state;
     return (
       <Menu onClick={this.handleClick} selectedKeys={current} mode="horizontal">
-        <Menu.Item key="login">
-          <Link to="/home" exact="true">
-            login
+        <Menu.Item key="homePage">
+          <Link to="/home/homePage" exact="true">
+            homePage
           </Link>
         </Menu.Item>
-        <Menu.Item key="signup">
-          <Link to="/home/signup" exact="true">
-            signup
+        <Menu.Item key="chart">
+          <Link to="/home/chart" exact="true">
+            chart
           </Link>
         </Menu.Item>
       </Menu>
