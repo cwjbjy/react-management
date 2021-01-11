@@ -35,7 +35,7 @@ const routes=[
         },
         children:[
             {
-                path:'/home/homePage',
+                path:'/home/firstItem',
                 component:HomePage,
                 exact:true,
                 auth:true,
