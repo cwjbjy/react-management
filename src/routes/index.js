@@ -1,3 +1,6 @@
+/*
+ * @description: 
+ */
 import {lazy} from "react";
 
 const Login = lazy(()=>import(/* webpackChunkName: "Login" */ '../pages/login/index.jsx'))
@@ -9,13 +12,15 @@ const NotFound = lazy(()=>import(/* webpackChunkName: "NotFound" */ '../componen
 const routes=[
     {
         path:'/',
-        exact:false,
+        exact:true,
+        auth:false,
         redirect: '/login',
     },
     {
         path:'/login',
         component:Login,
         exact:true,
+        auth:false,
         meta:{
             title:'登录'
         }
@@ -24,6 +29,7 @@ const routes=[
         path:'/home',
         component:AppHome,
         exact:false,
+        auth:true,
         meta:{
             title:'主页'
         },
@@ -32,6 +38,7 @@ const routes=[
                 path:'/home/homePage',
                 component:HomePage,
                 exact:true,
+                auth:true,
                 meta:{
                     title:'主页'
                 }
@@ -40,6 +47,7 @@ const routes=[
                 path:'/home/chart',
                 component:Chart,
                 exact:true,
+                auth:true,
                 meta:{
                     title:'图形页'
                 }
@@ -50,6 +58,7 @@ const routes=[
         path:'*',
         component:NotFound,
         exact:false,
+        auth:false,
         meta:{
             title:'404页面'
         }
