@@ -24,7 +24,7 @@ function LoginForm(props) {
       .then((res) => {
         saveCookie("token", res.value);
         saveCookie("auth", res.auth);
-        props.history.push('/home/homePage')
+        props.history.push('/home/firstItem')
       })
       .catch((err) => {
         if (err.status === 400) {
