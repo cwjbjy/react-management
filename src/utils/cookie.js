@@ -4,10 +4,7 @@ import cookie from 'react-cookies'
 export const saveCookie = (key, value) => {
     const expires = new Date()
     expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14)
-    cookie.save(key, value, {
-        path: '/',
-        expires
-    })
+    cookie.save(key, value)
 }
 
 // 获取当前用户cookie
@@ -17,8 +14,6 @@ export const readCookie = (key) => {
 
 // 用户登出，删除cookie
 export const removeCookie = (key) => {
-    cookie.remove(key, {
-        path: '/'
-    })
+    cookie.remove(key)
     window.location.href = '/login'
 }
