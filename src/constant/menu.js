@@ -3,7 +3,7 @@
  */
 export const menus = [{
         name: "系统首页",
-        path: "/home/firstItem",
+        path: "/firstItem",
         key: "firstItem",
         //   icon: require("@/assets/images/menus/home.png"),
     },
@@ -15,7 +15,7 @@ export const menus = [{
     },
     {
         name: "图片上传",
-        path: "/home/fileUp",
+        path: "/fileUp",
         key: "fileUp",
         //   icon: require("@/assets/images/menus/upload.png"),
     },
@@ -27,7 +27,7 @@ export const menus = [{
     },
     {
         name: "基础图表",
-        path: "/home/baseEcharts",
+        path: "/baseEcharts",
         key: "baseEcharts",
         //   icon: require("@/assets/images/menus/echarts.png"),
     },

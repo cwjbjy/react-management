@@ -1,81 +1,10 @@
-/*
- * @description: 
- */
-/*
- * @description: 
- */
-import {lazy} from "react";
+const files = require.context('.', false, /\.js$/)
+const routes = []
 
-const Login = lazy(()=>import(/* webpackChunkName: "Login" */ '@/pages/login/index.jsx'))
-const AppHome = lazy(()=>import(/* webpackChunkName: "AppHome" */ '@/layout/AppHome.jsx'))
-const HomePage = lazy(()=>import(/* webpackChunkName: "homePage" */'@/pages/homePage/index.jsx'))
-const Chart = lazy(()=>import(/* webpackChunkName: "Chart" */'@/pages/chart/index.jsx'))
-const FileUp = lazy(()=>import(/* webpackChunkName: "FileUp" */'@/pages/fileUp/index.jsx'))
-const NotFound = lazy(()=>import(/* webpackChunkName: "NotFound" */ '@/components/notFound/index.jsx'))
-
-const routes=[
-    {
-        path:'/',
-        exact:true,
-        auth:false,
-        redirect:true,
-    },
-    {
-        path:'/login',
-        component:Login,
-        exact:true,
-        auth:false,
-        meta:{
-            title:'登录'
-        }
-    },
-    {
-        path:'/home',
-        component:AppHome,
-        exact:false,
-        auth:true,
-        meta:{
-            title:'主页'
-        },
-        children:[
-            {
-                path:'/home/firstItem',
-                component:HomePage,
-                exact:true,
-                auth:true,
-                meta:{
-                    title:'主页'
-                }
-            },
-            {
-                path:'/home/baseEcharts',
-                component:Chart,
-                exact:true,
-                auth:true,
-                meta:{
-                    title:'图形页'
-                }
-            },
-            {
-                path:'/home/fileUp',
-                component:FileUp,
-                exact:true,
-                auth:true,
-                meta:{
-                    title:'文件'
-                }
-            },
-        ]
-    },
-    {
-        path:'*',
-        component:NotFound,
-        exact:false,
-        auth:false,
-        meta:{
-            title:'404页面'
-        }
-    }
-]
+files.keys().forEach(key => {
+  if (key === './index.js') return
+  const item = files(key).default
+  routes.push(...item)
+})
 
 export default routes
