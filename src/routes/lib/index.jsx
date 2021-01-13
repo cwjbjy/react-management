@@ -1,15 +1,16 @@
+import routes from "@/routes";
+import LayoutView from "@/layout/index.jsx";
+import { readCookie } from "@/utils/cookie";
+import { createBrowserHistory } from "history";
+import { Suspense } from "react";
+import { Spin } from "antd";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import { readCookie } from "@/utils/cookie";
-import routes from "@/routes";
-import LayoutView from "@/layout/index.jsx";
-import { createBrowserHistory } from "history";
-import { Suspense } from "react";
-import { Spin } from "antd";
+import "./index.scss";
 
 const buildRouter = ({ path, Component, children, auth, meta }, key) => {
   if (children) {

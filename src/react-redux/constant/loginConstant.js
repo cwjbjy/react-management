@@ -1,4 +1,3 @@
-const SETUSER = 'SETUSER'
-const SETFLAG = 'SETFLAG'
+const SETLOGIN = 'SETLOGIN'
 
-export {SETUSER,SETFLAG}
+export {SETLOGIN}

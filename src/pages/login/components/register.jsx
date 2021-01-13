@@ -1,6 +1,3 @@
-/*
- * @description: 注册表单
- */
 import { Component } from "react";
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";

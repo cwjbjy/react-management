@@ -8,13 +8,14 @@ import { message } from 'antd';
 import './third.scss';
 
 export default function LoginOther() {
-  function thirdLogin() {
-    message.warning({
-        content: '功能未开发，请使用用户注册',
-        className: 'custom-message',
-      });
-  }
 
+  const thirdLogin = ()=>{
+    message.warning({
+      content: '功能未开发，请使用用户注册',
+      className: 'custom-message',
+    });
+  }
+  
   return (
     <>
       <div className="other-acc">

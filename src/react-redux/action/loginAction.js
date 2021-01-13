@@ -14,18 +14,11 @@ const register = (params)=>{
 }
 
 /* 数据修改 */
-const SET_USER = (value)=>{
+const SET_LOGIN = (value)=>{
     return{
-        type:loginAction.SETUSER,
+        type:loginAction.SETLOGIN,
         value
     }
 }
 
-const SET_FLAG = (value)=>{
-    return{
-        type:loginAction.SETFLAG,
-        value
-    }
-}
-
-export {login,register,SET_USER,SET_FLAG}
+export {login,register,SET_LOGIN}

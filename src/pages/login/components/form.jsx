@@ -1,6 +1,3 @@
-/*
- * @description: 登录表单
- */
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { saveCookie } from "@/utils/cookie.js";
@@ -53,7 +50,7 @@ function LoginForm(props) {
         rules={[
           {
             required: true,
-            message: "Please input your username!",
+            message: "请输入用户名!",
           },
         ]}
       >
@@ -65,7 +62,7 @@ function LoginForm(props) {
         rules={[
           {
             required: true,
-            message: "Please input your password!",
+            message: "请输入密码!",
           },
         ]}
       >

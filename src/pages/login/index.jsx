@@ -1,6 +1,3 @@
-/*
- * @description: 登录页面
- */
 import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from './components/register'
@@ -9,12 +6,13 @@ import "./index.scss";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as loginAction from "@/react-redux/action/loginAction"
+import { Fragment } from "react";
 
 function Login(props) {
 
   /* 注册完成后回调 */
   const onRegister=(params)=>{
-    props.loginAction.SET_FLAG({
+    props.loginAction.SET_LOGIN({
       flag:params.flag,
       userName:params.userName,
       passWord:params.passWord
@@ -22,8 +20,8 @@ function Login(props) {
   }
 
   /* 切换tab */
-  const tabActive = () => {
-    props.loginAction.SET_FLAG({
+  const onTab = () => {
+    props.loginAction.SET_LOGIN({
       flag:!props.login.flag,
       userName:props.login.userName,
       passWord:props.login.passWord
@@ -42,22 +40,22 @@ function Login(props) {
           <div className="tab">
             <div
               className={`${flag ? "title_active" : ""} tab_title`}
-              onClick={tabActive}
+              onClick={onTab}
             >
               用户登录
             </div>
             <div
               className={`${!flag ? "title_active" : ""} tab_title`}
-              onClick={tabActive}
+              onClick={onTab}
             >
               用户注册
             </div>
           </div>
           {flag ? (
-            <>
+            <Fragment>
               <LoginForm userInfo={props.login} loginAction={props.loginAction}></LoginForm>
               <LoginOther></LoginOther>
-            </>
+            </Fragment>
           ) : (
             <RegisterForm loginAction={props.loginAction} onRegister={onRegister}></RegisterForm>
           )}
