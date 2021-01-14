@@ -1,6 +1,4 @@
-import {
-    SETLOGIN
-} from "../constant/loginConstant";
+import {SETLOGIN} from "../constant";
 
 const initState = {
     userName: '一叶扁舟',

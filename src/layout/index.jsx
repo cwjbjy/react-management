@@ -1,12 +1,12 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
-
+import { connect } from "react-redux";
 import "./index.scss";
-import { Fragment } from "react";
+
 
 const AppHome = (props) => {
   return (
-    <Fragment>
+    <div className={props.themeColor}>
       <Header />
       <main className="wrapper">
         <aside>
@@ -14,8 +14,12 @@ const AppHome = (props) => {
         </aside>
         <article>{props.routes}</article>
       </main>
-    </Fragment>
+    </div>
   );
 };
 
-export default AppHome;
+const mapStateToProps = (state)=>{
+  return state.theme
+}
+
+export default connect(mapStateToProps,null)(AppHome);

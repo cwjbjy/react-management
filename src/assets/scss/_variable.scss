@@ -9,8 +9,68 @@ $color-warning:#e6a23c;
 /* 背景 */
 $login-bg:rgba(25,202,173,1);
 $bg:#fff;
-$header-bg:#2f3542;
 
 /* 边框 */
 $border:#0078dc;
 $border-inactive:#e6e6e6;
+
+
+$themes: (
+  theme-blue: (
+    /* 字体*/
+    font-color: #fff,
+    /* 布局 */
+    header-background:#0678be,
+    aside-background:#336ea9,
+    main-background:#70a1ff,
+    box-shadow-color:#001a48,
+    /* card */
+    card-background:#fff,
+    card-border:#e9eaec,
+    card-font:#666,
+    card-active-background:#409eff,
+    card-active-border:#409eff,
+    /*拖拽*/
+    drag-background:#eff1f5,
+    /*按钮*/
+    primary-button:#409EFF,
+    /*飞机背景*/
+    fleet-bg:rgb(6, 42, 88),
+    /*字体图标*/
+    icon-font:#70a1ff,
+    /*表格*/
+    table-th:#d2d6de,
+  ),
+  theme-gray: (font-color: #fff,
+    header-background:#2f3542,
+    aside-background:#545c64,
+    main-background:#f0f0f0,
+    box-shadow-color:#ddd,
+    card-background:#fff,
+    card-border:#e9eaec,
+    card-font:#666,
+    card-active-background:#409eff,
+    card-active-border:#409eff,
+    drag-background:#eff1f5,
+    primary-button:#409EFF,
+    fleet-bg:rgb(6, 42, 88),
+    icon-font:#f0f0f0,
+    table-th:#d2d6de,
+  ),
+  theme-black: (font-color: #fff,
+    header-background:#303030,
+    aside-background:#303030,
+    main-background:#393939,
+    box-shadow-color:#ddd,
+    card-background:#303030,
+    card-border:#393939,
+    card-font:#fff,
+    card-active-background:#409eff,
+    card-active-border:#409eff,
+    drag-background:#303030,
+    primary-button:#303030,
+    fleet-bg:#393939,
+    icon-font:#635c5c,
+    table-th:#303030,
+  ),
+);

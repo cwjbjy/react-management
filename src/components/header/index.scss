@@ -1,7 +1,10 @@
 .header{
     display: flex;
     height: 70px;
-    background: $header-bg;
+    @include themify($themes) {
+      background-color: themed("header-background");
+      color: themed("font-color");
+    }
     color:$color;
     cursor: $c_pointer;
     &_left {
@@ -17,9 +20,9 @@
         @extend %right_center;
         .iconfont {
           font-size: 30px;
-          // @include themify($themes) {
-          //   color: themed("icon-font");
-          // }
+          @include themify($themes) {
+            color: themed("icon-font");
+          }
         }
         .user-img {
           width: 50px;
@@ -41,4 +44,11 @@
 
 .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
     text-align: center;
+    &:hover{
+      color:#66b1ff
+    }
+}
+
+.themeActive{
+  background-color: #ced6e0;
 }
