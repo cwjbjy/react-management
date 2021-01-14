@@ -24,3 +24,16 @@ section{
         border: 1px solid themed("card-border");
       }
 }
+
+.ant-progress-text{
+    @include themify($themes) {
+        color: themed("card-font");
+      }
+}
+
+.ant-card-head-title{
+    @include themify($themes) {
+        color: themed("card-font");
+      }
+}
+

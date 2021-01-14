@@ -1,5 +1,6 @@
 import { Row, Col } from "antd";
 import UserCard from "./components/userCard";
+import ProgressCard from "./components/progressCard";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -32,6 +33,7 @@ class HomePage extends Component {
         <Row>
           <Col span={8} lg={8} xl={8}>
             <UserCard imageUrl={imageUrl} userName={userName} registerTime={registerTime} role={role}/>
+            <ProgressCard/>
           </Col>
           <Col span={16} lg={16} xl={16}>
             Col
