@@ -7,7 +7,7 @@ const homePage = [
         Component:HomePage,
         auth:true,
         meta:{
-            title:'主页'
+            title:'系统首页'
         }
     },
 ]

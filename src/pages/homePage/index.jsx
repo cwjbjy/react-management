@@ -1,6 +1,7 @@
 import { Row, Col } from "antd";
 import UserCard from "./components/userCard";
 import ProgressCard from "./components/progressCard";
+import Message from "./components/message";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -36,7 +37,7 @@ class HomePage extends Component {
             <ProgressCard/>
           </Col>
           <Col span={16} lg={16} xl={16}>
-            Col
+            <Message/>
           </Col>
         </Row>
       </section>

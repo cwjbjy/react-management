@@ -1,0 +1,49 @@
+.icon-area {
+    height: 100px;
+    .icon-box {
+      padding-left: 10px;
+      padding-right: 10px;
+      .icon-content {
+        display: flex;
+      }
+      .icon-info {
+        flex: 1;
+        text-align: center;
+        @extend %column_center;
+        .grid-num {
+          font-size: 30px;
+          font-weight: bold;
+        }
+        .number1 {
+          color: rgb(45, 140, 240);
+        }
+        .number2 {
+          color: rgb(100, 213, 114);
+        }
+        .number3 {
+          color: rgb(242, 94, 67);
+        }
+        .describe{
+            font-size: 16px;
+            line-height: 1.5;
+        }
+      }
+    }
+    .grid-con-icon {
+      font-size: 50px;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 110px;
+      color: #fff;
+    }
+    .grid-con-1 {
+      background: rgb(45, 140, 240);
+    }
+    .grid-con-2 {
+      background: rgb(100, 213, 114);
+    }
+    .grid-con-3 {
+      background: rgb(242, 94, 67);
+    }
+  }
