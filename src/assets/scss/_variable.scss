@@ -22,6 +22,7 @@ $themes: (
     /* 布局 */
     header-background:#0678be,
     aside-background:#336ea9,
+    menu-select: #1890ff,
     main-background:#70a1ff,
     box-shadow-color:#001a48,
     /* card */
@@ -44,6 +45,7 @@ $themes: (
   theme-gray: (font-color: #fff,
     header-background:#2f3542,
     aside-background:#545c64,
+    menu-select:#434a50,
     main-background:#f0f0f0,
     box-shadow-color:#ddd,
     card-background:#fff,
@@ -60,6 +62,7 @@ $themes: (
   theme-black: (font-color: #fff,
     header-background:#303030,
     aside-background:#303030,
+    menu-select:#434a50,
     main-background:#393939,
     box-shadow-color:#ddd,
     card-background:#303030,

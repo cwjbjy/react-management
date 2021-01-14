@@ -1,12 +1,8 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-
-import { menus } from "@/constant/menu.js";
+import { menus } from "./config.jsx";
 import { Menu } from "antd";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import './index.scss'
 const { SubMenu } = Menu;
 
 export default class Menus extends Component {
@@ -29,10 +25,11 @@ export default class Menus extends Component {
         style={{ width: 256 }}
         selectedKeys={current}
         mode="inline"
+        className="Menu"
       >
         {menus.map((item, i) =>
           !item.children ? (
-            <Menu.Item key={item.key} icon={<MailOutlined />}>
+            <Menu.Item key={item.key} icon={item.icon}>
               <Link exact="true" to={item.path}>
                 {item.name}
               </Link>
@@ -40,8 +37,8 @@ export default class Menus extends Component {
           ) : (
             <SubMenu
               key={item.key}
-              icon={<AppstoreOutlined />}
               title={item.name}
+              icon={item.icon}
             >
               {item.children.map((itemChild, i) => (
                 <Menu.Item key={itemChild.key}>
