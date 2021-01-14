@@ -23,7 +23,7 @@ const Header = (props) => {
   });
   const onClick = ({ key }) => {
     if (key === "1") {
-        removeCookie('token')
+      removeCookie("token");
     }
   };
   const menu = (
@@ -41,16 +41,27 @@ const Header = (props) => {
       <Menu.Item key="1">退出登录</Menu.Item>
     </Menu>
   );
+  const colorMenu = (
+    <Menu onClick={onClick}>
+      <Menu.Item key="0">简约灰</Menu.Item>
+      <Menu.Item key="1">胖次蓝</Menu.Item>
+      <Menu.Item key="2">夜间模式</Menu.Item>
+    </Menu>
+  );
   return (
     <header className="header">
-      <div className="header_left">PC端后台管理系统(React版)</div>
+      <div className="header_left">
+        <span style={{ marginLeft: 10 }}>PC端后台管理系统(React版)</span>
+      </div>
       <div className="header_right">
+        <Dropdown overlay={colorMenu} className="user-drop">
+          <i className="iconfont icon-zhuti_tiaosepan_o"></i>
+        </Dropdown>
         <Dropdown overlay={menu} className="user-drop">
           <div className="userImage">
             <img src={imageUrl} className="user-img" alt="加载失败" />
-            <span style={{ marginRight: 10 }}>
-              <span style={{ marginRight: 2 }}>管理员</span>
-              {/* {{user_name}} */}
+            <span style={{ marginRight: 5 }}>
+              <span style={{ marginRight: 2 }}>{userName}</span>
               <CaretDownOutlined />
             </span>
           </div>

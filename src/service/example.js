@@ -26,12 +26,7 @@ API.updateUser = (params) => {
     return HttpClient.put('/updateUser', params)
 }
 
-//获取上传图片
-API.getImage = (params) => {
-    return HttpClient.get('/getImage', {
-        params: params
-    })
-}
+
 
 //获取用户单条信息
 API.getUser = (params) => {

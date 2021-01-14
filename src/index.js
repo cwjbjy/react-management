@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import RouterView from './routes/lib/index.jsx'
 
 import 'antd/dist/antd.css';
-
+import "./assets/icon/iconfont.css";
 ReactDOM.render(
   <Provider store={store}>
      <RouterView/>

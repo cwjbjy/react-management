@@ -15,6 +15,12 @@
       &_right {
         width: 50%;
         @extend %right_center;
+        .iconfont {
+          font-size: 30px;
+          // @include themify($themes) {
+          //   color: themed("icon-font");
+          // }
+        }
         .user-img {
           width: 50px;
           height: 50px;
