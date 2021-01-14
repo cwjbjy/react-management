@@ -9,8 +9,21 @@
     justify-content: space-around;
 }
 
+%space_between {
+    display: flex;
+    justify-content: space-between;
+}
+
 %right_center{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+%column_center{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column
 }

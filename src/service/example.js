@@ -28,11 +28,6 @@ API.updateUser = (params) => {
 
 
 
-//获取用户单条信息
-API.getUser = (params) => {
-    return HttpClient.get('/getUser', {
-        params: params
-    })
-}
+
 
 export default API

@@ -28,6 +28,14 @@ function Login(props) {
     })
   };
 
+  const onLogin = (params)=>{
+    props.loginAction.SET_LOGIN({
+      flag:true,
+      userName:params.userName,
+      passWord:params.passWord
+    })
+  }
+
   let  flag  = props.login.flag;
   
   return (
@@ -53,7 +61,7 @@ function Login(props) {
           </div>
           {flag ? (
             <Fragment>
-              <LoginForm userInfo={props.login} loginAction={props.loginAction}></LoginForm>
+              <LoginForm userInfo={props.login} loginAction={props.loginAction} onLogin={onLogin}></LoginForm>
               <LoginOther></LoginOther>
             </Fragment>
           ) : (

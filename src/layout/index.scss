@@ -2,3 +2,25 @@
     display: flex;
     height: calc(100vh - 70px);
 }
+
+article{
+    width: 100%;
+    overflow: auto;
+    @include themify($themes) {
+        background-color: themed("main-background");
+      }
+}
+
+section{
+    padding: 10px;
+}
+
+/* antd UI修改 */
+
+.ant-card{
+    @include themify($themes) {
+        background-color: themed("card-background");
+        color: themed("card-font");
+        border: 1px solid themed("card-border");
+      }
+}
