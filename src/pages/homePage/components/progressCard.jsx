@@ -15,7 +15,7 @@ const format = (percent)=>{
 
 const ProgressCard = () => {
   return (
-    <Card  title="语言详情" hoverable style={{ width: 342 }} className="user">
+    <Card  title="语言详情" hoverable  className="user">
     Vue<Progress percent={98} strokeColor="#42b983" format={format}/>
     Uni-app<Progress percent={89} strokeColor="#f1e05a" format={format}/>
     React<Progress percent={88}  format={format}/>

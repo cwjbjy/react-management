@@ -5,7 +5,7 @@ import "./userCard.scss";
 const UserCard = (props) => {
   let { imageUrl, userName, registerTime, role } = props;
   return (
-    <Card hoverable style={{ width: 342 }} className="user">
+    <Card hoverable  className="user">
       <Row className="user-top">
         <Col span="12">
           <img src={imageUrl} className="user-img" alt="加载失败" />
