@@ -1,52 +1,58 @@
-.wrapper{
-    display: flex;
-    height: calc(100vh - 70px);
+.wrapper {
+  display: flex;
+  height: calc(100vh - 70px);
 }
 
-article{
-    width: 100%;
-    overflow: auto;
-    @include themify($themes) {
-        background-color: themed("main-background");
-      }
+article {
+  width: 100%;
+  overflow: auto;
+  @include themify($themes) {
+    background-color: themed("main-background");
+  }
 }
 
-section{
-    padding: 10px;
+section {
+  padding: 10px;
 }
 
 /* antd UI修改 */
 
-.ant-card{
-    @include themify($themes) {
-        background-color: themed("card-background");
-        color: themed("card-font");
-        border: 1px solid themed("card-border");
-      }
+.ant-card {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+    border: 1px solid themed("card-border");
+  }
 }
 
-.ant-progress-text{
-    @include themify($themes) {
-        color: themed("card-font");
-      }
+.ant-progress-text {
+  @include themify($themes) {
+    color: themed("card-font");
+  }
 }
 
-.ant-card-head-title{
-    @include themify($themes) {
-        color: themed("card-font");
-      }
+.ant-card-head-title {
+  @include themify($themes) {
+    color: themed("card-font");
+  }
 }
 
-.ant-table-thead > tr > th{
-    @include themify($themes) {
-        background-color: themed("card-background");
-        color: themed("card-font");
-      }
+.ant-table-thead > tr > th {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+  }
 }
 
-.ant-table table{
-    @include themify($themes) {
-        background-color: themed("card-background");
-        color: themed("card-font");
-      }
+.ant-table table {
+  @include themify($themes) {
+    background-color: themed("card-background");
+    color: themed("card-font");
+  }
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  @include themify($themes) {
+    background-color: themed("main-background");
+  }
 }
