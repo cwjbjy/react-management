@@ -1,14 +1,16 @@
-import { Row, Col } from "antd";
+import { Row, Col, Card } from "antd";
 import UserCard from "./components/userCard";
 import ProgressCard from "./components/progressCard";
 import Message from "./components/message";
 import Schedule from "./components/schedule";
+import Bar from './components/bar'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userAction from "../../react-redux/action/userAction";
 import { useEffect, useState } from "react";
 import "./index.scss";
 const HomePage = (props) => {
+  let {theme} = props;
   let imageUrl = props.img.imageUrl;
   let userName = localStorage.getItem("userName");
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
@@ -25,7 +27,6 @@ const HomePage = (props) => {
   }, [userName, props.userAction]);
 
   return (
-    <section>
       <div className="homePage">
         <Row>
           <Col span={8} lg={8} xl={8}>
@@ -44,8 +45,17 @@ const HomePage = (props) => {
             </div>
           </Col>
         </Row>
+        <Row style={{marginBottom:20}}>
+          <Col span={12} lg={12} xl={12} className="echarts-box">
+            <Card hoverable>
+              <Bar theme={theme}/>
+            </Card>
+          </Col>
+          <Col span={12} lg={12} xl={12} className="echarts-box">
+            <Card hoverable></Card>
+          </Col>
+        </Row>
       </div>
-    </section>
   );
 };
 
