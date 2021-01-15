@@ -37,3 +37,16 @@ section{
       }
 }
 
+.ant-table-thead > tr > th{
+    @include themify($themes) {
+        background-color: themed("card-background");
+        color: themed("card-font");
+      }
+}
+
+.ant-table table{
+    @include themify($themes) {
+        background-color: themed("card-background");
+        color: themed("card-font");
+      }
+}
