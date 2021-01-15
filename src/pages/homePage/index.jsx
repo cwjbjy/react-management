@@ -3,7 +3,8 @@ import UserCard from "./components/userCard";
 import ProgressCard from "./components/progressCard";
 import Message from "./components/message";
 import Schedule from "./components/schedule";
-import Bar from './components/bar'
+import Bar from './components/bar';
+import BarLine from './components/barLine'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userAction from "../../react-redux/action/userAction";
@@ -52,7 +53,9 @@ const HomePage = (props) => {
             </Card>
           </Col>
           <Col span={12} lg={12} xl={12} className="echarts-box">
-            <Card hoverable></Card>
+            <Card hoverable>
+              <BarLine theme={theme}/>
+            </Card>
           </Col>
         </Row>
       </div>

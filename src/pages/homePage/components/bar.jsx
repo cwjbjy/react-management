@@ -10,7 +10,7 @@ import "./bar.scss";
 
 var myChart
 
-const Rose = (props) => {
+const Bar = (props) => {
   const autoSize = () => {
     let echartsInstance = echarts.getInstanceByDom(echart.current);
     echartsInstance.resize();
@@ -67,4 +67,4 @@ const Rose = (props) => {
   return <div ref={echart} className="myChart"></div>;
 };
 
-export default Rose;
+export default Bar;
