@@ -19,7 +19,7 @@ function LoginForm(props) {
     props.loginAction
       .login(formData)
       .then((res) => {
-        props.onLogin(params)
+        props.onLogin({...params,flag:true})
         localStorage.setItem("userName",params.userName)
         saveCookie("token", res.value);
         saveCookie("auth", res.auth);

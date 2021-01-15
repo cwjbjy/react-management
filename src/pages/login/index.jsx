@@ -10,8 +10,8 @@ import { Fragment } from "react";
 
 function Login(props) {
 
-  /* 注册完成后回调 */
-  const onRegister=(params)=>{
+  /* 用户名改变的回调 */
+  const onUserName=(params)=>{
     props.loginAction.SET_LOGIN({
       flag:params.flag,
       userName:params.userName,
@@ -28,16 +28,7 @@ function Login(props) {
     })
   };
 
-  const onLogin = (params)=>{
-    props.loginAction.SET_LOGIN({
-      flag:true,
-      userName:params.userName,
-      passWord:params.passWord
-    })
-  }
-
-  let  flag  = props.login.flag;
-  
+  let {login,loginAction} = props
   return (
     <div className="login">
       <header>
@@ -47,25 +38,25 @@ function Login(props) {
         <div className="form">
           <div className="tab">
             <div
-              className={`${flag ? "title_active" : ""} tab_title`}
+              className={`${login.flag ? "title_active" : ""} tab_title`}
               onClick={onTab}
             >
               用户登录
             </div>
             <div
-              className={`${!flag ? "title_active" : ""} tab_title`}
+              className={`${!login.flag ? "title_active" : ""} tab_title`}
               onClick={onTab}
             >
               用户注册
             </div>
           </div>
-          {flag ? (
+          {login.flag ? (
             <Fragment>
-              <LoginForm userInfo={props.login} loginAction={props.loginAction} onLogin={onLogin}></LoginForm>
+              <LoginForm userInfo={login} loginAction={loginAction} onLogin={onUserName}></LoginForm>
               <LoginOther></LoginOther>
             </Fragment>
           ) : (
-            <RegisterForm loginAction={props.loginAction} onRegister={onRegister}></RegisterForm>
+            <RegisterForm loginAction={loginAction} onRegister={onUserName}></RegisterForm>
           )}
         </div>
       </main>
