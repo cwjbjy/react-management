@@ -9,7 +9,7 @@ const chart = [
         Component:Chart,
         auth:true,
         meta:{
-            title:'图形页'
+            title:'基础图表'
         }
     },
 ]
