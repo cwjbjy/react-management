@@ -26,6 +26,10 @@ section {
   }
 }
 
+.ant-card-body{
+    font-size: 16px;
+}
+
 .ant-progress-text {
   @include themify($themes) {
     color: themed("card-font");

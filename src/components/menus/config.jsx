@@ -1,6 +1,5 @@
 import Home from "@/assets/images/menus/home.png";
 import ChinaMap from "@/assets/images/menus/echarts_heatmap.png"
-import Upload from '@/assets/images/menus/upload.png'
 import Pdf from '@/assets/images/menus/pdf.png'
 import Echarts from '@/assets/images/menus/echarts.png';
 import BaseTable from '@/assets/images/menus/baseTable.png'
@@ -25,12 +24,6 @@ export const menus = [{
         path: "/fleet",
         key: "fleet",
         icon: <img src={ChinaMap} alt="加载失败" className="menuIcon"></img>,
-    },
-    {
-        name: "图片上传",
-        path: "/fileUp",
-        key: "fileUp",
-        icon: <img src={Upload} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "文件预览",
