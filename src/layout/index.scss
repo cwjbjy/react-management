@@ -6,6 +6,7 @@
 article {
   width: 100%;
   overflow: auto;
+  height: inherit;
   @include themify($themes) {
     background-color: themed("main-background");
   }

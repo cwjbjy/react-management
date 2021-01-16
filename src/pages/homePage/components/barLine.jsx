@@ -1,20 +1,12 @@
 import { useEffect, useRef } from "react";
-import echarts from "echarts/lib/echarts";
-import { themeColor } from "@/constant/theme";
 
-import "echarts/lib/chart/bar";
-import "echarts/lib/chart/line";
-// 引入提示框和标题组件
-import "echarts/lib/component/tooltip";
-import "echarts/lib/component/title";
-import "echarts/lib/component/legend";
-import "./barLine.scss";
+import { themeColor } from "@/constant/theme";
 
 var myChart;
 
 const BarLine = (props) => {
   const autoSize = () => {
-    let echartsInstance = echarts.getInstanceByDom(echart.current);
+    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
     echartsInstance.resize();
   };
   useEffect(() => {
@@ -24,7 +16,7 @@ const BarLine = (props) => {
       myChart.dispose();
     }
 
-    myChart = echarts.init(echart.current);
+    myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
       title: {
@@ -185,6 +177,9 @@ const BarLine = (props) => {
           type: "bar",
           barWidth: 15,
           z:10,
+          itemStyle: {
+            color:'rgba(84, 112, 198)'
+          },
           data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
         },
       ],
@@ -197,7 +192,7 @@ const BarLine = (props) => {
     };
   });
   const echart = useRef();
-  return <div ref={echart} className="myChart"></div>;
+  return <div ref={echart} className="myChart" style={{height:300}}></div>;
 };
 
 export default BarLine;

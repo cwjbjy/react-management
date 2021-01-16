@@ -3,7 +3,8 @@ import { Row, Col } from "antd";
 import { register } from "@/filter";
 import "./userCard.scss";
 const UserCard = (props) => {
-  let { imageUrl, userName, registerTime, role } = props;
+  let { userName, registerTime, role } = props;
+  let imageUrl = sessionStorage.getItem('imageUrl');
   return (
     <Card hoverable  className="user">
       <Row className="user-top">

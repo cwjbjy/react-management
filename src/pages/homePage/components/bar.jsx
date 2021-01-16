@@ -1,30 +1,24 @@
 import { useEffect, useRef } from "react";
-import echarts from "echarts/lib/echarts";
 import { themeColor } from "@/constant/theme";
-// 引入柱状图
-import "echarts/lib/chart/bar";
-// 引入提示框和标题组件
-import "echarts/lib/component/tooltip";
-import "echarts/lib/component/title";
-import "./bar.scss";
 
-var myChart
+var myChart;
 
 const Bar = (props) => {
   const autoSize = () => {
-    let echartsInstance = echarts.getInstanceByDom(echart.current);
+    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
     echartsInstance.resize();
   };
   useEffect(() => {
     let { theme } = props;
 
     if (myChart !== null && myChart !== "" && myChart !== undefined) {
-        myChart.dispose();
+      myChart.dispose();
     }
 
-    myChart = echarts.init(echart.current);
+    myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
+      color: ['rgba(84, 112, 198)'],
       title: {
         text: "销售图表",
         textStyle: {
@@ -64,7 +58,7 @@ const Bar = (props) => {
     };
   });
   const echart = useRef();
-  return <div ref={echart} className="myChart"></div>;
+  return <div ref={echart} className="myChart" style={{height:300}}></div>;
 };
 
 export default Bar;
