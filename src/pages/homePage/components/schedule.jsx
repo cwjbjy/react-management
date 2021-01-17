@@ -53,8 +53,8 @@ const Schedule = () => {
       className="schedule"
     >
       <Table dataSource={data} pagination={false} >
-        <Column title="Name" dataIndex="lastName" key="lastName" />
-        <Column title="Age" dataIndex="age" key="age" />
+        <Column title="Name" dataIndex="lastName" key="lastName"/>
+        <Column title="Age" dataIndex="age" key="age"/>
         <Column title="Address" dataIndex="address" key="address" />
         <Column
           title="Tags"

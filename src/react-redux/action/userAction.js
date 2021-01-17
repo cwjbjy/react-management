@@ -7,4 +7,22 @@ const getUser = (params)=>{
     }
 }
 
-export {getUser}
+const getUsers = ()=>{
+    return dispatch=>{
+        return API.getUsers()
+    }
+}
+
+const deleteUser = (params)=>{
+    return dispatch=>{
+        return API.deleteUser(params)
+    }
+}
+
+const updateUser = (params)=>{
+    return dispatch=>{
+        return API.updateUser(params)
+    }
+}
+
+export {getUser,getUsers,deleteUser,updateUser}

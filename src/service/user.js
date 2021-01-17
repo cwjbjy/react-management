@@ -12,4 +12,23 @@ API.getUser = (params) => {
     })
 }
 
+//获取所有用户信息
+API.getUsers = () => {
+    return HttpClient.get(`${auth_url}/user`)
+}
+
+//删除普通用户 /Query String Parameters拼接在URL上 通常用于get与delete
+API.deleteUser = (params) => {
+    return HttpClient.delete(`${auth_url}/deleteUser`, {
+        data: params
+    })
+}
+
+//修改管理员账户信息
+API.updateUser = (params) => {
+    return HttpClient.put(`${auth_url}/updateUser`, {
+        data: params
+    })
+}
+
 export default API
