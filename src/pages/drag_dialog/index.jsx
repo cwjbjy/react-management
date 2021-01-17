@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Card ,Button} from "antd";
+import { Modal, Card, Button } from "antd";
 import Toast from "./components/index";
 import "./index.scss";
 
@@ -8,7 +8,10 @@ const DragModel = () => {
 
   return (
     <section>
-      <Card hoverable title={<strong>点击按钮，鼠标移动到弹框处，可实现拖拽功能。</strong>}>
+      <Card
+        hoverable
+        title={<strong>点击按钮，鼠标移动到弹框处，可实现拖拽功能。</strong>}
+      >
         <Button type="primary" size="large" onClick={() => onVisible(true)}>
           点我弹框
         </Button>
