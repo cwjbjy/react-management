@@ -1,0 +1,10 @@
+{
+  "Welcome to React": "458",
+  "btn": "Switch Chinese",
+  "title": "Technology Stack：React,React-Redux,React-Router-Dom,Echarts,AntD,SCSS,ES6,Nodejs,Nginx,MySQL",
+  "title1": "Product Presentation",
+  "p1":"The page needs to be logged in to be accessible",
+  "p2":"Drag and drop functionality:Drag - and - drop list options, drag - and - drop simulation box",
+  "p3":"Toggle theme colors: Set the theme color to the left of the top image",
+  "p4":"Using antd-grid layout and Flex layout to achieve screen adaptation"
+}

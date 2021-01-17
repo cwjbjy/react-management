@@ -16,7 +16,7 @@ const Drag = [
         Component:DragDialog,
         auth:true,
         meta:{
-            title:'图形页'
+            title:'拖拽弹框'
         }
     },
 ]
