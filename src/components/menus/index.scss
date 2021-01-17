@@ -11,6 +11,16 @@ aside {
   }
 }
 
+.ant-menu-item{
+  display: flex !important;
+  align-items: center;
+}
+
+.ant-menu-submenu-title{
+  display: flex !important;
+  align-items: center;
+}
+
 /* 菜单样式 */
 
 .ant-menu-item a {
