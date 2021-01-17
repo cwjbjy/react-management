@@ -8,7 +8,7 @@ const Drag = [
         Component:DragList,
         auth:true,
         meta:{
-            title:'图形页'
+            title:'拖拽列表'
         }
     },
     {
