@@ -109,7 +109,8 @@ class UserManage extends Component {
     return (
       <section>
         <Card hoverable>
-          <Table bordered columns={columns} dataSource={tableData} />
+          <strong>管理员可修改密码，普通用户可删除</strong>
+          <Table bordered columns={columns} dataSource={tableData} style={{marginTop:10}}/>
         </Card>
         <Modal
           title="修改密码"
