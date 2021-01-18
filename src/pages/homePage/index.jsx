@@ -7,25 +7,33 @@ import Bar from './components/bar';
 import BarLine from './components/barLine'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import * as imgAction from "@/react-redux/action/imgAction";
 import * as userAction from "../../react-redux/action/userAction";
+import { img_url } from "@/service/lib/baseUrl.js";
 import { useEffect, useState } from "react";
 import "./index.scss";
 const HomePage = (props) => {
   let {theme} = props;
-  let imageUrl = props.img.imageUrl;
   let userName = localStorage.getItem("userName");
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
 
   const [registerTime, getTime] = useState("");
-
+  const [imageUrl,setImage] = useState("")
   useEffect(() => {
-    const params = {
+    let params = {
       user_name: userName,
     };
+    /* 用户头像 */
+    props.imgAction.getImage(params).then((res) => {
+      let fileName = res.Data[0].photo;
+      let imgURL = `${img_url}${fileName}`;
+      setImage(imgURL)
+    });
+    /* 用户信息 */
     props.userAction.getUser(params).then((res) => {
       getTime(res.Data[0].createTime);
     });
-  }, [userName, props.userAction]);
+  }, [userName, props]);
 
   return (
       <div className="homePage">
@@ -68,6 +76,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    imgAction: bindActionCreators(imgAction, dispatch),
     userAction: bindActionCreators(userAction, dispatch),
   };
 };
