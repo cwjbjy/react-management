@@ -1,30 +1,18 @@
-import "./index.scss";
-import {
-  Card,
-  Table,
-  Image,
-  Button,
-  Modal,
-  Form,
-  Input,
-  message,
-  Popconfirm,
-} from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Card, Modal, message } from "antd";
 import { connect } from "react-redux";
 import * as userAction from "../../react-redux/action/userAction";
 import { bindActionCreators } from "redux";
 import { Component } from "react";
-import { img_url } from "../../service/lib/baseUrl";
-
+import PassChange from "./components/passChange";
+import UserTable from "./components/userTable";
+import "./index.scss";
 class UserManage extends Component {
   constructor() {
     super();
     this.state = {
       tableData: [],
-      isModalVisible: false,
-      password: "",
       info: {},
+      isModalVisible: false,
     };
   }
 
@@ -46,71 +34,18 @@ class UserManage extends Component {
   };
 
   render() {
-    const columns = [
-      {
-        title: "用户名",
-        dataIndex: "user_name",
-        align: "center",
-      },
-      {
-        title: "单击图像可以放大",
-        dataIndex: "photo",
-        align: "center",
-        render: (text) => <Image width={40} src={`${img_url}${text}`} />,
-      },
-      {
-        title: "角色描述",
-        dataIndex: "authority",
-        align: "center",
-        render: (text) => (
-          <span className={text === 1 ? "blue" : ""}>
-            {text === 1 ? "管理员" : "普通用户"}
-          </span>
-        ),
-      },
-      {
-        title: "注册时间",
-        dataIndex: "createTime",
-        align: "center",
-      },
-      {
-        title: "操作",
-        key: "action",
-        align: "center",
-        render: (text, record) => (
-          <>
-            {record.authority === 1 ? (
-              <Button
-                type="text"
-                className="blue"
-                icon={<EditOutlined />}
-                onClick={this.onEdit.bind(this, record)}
-              >
-                编辑
-              </Button>
-            ) : (
-              <Popconfirm
-                title="确认删除?"
-                onConfirm={this.onDelete.bind(this, record)}
-                onCancel={this.cancel}
-                okText="Yes"
-                cancelText="No"
-              >
-                <Button type="text" className="red" icon={<DeleteOutlined />}>
-                  删除
-                </Button>
-              </Popconfirm>
-            )}
-          </>
-        ),
-      },
-    ];
-    let { tableData, isModalVisible, password } = this.state;
+    let { tableData, isModalVisible } = this.state;
+    let { userAction } = this.props;
     return (
       <section>
         <Card hoverable>
           <strong>管理员可修改密码，普通用户可删除</strong>
-          <Table bordered columns={columns} dataSource={tableData} style={{marginTop:10}}/>
+          <UserTable
+            tableData={tableData}
+            userAction={userAction}
+            onModal={this.onEdit}
+            onDelete={this.onDelete}
+          />
         </Card>
         <Modal
           title="修改密码"
@@ -118,32 +53,35 @@ class UserManage extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          <Form name="basic">
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input.Password value={password} onChange={this.onPassword} />
-            </Form.Item>
-          </Form>
+          <PassChange userAction={userAction} />
         </Modal>
       </section>
     );
   }
-  cancel = () => {};
-  onEdit(params) {
+  
+  onEdit = (params) => {
     this.setState({
-      isModalVisible: true,
-      info: params,
+      isModalVisible: params.isModalVisible,
+      info: params.info,
     });
-  }
+  };
+
+  onDelete = (value) => {
+    let { id } = value;
+    let params = {
+      id,
+    };
+    this.props.userAction.deleteUser(params).then(() => {
+      message.success({
+        content: "删除成功",
+      });
+      this.getUsers();
+    });
+  };
 
   handleOk = () => {
     let { id, user_name } = this.state.info;
-    let { password } = this.state;
+    let { password } = this.props.user;
     let params = {
       id,
       user_name,
@@ -165,25 +103,6 @@ class UserManage extends Component {
   handleCancel = () => {
     this.setState({
       isModalVisible: false,
-    });
-  };
-
-  onDelete(value) {
-    let { id } = value;
-    let params = {
-      id,
-    };
-    this.props.userAction.deleteUser(params).then(() => {
-      message.success({
-        content: "删除成功",
-      });
-      this.getUsers();
-    });
-  }
-
-  onPassword = (e) => {
-    this.setState({
-      password: e.target.value,
     });
   };
 }
