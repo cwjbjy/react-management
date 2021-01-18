@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 import { menus } from "./config.jsx";
 import { Menu } from "antd";
 import "./index.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const { SubMenu } = Menu;
 
-const Menus = () => {
+const Menus = (props) => {
   const [current, setCurrent] = useState("firstItem");
+  useEffect(()=>{
+    /* 刷新页面时跳转到首页 */
+    let path = menus[0].path
+    props.history.push(path)
+  },[])
   const handleClick = (e) => {
     setCurrent(e.key);
   };
@@ -41,4 +46,4 @@ const Menus = () => {
   );
 };
 
-export default Menus;
+export default withRouter(Menus);

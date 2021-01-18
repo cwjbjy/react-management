@@ -13,7 +13,6 @@ export default class UserTable extends Component {
     this.props.onDelete(params);
   }
   render() {
-    console.log("this.props", this.props);
     const columns = [
       {
         title: "用户名",
