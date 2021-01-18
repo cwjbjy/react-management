@@ -52,7 +52,7 @@ const BuildRoutes = () => {
     <Switch>
       {noLayoutRoutes}
       <Route
-        path="/home"
+        path="/"
         render={() => (
           <LayoutView
             routes={
@@ -69,7 +69,6 @@ const BuildRoutes = () => {
           />
         )}
       />
-      <Route path="/" exact render={() => <Redirect to="/login" />} />
     </Switch>
   );
 };

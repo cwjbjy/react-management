@@ -4,7 +4,7 @@ const DragDialog = lazy(()=>import(/* webpackChunkName: "DragDialog" */'@/pages/
 
 const Drag = [
     {
-        path:'/home/dragList',
+        path:'/dragList',
         Component:DragList,
         auth:true,
         meta:{
@@ -12,7 +12,7 @@ const Drag = [
         }
     },
     {
-        path:'/home/dragDialog',
+        path:'/dragDialog',
         Component:DragDialog,
         auth:true,
         meta:{

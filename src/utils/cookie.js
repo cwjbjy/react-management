@@ -15,5 +15,4 @@ export const readCookie = (key) => {
 // 用户登出，删除cookie
 export const removeCookie = (key) => {
     cookie.remove(key)
-    window.location.href = '/login'
 }

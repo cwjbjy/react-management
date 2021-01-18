@@ -15,31 +15,31 @@ import './config.scss'
 
 export const menus = [{
         name: "系统首页",
-        path: "/home/firstItem",
+        path: "/firstItem",
         key: "firstItem",
         icon: <img src={Home} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "模拟航线",
-        path: "/home/fleet",
+        path: "/fleet",
         key: "fleet",
         icon: <img src={ChinaMap} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "文件预览",
-        path: "/home/pdf",
+        path: "/pdf",
         key: "pdf",
         icon: <img src={Pdf} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "基础图表",
-        path: "/home/baseEcharts",
+        path: "/baseEcharts",
         key: "baseEcharts",
         icon: <img src={Echarts} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "基础表格",
-        path: "/home/baseTable",
+        path: "/baseTable",
         key: "baseTable",
         icon: <img src={BaseTable} alt="加载失败" className="menuIcon"></img>,
     },
@@ -49,12 +49,12 @@ export const menus = [{
         icon: <img src={Drag} alt="加载失败" className="menuIcon"></img>,
         children: [{
                 name: "拖拽列表",
-                path: "/home/dragList",
+                path: "/dragList",
                 key: "dragList",
             },
             {
                 name: "拖拽弹框",
-                path: "/home/dragDialog",
+                path: "/dragDialog",
                 key: "dragDialog",
             },
         ],
@@ -62,7 +62,7 @@ export const menus = [{
     {
         name: "语言转换",
         icon: <img src={I18n} alt="加载失败" className="menuIcon"></img>,
-        path: "/home/I18n",
+        path: "/I18n",
         key: "I18n",
     },
     // {
@@ -88,7 +88,7 @@ export const menus = [{
     // },
     {
         name: "放大镜",
-        path: "/home/magnifying",
+        path: "/magnifying",
         key: "magnifying",
         icon: <img src={Magnifying} alt="加载失败" className="menuIcon"></img>,
     },
@@ -100,7 +100,7 @@ export const menus = [{
     // },
     {
         name: "后台管理",
-        path: "/home/manage",
+        path: "/manage",
         key: "manage",
         icon: <img src={Manage} alt="加载失败" className="menuIcon"></img>,
     },

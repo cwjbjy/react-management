@@ -5,7 +5,7 @@ const UserManage = lazy(()=>import(/* webpackChunkName: "userManage" */'@/pages/
 
 const userManage = [
     {
-        path:'/home/manage',
+        path:'/manage',
         Component:UserManage,
         auth:true,
         meta:{

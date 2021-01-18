@@ -3,7 +3,7 @@
   "btn": "切换英文",
   "title": "技术栈：React,React-Redux,React-Router-Dom,Echarts,AntD,SCSS,ES6,Nodejs,Nginx,MySQL",
   "title1": "产品介绍",
-  "p1": "权限管理：页面需登录才可访问",
+  "p1": "权限管理：管理员方可看到后台管理页面，修改自己密码以及对普通用户进行操作",
   "p2": "拖拽功能：可拖拽列表中选项，可拖拽模拟框",
   "p3": "切换主题色：在顶部头像左侧设置主题色",
   "p4": "采用antd-grid布局、flex布局实现屏幕适配"

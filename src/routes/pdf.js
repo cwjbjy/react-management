@@ -3,7 +3,7 @@ const PdfPreview = lazy(()=>import(/* webpackChunkName: "PdfPreview" */ '@/pages
 
 const pdf = [
     {
-        path:'/home/pdf',
+        path:'/pdf',
         Component:PdfPreview,
         auth:true,
         meta:{

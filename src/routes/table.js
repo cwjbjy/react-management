@@ -3,7 +3,7 @@ const BaseTable = lazy(()=>import(/* webpackChunkName: "baseTable" */ '@/pages/b
 
 const pdf = [
     {
-        path:'/home/baseTable',
+        path:'/baseTable',
         Component:BaseTable,
         auth:true,
         meta:{

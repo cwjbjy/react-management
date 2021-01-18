@@ -23,7 +23,7 @@ function LoginForm(props) {
         localStorage.setItem("userName",params.userName)
         saveCookie("token", res.value);
         saveCookie("auth", res.auth);
-        props.history.push('/home/firstItem')
+        props.history.push('/firstItem')
       })
       .catch((err) => {
         if (err.status === 400) {

@@ -1,29 +1,19 @@
-import { Link,withRouter } from "react-router-dom";
-import { menus } from "./config.jsx";
+import { Link, withRouter } from "react-router-dom";
 import { Menu } from "antd";
 import "./index.scss";
-import { useEffect, useState } from "react";
+
 const { SubMenu } = Menu;
 
 const Menus = (props) => {
-  const [current, setCurrent] = useState("firstItem");
-  useEffect(()=>{
-    /* 刷新页面时跳转到首页 */
-    let path = menus[0].path
-    props.history.push(path)
-  },[])
-  const handleClick = (e) => {
-    setCurrent(e.key);
-  };
+
   return (
     <Menu
-      onClick={handleClick}
       style={{ width: 256 }}
-      selectedKeys={current}
+      defaultSelectedKeys={['firstItem']}
       mode="inline"
       className="Menu"
     >
-      {menus.map((item, i) =>
+      {props.newMenus.map((item, i) =>
         !item.children ? (
           <Menu.Item key={item.key} icon={item.icon}>
             <Link exact="true" to={item.path}>

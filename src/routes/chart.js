@@ -5,7 +5,7 @@ const Chart = lazy(()=>import(/* webpackChunkName: "Chart" */'@/pages/chart/inde
 
 const chart = [
     {
-        path:'/home/baseEcharts',
+        path:'/baseEcharts',
         Component:Chart,
         auth:true,
         meta:{
