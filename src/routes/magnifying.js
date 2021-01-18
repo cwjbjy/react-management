@@ -3,7 +3,7 @@ const Magnifying = lazy(()=>import(/* webpackChunkName: "magnifying" */'@/pages/
 
 const magnifying = [
     {
-        path:'/magnifying',
+        path:'/home/magnifying',
         Component:Magnifying,
         auth:true,
         meta:{

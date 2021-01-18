@@ -3,7 +3,7 @@ const HomePage = lazy(()=>import(/* webpackChunkName: "homePage" */'@/pages/home
 
 const homePage = [
     {
-        path:'/firstItem',
+        path:'/home/firstItem',
         Component:HomePage,
         auth:true,
         meta:{

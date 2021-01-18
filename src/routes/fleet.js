@@ -5,7 +5,7 @@ const FleetLine = lazy(()=>import(/* webpackChunkName: "fleetLine" */'@/pages/fl
 
 const chart = [
     {
-        path:'/fleet',
+        path:'/home/fleet',
         Component:FleetLine,
         auth:true,
         meta:{
