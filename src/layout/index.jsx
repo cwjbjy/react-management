@@ -41,6 +41,10 @@ class AppHome extends Component {
       })
       sessionStorage.setItem("imageUrl", imgURL);
     });
+    /* 页面刷新 */
+    if(this.props.location.pathname !== '/firstItem'){
+      this.props.history.push('/firstItem')
+    }
   }
   render(){
     let {routes,theme,themeAction} = this.props

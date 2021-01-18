@@ -53,8 +53,9 @@ const BuildRoutes = () => {
       {noLayoutRoutes}
       <Route
         path="/"
-        render={() => (
+        render={(props) => (
           <LayoutView
+            {...props}
             routes={
               <Suspense
                 fallback={

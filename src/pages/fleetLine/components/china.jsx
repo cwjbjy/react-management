@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { geoCoordMap, apiData} from "./chinaConfig";
-import "./china.scss";
 
 var myChart;
 
