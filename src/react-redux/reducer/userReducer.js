@@ -7,7 +7,7 @@ const initState = {
     isModalVisible: false
 }
 
-const user = (state = initState, action) => {
+export default (state = initState, action) => {
     switch (action.type) {
         case SETPASSWORD:
             return Object.assign(state, {
@@ -17,5 +17,3 @@ const user = (state = initState, action) => {
             return state
     }
 }
-
-export default user

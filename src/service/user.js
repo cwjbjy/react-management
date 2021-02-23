@@ -17,7 +17,7 @@ API.getUsers = () => {
     return HttpClient.get(`${auth_url}/user`)
 }
 
-//删除普通用户 /Query String Parameters拼接在URL上 通常用于get与delete
+//删除普通用户 
 API.deleteUser = (params) => {
     return HttpClient.delete(`${auth_url}/deleteUser`, {
         data: params

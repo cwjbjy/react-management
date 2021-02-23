@@ -18,8 +18,11 @@ class AppHome extends Component {
     }
   }
   componentDidMount(){
-    /* 动态加载菜单栏 */
     let authMenus = readCookie("auth");
+    if(!authMenus){
+      this.props.history.push('/login')
+    } 
+    /* 动态加载菜单栏 */
     let arr = [];
     menus.forEach((item) => {
       if (item.key && authMenus.includes(item.key)) {

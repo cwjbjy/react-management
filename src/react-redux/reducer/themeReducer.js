@@ -4,7 +4,7 @@ const initState = {
     themeColor:'theme-gray'
 }
 
-const theme = (state =initState,action )=>{
+export default (state =initState,action )=>{
     switch(action.type){
         case SETTHEME:
             return{
@@ -14,5 +14,3 @@ const theme = (state =initState,action )=>{
             return state
     }
 }
-
-export default theme

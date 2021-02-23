@@ -1,4 +1,6 @@
-import {SETLOGIN} from "../constant";
+import {
+    SETLOGIN
+} from "../constant";
 
 const initState = {
     userName: '一叶扁舟',
@@ -6,17 +8,15 @@ const initState = {
     flag: true
 }
 
-const login = (state = initState, action) => {
+export default (state = initState, action) => {
     switch (action.type) {
         case SETLOGIN:
             return {
                 userName: action.value.userName,
-                    passWord: action.value.passWord,
-                    flag: action.value.flag
+                passWord: action.value.passWord,
+                flag: action.value.flag
             }
             default:
                 return state
     }
 }
-
-export default login

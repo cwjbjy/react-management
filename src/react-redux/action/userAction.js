@@ -1,5 +1,5 @@
 import API from '../../service'
-import { SETPASSWORD } from "../constant/userConst";
+import { SETPASSWORD } from "../constant";
 const setPassword = (value)=>{
     return{
         type:SETPASSWORD,
