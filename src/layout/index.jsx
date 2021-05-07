@@ -21,6 +21,7 @@ class AppHome extends Component {
     let authMenus = readCookie("auth");
     if(!authMenus){
       this.props.history.push('/login')
+      return;
     } 
     /* 动态加载菜单栏 */
     let arr = [];
