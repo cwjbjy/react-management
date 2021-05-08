@@ -5,17 +5,16 @@ import {removeCookie} from '@/utils/cookie'
 import { withRouter } from "react-router-dom";
 function Header(props) {
 
-  let { themeColor } = props.theme;
-  let {imageUrl} = props
+  let {imageUrl,themeColor,themeAction,history} = props
 
   const onList = ({ key }) => {
     if (key === "1") {
-      props.history.push('/login')
+      history.push('/login')
       removeCookie("token");
     }
   };
   const onColor = ({ key }) => {
-    props.themeAction.SET_THEME(key);
+    themeAction.SET_THEME(key);
   };
 
   const menu = (

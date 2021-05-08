@@ -30,7 +30,7 @@ const Menus = (props) => {
       className="Menu"
       onOpenChange={onOpenChange}
     >
-      {props.newMenus.map((item, i) =>
+      {props.newMenus.map((item) =>
         !item.children ? (
           <Menu.Item key={item.key} icon={item.icon}>
             <Link exact="true" to={item.path}>
@@ -39,7 +39,7 @@ const Menus = (props) => {
           </Menu.Item>
         ) : (
           <SubMenu key={item.key} title={item.name} icon={item.icon}>
-            {item.children.map((itemChild, i) => (
+            {item.children.map((itemChild) => (
               <Menu.Item key={itemChild.key}>
                 <Link exact="true" to={itemChild.path}>
                   {itemChild.name}

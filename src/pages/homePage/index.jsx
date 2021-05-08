@@ -7,7 +7,7 @@ import Bar from './components/bar';
 import BarLine from './components/barLine'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as imgAction from "@/react-redux/action/imgAction";
+import * as imgAction from "@/react-redux/action/img";
 import * as userAction from "../../react-redux/action/userAction";
 import { useEffect, useState } from "react";
 import "./index.scss";
