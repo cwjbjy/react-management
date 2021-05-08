@@ -16,7 +16,6 @@ export default class RegisterForm extends Component {
 
   static propTypes = {
     loginAction: PropTypes.object.isRequired,
-    onRegister: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -38,27 +37,7 @@ export default class RegisterForm extends Component {
           createTime: getTime(),
           photo: "userlogo.png",
         };
-        this.props.loginAction
-          .register(user)
-          .then((res) => {
-            message.success({
-              content: res.message,
-              className: "custom-message",
-            });
-            this.props.onRegister({
-              userName: params.reg_name,
-              passWord: params.rge_pass,
-              flag: true,
-            });
-          })
-          .catch((err) => {
-            if (err.status === 403) {
-              message.error({
-                content: "用户名已存在，请重新选择用户名",
-                className: "custom-message",
-              });
-            }
-          });
+        this.props.loginAction.ADD_USER(user);
       } else {
         message.error({
           content: "验证码错误",

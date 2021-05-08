@@ -56,7 +56,7 @@ function Login(props) {
               <LoginOther></LoginOther>
             </Fragment>
           ) : (
-            <RegisterForm loginAction={loginAction} onRegister={onUserName}></RegisterForm>
+            <RegisterForm loginAction={loginAction}></RegisterForm>
           )}
         </div>
       </main>
