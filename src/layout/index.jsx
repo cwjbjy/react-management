@@ -16,8 +16,7 @@ class AppHome extends Component {
     };
   }
   componentDidMount() {
-    let authMenus = readCookie("auth");
-    if (!authMenus) {
+    if (!readCookie("auth")) {
       this.props.history.push("/login");
       return;
     }
@@ -30,6 +29,7 @@ class AppHome extends Component {
   }
   getMenu = () => {
     let arr = [];
+    let authMenus = readCookie("auth");
     menus.forEach((item) => {
       if (item.key && authMenus.includes(item.key)) {
         arr.push(item);

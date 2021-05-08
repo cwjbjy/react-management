@@ -5,7 +5,7 @@ import "./index.scss";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as loginAction from "@/react-redux/action/loginAction"
+import * as loginAction from "@/react-redux/action/login"
 import { Fragment } from "react";
 
 function Login(props) {

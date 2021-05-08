@@ -1,14 +1,33 @@
-//正则表达式
+import {
+    message
+} from "antd";
 
-//验证密码由数字和字母组成，并且要同时含有数字和字母，且长度要在8-16位之间
-/*
-^ 匹配一行的开头位置
-(?![0-9]+$) 预测该位置后面不全是数字
-(?![a-zA-Z]+$) 预测该位置后面不全是字母
-[0-9A-Za-z] {8,16} 由8-16位数字或这字母组成
-$ 匹配行结尾位置
-*/
-export const isValidPass = (val) => {
-    const patt = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
-    return patt.test(val)
+export const rules = {
+    isValidPass: (val) => {
+        return new Promise((resolve, reject) => {
+            const patt = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/
+            if (!patt.test(val)) {
+                message.error({
+                    content: "密码错误",
+                    className: "custom-message",
+                })
+                reject()
+            } else {
+                resolve()
+            }
+        })
+    },
+    equal: (pass, pass_again) => {
+        return new Promise((resolve, reject) => {
+            if (pass !== pass_again) {
+                message.error({
+                    content: "两次输入密码不一致",
+                    className: "custom-message",
+                });
+                reject()
+            }else{
+                resolve()
+            }
+        })
+    }
 }
