@@ -1,6 +1,6 @@
 import {
     SETPASSWORD,
-} from "../constant/userConst";
+} from "../constant";
 
 const initState = {
     password: '',

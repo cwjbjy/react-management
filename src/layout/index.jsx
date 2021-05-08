@@ -7,13 +7,11 @@ import * as imgAction from "@/react-redux/action/imgAction";
 import * as themeAction from "@/react-redux/action/themeAction";
 import { Component } from "react";
 import { bindActionCreators } from "redux";
-import { img_url } from "@/service/lib/baseUrl.js";
 import {readCookie} from '@/utils/cookie'
 class AppHome extends Component {
   constructor(){
     super()
     this.state={
-      imageUrl:'',
       newMenus:[] 
     }
   }
@@ -37,25 +35,18 @@ class AppHome extends Component {
     let params = {
       user_name: localStorage.getItem("userName"),
     };
-    this.props.imgAction.getImage(params).then((res) => {
-      let fileName = res.Data[0].photo;
-      let imgURL = `${img_url}${fileName}`;
-      this.setState({
-        imageUrl:imgURL
-      })
-      sessionStorage.setItem("imageUrl", imgURL);
-    });
+    this.props.imgAction.getImage(params)
     /* 页面刷新 */
     if(this.props.location.pathname !== '/firstItem'){
       this.props.history.push('/firstItem')
     }
   }
   render(){
-    let {routes,theme,themeAction} = this.props
-    let {imageUrl,newMenus} = this.state
+    let {routes,theme,themeAction,img} = this.props
+    let {newMenus} = this.state
     return (
       <div className={theme.themeColor}>
-        <Header imageUrl={imageUrl} themeAction={themeAction} theme={theme}/>
+        <Header imageUrl={img.imageUrl} themeAction={themeAction} theme={theme}/>
         <main className="wrapper">
           <aside>
             <Menus newMenus={newMenus}/>

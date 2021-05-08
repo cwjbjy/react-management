@@ -1,3 +1,7 @@
-export {SETLOGIN} from './loginConst'
-export {SETTHEME} from './themeConst'
-export {SETPASSWORD} from './userConst'
+export const SETLOGIN = 'SETLOGIN'
+
+export const SETTHEME = 'SETTHEME'
+
+export const SETPASSWORD = 'SETPASSWORD'
+
+export const SETIMAGE = 'SETIMAGE'
