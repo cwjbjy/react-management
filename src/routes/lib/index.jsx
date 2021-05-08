@@ -1,7 +1,6 @@
 import routes from "@/routes";
 import LayoutView from "@/layout/index.jsx";
 import { readCookie } from "@/utils/cookie";
-import { createBrowserHistory } from "history";
 import { Suspense } from "react";
 import { Spin } from "antd";
 import {
@@ -24,9 +23,7 @@ const buildRouter = ({ path, Component, children, auth, meta }, key) => {
         key={key}
         path={path}
         render={(props) => {
-          if (meta?.title) {
-            document.title = meta.title;
-          }
+          document.title = meta.title || '文杰仓库'
           return !auth || readCookie("token") ? (
             <Component {...props} />
           ) : (
@@ -76,7 +73,7 @@ const BuildRoutes = () => {
 
 const RouterView = () => {
   return (
-    <Router key={createBrowserHistory().location.key}>
+    <Router>
       <Suspense
         fallback={
           <div className="loadBox">
