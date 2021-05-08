@@ -1,17 +1,34 @@
+
+import { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Menu } from "antd";
 import "./index.scss";
 
 const { SubMenu } = Menu;
 
+const rootSubmenuKeys = ["drag", "flowChart"];
+
 const Menus = (props) => {
+
+  const [openKeys, setOpenKeys] = useState([]);
+
+  const onOpenChange = keys => {
+    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
 
   return (
     <Menu
       style={{ width: 256 }}
       defaultSelectedKeys={['firstItem']}
+      openKeys={openKeys}
       mode="inline"
       className="Menu"
+      onOpenChange={onOpenChange}
     >
       {props.newMenus.map((item, i) =>
         !item.children ? (
