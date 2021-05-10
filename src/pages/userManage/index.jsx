@@ -1,6 +1,7 @@
 import { Card, Modal, message } from "antd";
 import { connect } from "react-redux";
 import * as userAction from "../../redux/action/user";
+import { SET_USERS } from '../../redux/action/users'
 import { bindActionCreators } from "redux";
 import { Component } from "react";
 import PassChange from "./components/passChange";
@@ -10,7 +11,6 @@ class UserManage extends Component {
   constructor() {
     super();
     this.state = {
-      tableData: [],
       info: {},
       isModalVisible: false,
     };
@@ -21,27 +21,18 @@ class UserManage extends Component {
   }
 
   getUsers = () => {
-    this.props.userAction.getUsers().then((res) => {
-      let newArr = [];
-      res.data.forEach((item, index) => {
-        let newItem = Object.assign({}, item, { key: index });
-        newArr.push(newItem);
-      });
-      this.setState({
-        tableData: newArr,
-      });
-    });
+    this.props.SET_USERS();
   };
 
   render() {
-    let { tableData, isModalVisible } = this.state;
-    let { userAction } = this.props;
+    let { isModalVisible } = this.state;
+    let { userAction,users } = this.props;
     return (
       <section>
         <Card hoverable>
           <strong>管理员可修改密码，普通用户可删除</strong>
           <UserTable
-            tableData={tableData}
+            tableData={users}
             userAction={userAction}
             onModal={this.onEdit}
             onDelete={this.onDelete}
@@ -114,6 +105,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userAction: bindActionCreators(userAction, dispatch),
+    SET_USERS:()=>{dispatch(SET_USERS())}
   };
 };
 

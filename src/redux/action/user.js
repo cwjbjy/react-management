@@ -18,12 +18,6 @@ const SET_USER = (params)=>{
     }
 }
 
-const getUsers = ()=>{
-    return dispatch=>{
-        return API.getUsers()
-    }
-}
-
 const deleteUser = (params)=>{
     return dispatch=>{
         return API.deleteUser(params)
@@ -36,4 +30,4 @@ const updateUser = (params)=>{
     }
 }
 
-export {setPassword,SET_USER,getUsers,deleteUser,updateUser}
+export {setPassword,SET_USER,deleteUser,updateUser}
