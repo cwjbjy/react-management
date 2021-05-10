@@ -1,6 +1,6 @@
 import {
-    SETPASSWORD,
-} from "../constant";
+    SETPASSWORD,SETTIME
+} from "../../constant/store";
 
 const initState = {
     password: '',
@@ -13,6 +13,10 @@ export default (state = initState, action) => {
             return Object.assign(state, {
                 password: action.value
             })
+            case SETTIME:
+                return Object.assign({},state,{
+                    time:action.value
+                })
         default:
             return state
     }

@@ -1,6 +1,6 @@
 import { Card, Modal, message } from "antd";
 import { connect } from "react-redux";
-import * as userAction from "../../react-redux/action/userAction";
+import * as userAction from "../../react-redux/action/user";
 import { bindActionCreators } from "redux";
 import { Component } from "react";
 import PassChange from "./components/passChange";

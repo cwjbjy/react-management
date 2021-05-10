@@ -1,18 +1,17 @@
 import QQ from "@/assets/images/login/QQ.png";
 import WB from "@/assets/images/login/wb.png";
 import WX from "@/assets/images/login/wx.png";
-import { message } from 'antd';
-import './third.scss';
+import { message } from "antd";
+import "./third.scss";
 
-export default function LoginOther() {
-
-  const thirdLogin = ()=>{
+const LoginOther = () => {
+  const thirdLogin = () => {
     message.warning({
-      content: '功能未开发，请使用用户注册',
-      className: 'custom-message',
+      content: "功能未开发，请使用用户注册",
+      className: "custom-message",
     });
-  }
-  
+  };
+
   return (
     <>
       <div className="other-acc">
@@ -31,4 +30,6 @@ export default function LoginOther() {
       </div>
     </>
   );
-}
+};
+
+export default LoginOther;

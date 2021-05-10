@@ -1,4 +1,4 @@
-import {SETIMAGE} from '../constant'
+import {SETIMAGE} from '../../constant/store'
 
 const initState = {
     imageUrl: ''

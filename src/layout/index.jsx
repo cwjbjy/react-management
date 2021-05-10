@@ -4,7 +4,7 @@ import { menus } from "../components/menus/config.jsx";
 import { connect } from "react-redux";
 import "./index.scss";
 import * as imgAction from "@/react-redux/action/img";
-import * as themeAction from "@/react-redux/action/themeAction";
+import * as themeAction from "@/react-redux/action/theme";
 import { Component } from "react";
 import { bindActionCreators } from "redux";
 import { readCookie } from "@/utils/cookie";

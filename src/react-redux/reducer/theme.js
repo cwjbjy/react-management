@@ -1,4 +1,4 @@
-import { SETTHEME } from "../constant";
+import { SETTHEME } from "../../constant/store";
 
 const initState = {
     themeColor:'theme-gray'

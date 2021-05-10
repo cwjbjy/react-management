@@ -6,26 +6,20 @@ import Schedule from "./components/schedule";
 import Bar from './components/bar';
 import BarLine from './components/barLine'
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as imgAction from "@/react-redux/action/img";
-import * as userAction from "../../react-redux/action/userAction";
-import { useEffect, useState } from "react";
+import { SET_USER } from "../../react-redux/action/user";
+import { useEffect } from "react";
 import "./index.scss";
 const HomePage = (props) => {
-  let {theme,img} = props;
+  let {theme,img,user,SET_USER} = props;
   let userName = localStorage.getItem("userName");
-  let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
+  
 
-  const [registerTime, getTime] = useState("");
   useEffect(() => {
     let params = {
       user_name: userName,
     };
-    /* 用户信息 */
-    props.userAction.getUser(params).then((res) => {
-      getTime(res.Data[0].createTime);
-    });
-  }, [userName, props]);
+    SET_USER(params);
+  }, []);
 
   return (
       <div className="homePage">
@@ -34,8 +28,7 @@ const HomePage = (props) => {
             <UserCard
               imageUrl={img.imageUrl}
               userName={userName}
-              registerTime={registerTime}
-              role={role}
+              registerTime={user.time}
             />
             <ProgressCard />
           </Col>
@@ -68,8 +61,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    imgAction: bindActionCreators(imgAction, dispatch),
-    userAction: bindActionCreators(userAction, dispatch),
+    SET_USER: (params)=>{dispatch(SET_USER(params))},
   };
 };
 

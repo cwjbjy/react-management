@@ -1,6 +1,6 @@
 import {
     SETUSER
-} from "../constant";
+} from "../../constant/store";
 
 const initState = {
     userName: '一叶扁舟',

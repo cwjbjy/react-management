@@ -1,7 +1,7 @@
 import API from '@/service/index'
 import { saveCookie } from "@/utils/cookie.js";
 import { message } from "antd";
-import { SETUSER } from "../constant";
+import { SETUSER } from "../../constant/store";
 
 const SET_LOGIN = (params, fn) => {
     return dispatch => {

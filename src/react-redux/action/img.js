@@ -1,5 +1,5 @@
 import API from '@/service/index'
-import {SETIMAGE} from '../constant'
+import {SETIMAGE} from '../../constant/store'
 import { img_url } from "@/service/lib/baseUrl.js";
 
 export const SET_IMAGE = (params) => {

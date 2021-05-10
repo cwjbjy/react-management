@@ -2,8 +2,10 @@ import { Card } from "antd";
 import { Row, Col } from "antd";
 import { register } from "@/filter";
 import "./userCard.scss";
+
 const UserCard = (props) => {
-  let { userName, registerTime, role,imageUrl } = props;
+  let { userName, registerTime,imageUrl } = props;
+  let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
   return (
     <Card hoverable  className="user">
       <Row className="user-top">
