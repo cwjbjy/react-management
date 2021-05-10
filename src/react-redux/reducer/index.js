@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import  login from "./loginReducer";
-import img from "./imgReducer";
-import theme from "./themeReducer";
-import user from './userReducer'
+import  login from "./login";
+import img from "./img";
+import theme from "./theme";
+import user from './user'
 const rootReducer = combineReducers({
     login,img,theme,user
 })

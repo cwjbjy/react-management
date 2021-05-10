@@ -1,12 +1,8 @@
 import API from '@/service/index'
 import { saveCookie } from "@/utils/cookie.js";
-import {
-    message
-} from "antd";
-import {
-    SETUSER
-} from "../constant";
-/* 网络请求 */
+import { message } from "antd";
+import { SETUSER } from "../constant";
+
 const SET_LOGIN = (params, fn) => {
     return dispatch => {
         return API.login(params).then((res) => {

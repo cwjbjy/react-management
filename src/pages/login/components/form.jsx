@@ -3,7 +3,9 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
-function LoginForm(props) {
+
+const LoginForm = (props) => {
+  let { loginAction, history, userInfo } = props;
   let icon = {
     color: "#c0c4cc",
   };
@@ -11,18 +13,18 @@ function LoginForm(props) {
     console.log("Failed:", errorInfo);
   };
   const login = () => {
-    props.history.push("/firstItem");
+    history.push("/firstItem");
   };
   const onFinish = (params) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
     formData.append("passWord", params.passWord);
-    props.loginAction.SET_LOGIN(formData, login);
+    loginAction.SET_LOGIN(formData, login);
   };
   return (
     <Form
       name="basic"
-      initialValues={props.userInfo}
+      initialValues={userInfo}
       size="large"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -60,7 +62,7 @@ function LoginForm(props) {
       </Form.Item>
     </Form>
   );
-}
+};
 
 LoginForm.propTypes = {
   userInfo: PropTypes.object,

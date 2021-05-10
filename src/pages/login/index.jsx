@@ -9,16 +9,14 @@ import * as loginAction from "@/react-redux/action/login";
 import { Fragment } from "react";
 
 const Login = (props) => {
-  /* 切换tab */
+  let { login, loginAction } = props;
   const onTab = () => {
-    props.loginAction.SET_USER({
+    loginAction.SET_USER({
       flag: !props.login.flag,
       userName: props.login.userName,
       passWord: props.login.passWord,
     });
   };
-
-  let { login, loginAction } = props;
   return (
     <div className="login">
       <header>

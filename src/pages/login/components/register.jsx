@@ -24,8 +24,8 @@ export default class RegisterForm extends Component {
     });
   }
 
-
   render() {
+    let { loginAction } = this.props;
     const onFinish = async (params) => {
       if (params.authCode && this.state.verifyCode.validate(params.authCode)) {
         await rules.isValidPass(params.rge_pass);
@@ -37,7 +37,7 @@ export default class RegisterForm extends Component {
           createTime: getTime(),
           photo: "userlogo.png",
         };
-        this.props.loginAction.ADD_USER(user);
+        loginAction.ADD_USER(user);
       } else {
         message.error({
           content: "验证码错误",

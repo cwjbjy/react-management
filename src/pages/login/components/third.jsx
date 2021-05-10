@@ -1,6 +1,3 @@
-/*
- * @description: 第三方登录
- */
 import QQ from "@/assets/images/login/QQ.png";
 import WB from "@/assets/images/login/wb.png";
 import WX from "@/assets/images/login/wx.png";
