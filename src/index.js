@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import store from './react-redux/store'
+import store from './redux/store'
 import { Provider } from "react-redux";
 
 import RouterView from './routes/lib/index.jsx'

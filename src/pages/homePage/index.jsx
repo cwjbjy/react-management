@@ -6,7 +6,7 @@ import Schedule from "./components/schedule";
 import Bar from './components/bar';
 import BarLine from './components/barLine'
 import { connect } from "react-redux";
-import { SET_USER } from "../../react-redux/action/user";
+import { SET_USER } from "../../redux/action/user";
 import { useEffect } from "react";
 import "./index.scss";
 const HomePage = (props) => {
