@@ -5,29 +5,35 @@ import { connect } from "react-redux";
 import "./index.scss";
 import * as imgAction from "@/redux/action/img";
 import * as themeAction from "@/redux/action/theme";
-import { Component } from "react";
 import { bindActionCreators } from "redux";
 import { readCookie } from "@/utils/cookie";
-class AppHome extends Component {
-  constructor() {
-    super();
-    this.state = {
-      newMenus: [],
-    };
-  }
-  componentDidMount() {
+import { useEffect, useState } from "react/cjs/react.development";
+const AppHome = (props) => {
+  const [newMenus, setMenu] = useState([]);
+  const {
+    history,
+    location,
+    imgAction,
+    routes,
+    theme,
+    themeAction,
+    img,
+  } = props;
+
+  useEffect(() => {
     if (!readCookie("auth")) {
-      this.props.history.push("/login");
+      history.push("/login");
       return;
     }
-    this.getMenu();
-    this.getImage();
+    getMenu();
+    getImage();
     /* 页面刷新 */
-    if (this.props.location.pathname !== "/firstItem") {
-      this.props.history.push("/firstItem");
+    if (location.pathname !== "/firstItem") {
+      history.push("/firstItem");
     }
-  }
-  getMenu = () => {
+  }, []);
+
+  const getMenu = () => {
     let arr = [];
     let authMenus = readCookie("auth");
     menus.forEach((item) => {
@@ -35,36 +41,32 @@ class AppHome extends Component {
         arr.push(item);
       }
     });
-    this.setState({
-      newMenus: arr,
-    });
+    setMenu(arr);
   };
-  getImage = () => {
+
+  const getImage = () => {
     let params = {
       user_name: localStorage.getItem("userName"),
     };
-    this.props.imgAction.SET_IMAGE(params);
+    imgAction.SET_IMAGE(params);
   };
-  render() {
-    let { routes, theme, themeAction, img } = this.props;
-    let { newMenus } = this.state;
-    return (
-      <div className={theme}>
-        <Header
-          imageUrl={img.imageUrl}
-          themeAction={themeAction}
-          themeColor={theme}
-        />
-        <main className="wrapper">
-          <aside>
-            <Menus newMenus={newMenus} />
-          </aside>
-          <article>{routes}</article>
-        </main>
-      </div>
-    );
-  }
-}
+  
+  return (
+    <div className={theme}>
+      <Header
+        imageUrl={img.imageUrl}
+        themeAction={themeAction}
+        themeColor={theme}
+      />
+      <main className="wrapper">
+        <aside>
+          <Menus newMenus={newMenus} />
+        </aside>
+        <article>{routes}</article>
+      </main>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
   return state;
