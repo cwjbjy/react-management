@@ -1,28 +1,30 @@
 import { useEffect, useRef } from "react";
-
 import { themeColor } from "@/constant/theme";
 
-var myChart;
-
 const BarLine = (props) => {
-  const autoSize = () => {
-    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
-    echartsInstance.resize();
-  };
+  const echart = useRef();
+  let myChart;
+
   useEffect(() => {
+    initial();
+  }, [props]);
+
+  useEffect(() => {
+    window.addEventListener("resize", autoSize, false);
+    return () => {
+      window.removeEventListener("resize", autoSize, false);
+    };
+  });
+
+  const initial = () => {
     let { theme } = props;
-
-    if (myChart !== null && myChart !== "" && myChart !== undefined) {
-      myChart.dispose();
-    }
-
     myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
       title: {
         text: "2019年销售水量和主营业务收入对比",
         textStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       tooltip: {
@@ -42,7 +44,7 @@ const BarLine = (props) => {
         top: "10%",
         left: "center",
         textStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       xAxis: {
@@ -59,21 +61,21 @@ const BarLine = (props) => {
         axisLine: {
           show: true, //隐藏X轴轴线
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisTick: {
           show: true, //隐藏X轴刻度
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisLabel: {
           show: true,
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
         nameTextStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       yAxis: [
@@ -86,21 +88,21 @@ const BarLine = (props) => {
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
-              color: themeColor[theme.themeColor].font,
+              color: themeColor[theme].font,
             },
           },
           axisTick: {
             show: true, //隐藏X轴刻度
             lineStyle: {
-              color: themeColor[theme.themeColor].font,
+              color: themeColor[theme].font,
             },
           },
           axisLabel: {
             show: true,
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
           nameTextStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         {
@@ -113,22 +115,22 @@ const BarLine = (props) => {
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
-              color: themeColor[theme.themeColor].font,
+              color: themeColor[theme].font,
             },
           },
           axisTick: {
             show: true, //隐藏X轴刻度
             lineStyle: {
-              color: themeColor[theme.themeColor].font,
+              color: themeColor[theme].font,
             },
           },
           axisLabel: {
             show: true,
             formatter: "{value} %", //右侧Y轴文字显示
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
           nameTextStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
       ],
@@ -176,23 +178,21 @@ const BarLine = (props) => {
           name: "主营业务",
           type: "bar",
           barWidth: 15,
-          z:10,
+          z: 10,
           itemStyle: {
-            color:'rgba(84, 112, 198)'
+            color: "#2d8cf0",
           },
           data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5],
         },
       ],
     });
-  }, [props]);
-  useEffect(() => {
-    window.addEventListener("resize", autoSize, false);
-    return () => {
-      window.removeEventListener("resize", autoSize, false);
-    };
-  });
-  const echart = useRef();
-  return <div ref={echart} className="myChart" style={{height:300}}></div>;
+  };
+
+  const autoSize = () => {
+    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
+    echartsInstance.resize();
+  };
+  return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };
 
 export default BarLine;

@@ -1,11 +1,11 @@
 import { Row, Col, Card } from "antd";
 import { connect } from "react-redux";
-import Bar from './components/bar'
-import Pie from './components/pie'
-import Scatter from './components/scatter'
-import Scale from './components/scale'
-import Line from './components/line'
-import Cylinder from './components/cylinder'
+import Bar from '../../components/baseEcharts/bar'
+import Pie from '../../components/baseEcharts/pie'
+import Scatter from '../../components/baseEcharts/scatter'
+import Scale from '../../components/baseEcharts/scale'
+import Line from '../../components/baseEcharts/line'
+import Cylinder from '../../components/baseEcharts/cylinder'
 import "./index.scss";
 const Chart = (props) => {
     let {theme} = props;

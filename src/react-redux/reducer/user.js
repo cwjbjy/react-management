@@ -4,7 +4,8 @@ import {
 
 const initState = {
     password: '',
-    isModalVisible: false
+    isModalVisible: false,
+    time:""
 }
 
 export default (state = initState, action) => {

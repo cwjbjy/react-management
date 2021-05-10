@@ -49,11 +49,11 @@ class AppHome extends Component {
     let { routes, theme, themeAction, img } = this.props;
     let { newMenus } = this.state;
     return (
-      <div className={theme.themeColor}>
+      <div className={theme}>
         <Header
           imageUrl={img.imageUrl}
           themeAction={themeAction}
-          themeColor={theme.themeColor}
+          themeColor={theme}
         />
         <main className="wrapper">
           <aside>

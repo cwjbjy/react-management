@@ -1,31 +1,39 @@
 import { useEffect, useRef } from "react";
 import { themeColor } from "@/constant/theme";
 
-var myChart;
-
 const Bar = (props) => {
-  const autoSize = () => {
-    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
-    echartsInstance.resize();
-  };
+  const echart = useRef();
+  let myChart;
+
   useEffect(() => {
+    initial();
+  }, [props]);
+
+  useEffect(() => {
+    window.addEventListener("resize", autoSize, false);
+    return () => {
+      window.removeEventListener("resize", autoSize, false);
+    };
+  });
+
+  const initial = () => {
     let { theme } = props;
-
-    if (myChart !== null && myChart !== "" && myChart !== undefined) {
-      myChart.dispose();
-    }
-
     myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
-      color: ['rgba(84, 112, 198)'],
+      color: ["#2d8cf0"],
       title: {
         text: "销售图表",
         textStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
-      tooltip: {},
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "shadow",
+        },
+      },
       grid: {
         bottom: "8%",
       },
@@ -33,13 +41,13 @@ const Bar = (props) => {
         data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
         axisLabel: {
           show: true,
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       yAxis: {
         axisLabel: {
           show: true,
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       series: [
@@ -50,15 +58,14 @@ const Bar = (props) => {
         },
       ],
     });
-  }, [props]);
-  useEffect(() => {
-    window.addEventListener("resize", autoSize, false);
-    return () => {
-      window.removeEventListener("resize", autoSize, false);
-    };
-  });
-  const echart = useRef();
-  return <div ref={echart} className="myChart" style={{height:300}}></div>;
+  };
+
+  const autoSize = () => {
+    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
+    echartsInstance.resize();
+  };
+
+  return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };
 
 export default Bar;

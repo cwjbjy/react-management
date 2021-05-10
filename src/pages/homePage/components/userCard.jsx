@@ -1,6 +1,7 @@
 import { Card } from "antd";
 import { Row, Col } from "antd";
 import { register } from "@/filter";
+import PropTypes from 'prop-types'
 import "./userCard.scss";
 
 const UserCard = (props) => {
@@ -29,5 +30,11 @@ const UserCard = (props) => {
     </Card>
   );
 };
+
+UserCard.propTypes = {
+  userName:PropTypes.string.isRequired,
+  registerTime:PropTypes.string.isRequired,
+  imageUrl:PropTypes.string.isRequired
+}
 
 export default UserCard;

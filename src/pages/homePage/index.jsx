@@ -13,7 +13,6 @@ const HomePage = (props) => {
   let {theme,img,user,SET_USER} = props;
   let userName = localStorage.getItem("userName");
   
-
   useEffect(() => {
     let params = {
       user_name: userName,

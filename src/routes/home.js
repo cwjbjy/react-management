@@ -3,7 +3,7 @@ import {lazy} from "react";
 const HomePage = lazy(()=>import(/* webpackChunkName: "homePage" */'@/pages/homePage/index.jsx'))
 const FleetLine = lazy(()=>import(/* webpackChunkName: "fleetLine" */'@/pages/fleetLine/index.jsx'))
 const PdfPreview = lazy(()=>import(/* webpackChunkName: "PdfPreview" */ '@/pages/pdfPreview/index.jsx'))
-const Chart = lazy(()=>import(/* webpackChunkName: "Chart" */'@/pages/chart/index.jsx'))
+const BaseEchart = lazy(()=>import(/* webpackChunkName: "baseEchart" */'@/pages/baseEchart/index.jsx'))
 const BaseTable = lazy(()=>import(/* webpackChunkName: "baseTable" */ '@/pages/baseTable/index.jsx'))
 const DragList = lazy(()=>import(/* webpackChunkName: "DragList" */'@/pages/drag_list/index.jsx'))
 const DragDialog = lazy(()=>import(/* webpackChunkName: "DragDialog" */'@/pages/drag_dialog/index.jsx'))
@@ -42,7 +42,7 @@ export default [
     },
     {
         path:'/baseEcharts',
-        Component:Chart,
+        Component:BaseEchart,
         auth:true,
         meta:{
             title:'基础图表'

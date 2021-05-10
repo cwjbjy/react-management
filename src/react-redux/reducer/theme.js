@@ -1,15 +1,11 @@
 import { SETTHEME } from "../../constant/store";
 
-const initState = {
-    themeColor:'theme-gray'
-}
+const initState = 'theme-gray'
 
-export default (state =initState,action )=>{
+export default (state = initState,action )=>{
     switch(action.type){
         case SETTHEME:
-            return{
-                themeColor:action.value
-            }
+            return action.value
         default:
             return state
     }

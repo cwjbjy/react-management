@@ -1,20 +1,24 @@
 import { useEffect, useRef } from "react";
 import { themeColor } from "@/constant/theme";
 import "./index.scss";
-var myChart;
 
 const Scale = (props) => {
-  const autoSize = () => {
-    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
-    echartsInstance.resize();
-  };
+  const echart = useRef();
+  let myChart;
+
   useEffect(() => {
+    initial();
+  }, [props]);
+
+  useEffect(() => {
+    window.addEventListener("resize", autoSize, false);
+    return () => {
+      window.removeEventListener("resize", autoSize, false);
+    };
+  });
+
+  const initial = () => {
     let { theme } = props;
-
-    if (myChart !== null && myChart !== "" && myChart !== undefined) {
-      myChart.dispose();
-    }
-
     myChart = window.echarts.init(echart.current);
     myChart.clear();
     var symbols = [
@@ -34,7 +38,7 @@ const Scale = (props) => {
         textStyle: {
           fontSize: 18,
           fontFamily: "Arial",
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
     };
@@ -48,7 +52,7 @@ const Scale = (props) => {
       },
       legend: {
         textStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
         orient: "vertical",
         left: "left",
@@ -71,21 +75,21 @@ const Scale = (props) => {
         axisTick: {
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisLine: {
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisLabel: {
           show: false,
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
         nameTextStyle: {
-          color: themeColor[theme.themeColor].font,
+          color: themeColor[theme].font,
         },
       },
       yAxis: {
@@ -93,28 +97,28 @@ const Scale = (props) => {
         splitLine: {
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisTick: {
           // 刻度线
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisLine: {
           // 轴线
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
         axisLabel: {
           // 轴坐标文字
           show: false,
           lineStyle: {
-            color: themeColor[theme.themeColor].font,
+            color: themeColor[theme].font,
           },
         },
       },
@@ -256,14 +260,12 @@ const Scale = (props) => {
         },
       ],
     });
-  }, [props]);
-  useEffect(() => {
-    window.addEventListener("resize", autoSize, false);
-    return () => {
-      window.removeEventListener("resize", autoSize, false);
-    };
-  });
-  const echart = useRef();
+  };
+
+  const autoSize = () => {
+    let echartsInstance = window.echarts.getInstanceByDom(echart.current);
+    echartsInstance.resize();
+  };
   return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };
 
