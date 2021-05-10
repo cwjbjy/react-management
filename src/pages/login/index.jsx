@@ -1,34 +1,24 @@
 import LoginForm from "./components/form";
 import LoginOther from "./components/third";
-import RegisterForm from './components/register'
+import RegisterForm from "./components/register";
 import "./index.scss";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as loginAction from "@/react-redux/action/login"
+import * as loginAction from "@/react-redux/action/login";
 import { Fragment } from "react";
 
-function Login(props) {
-
-  /* 用户名改变的回调 */
-  const onUserName=(params)=>{
-    props.loginAction.SET_LOGIN({
-      flag:params.flag,
-      userName:params.userName,
-      passWord:params.passWord
-    })
-  }
-
+const Login = (props) => {
   /* 切换tab */
   const onTab = () => {
-    props.loginAction.SET_LOGIN({
-      flag:!props.login.flag,
-      userName:props.login.userName,
-      passWord:props.login.passWord
-    })
+    props.loginAction.SET_USER({
+      flag: !props.login.flag,
+      userName: props.login.userName,
+      passWord: props.login.passWord,
+    });
   };
 
-  let {login,loginAction} = props
+  let { login, loginAction } = props;
   return (
     <div className="login">
       <header>
@@ -52,7 +42,10 @@ function Login(props) {
           </div>
           {login.flag ? (
             <Fragment>
-              <LoginForm userInfo={login} loginAction={loginAction} onLogin={onUserName}></LoginForm>
+              <LoginForm
+                userInfo={login}
+                loginAction={loginAction}
+              ></LoginForm>
               <LoginOther></LoginOther>
             </Fragment>
           ) : (
@@ -62,16 +55,16 @@ function Login(props) {
       </main>
     </div>
   );
-}
+};
 
-const mapStateToProps = (state)=>{
-  return state
-}
+const mapStateToProps = (state) => {
+  return state;
+};
 
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    loginAction:bindActionCreators(loginAction,dispatch)
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginAction: bindActionCreators(loginAction, dispatch),
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,5 +1,5 @@
 import {
-    SETLOGIN
+    SETUSER
 } from "../constant";
 
 const initState = {
@@ -10,7 +10,7 @@ const initState = {
 
 export default (state = initState, action) => {
     switch (action.type) {
-        case SETLOGIN:
+        case SETUSER:
             return {
                 userName: action.value.userName,
                 passWord: action.value.passWord,

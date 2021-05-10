@@ -1,26 +1,53 @@
 import API from '@/service/index'
+import { saveCookie } from "@/utils/cookie.js";
 import {
     message
 } from "antd";
 import {
-    SETLOGIN
+    SETUSER
 } from "../constant";
 /* 网络请求 */
-const login = (params) => {
+const SET_LOGIN = (params, fn) => {
     return dispatch => {
-        return API.login(params)
+        return API.login(params).then((res) => {
+                dispatch(SET_USER({
+                    userName: params.get('userName'),
+                    passWord: params.get('passWord'),
+                    flag: true
+                }))
+                localStorage.setItem("userName", params.get('userName'))
+                saveCookie("token", res.value);
+                saveCookie("auth", res.auth);
+                fn()
+            })
+            .catch((err) => {
+                if (err.status === 400) {
+                    message.error({
+                        content: "密码错误",
+                        className: "custom-message",
+                    });
+                } else if (err.status === 401) {
+                    message.error({
+                        content: "用户名错误",
+                        className: "custom-message",
+                    });
+                }
+            });
     }
 }
 
 const ADD_USER = (params) => {
-    let {userName,passWord} = params
+    let {
+        userName,
+        passWord
+    } = params
     return dispatch => {
         return API.register(params).then((res) => {
                 message.success({
                     content: res.message,
                     className: "custom-message",
                 })
-                dispatch(SET_LOGIN({
+                dispatch(SET_USER({
                     userName,
                     passWord,
                     flag: true,
@@ -37,16 +64,15 @@ const ADD_USER = (params) => {
     }
 }
 
-/* 数据修改 */
-const SET_LOGIN = (value) => {
+const SET_USER = (value) => {
     return {
-        type: SETLOGIN,
+        type: SETUSER,
         value
     }
 }
 
 export {
-    login,
+    SET_LOGIN,
     ADD_USER,
-    SET_LOGIN
+    SET_USER
 }

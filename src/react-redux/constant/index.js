@@ -1,4 +1,4 @@
-export const SETLOGIN = 'SETLOGIN'
+export const SETUSER = 'SETUSER'
 
 export const SETTHEME = 'SETTHEME'
 
