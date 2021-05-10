@@ -3,99 +3,82 @@ import { connect } from "react-redux";
 import * as userAction from "../../redux/action/user";
 import { SET_USERS } from '../../redux/action/users'
 import { bindActionCreators } from "redux";
-import { Component } from "react";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
 import "./index.scss";
-class UserManage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      info: {},
-      isModalVisible: false,
-    };
-  }
+import { useEffect, useState } from "react/cjs/react.development";
 
-  componentDidMount() {
-    this.getUsers();
-  }
+const UserManage = (props)=>{
 
-  getUsers = () => {
-    this.props.SET_USERS();
+  const [ info , setInfo] = useState({})
+  const [ isModalVisible , setModal] = useState(false)
+  const [ password , setPassword] = useState('')
+
+  let { userAction,SET_USERS,users } = props;
+
+  useEffect(()=>{
+    SET_USERS()
+  },[])
+
+  const onEdit = (params) => {
+    let {isModalVisible,info} = params
+    setModal(isModalVisible)
+    setInfo(info)
   };
 
-  render() {
-    let { isModalVisible } = this.state;
-    let { userAction,users } = this.props;
-    return (
-      <section>
-        <Card hoverable>
-          <strong>管理员可修改密码，普通用户可删除</strong>
-          <UserTable
-            tableData={users}
-            userAction={userAction}
-            onModal={this.onEdit}
-            onDelete={this.onDelete}
-          />
-        </Card>
-        <Modal
-          title="修改密码"
-          visible={isModalVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <PassChange userAction={userAction} />
-        </Modal>
-      </section>
-    );
-  }
-  
-  onEdit = (params) => {
-    this.setState({
-      isModalVisible: params.isModalVisible,
-      info: params.info,
-    });
-  };
-
-  onDelete = (value) => {
+  const onDelete = (value) => {
     let { id } = value;
-    let params = {
-      id,
-    };
-    this.props.userAction.deleteUser(params).then(() => {
+    userAction.DELETE_USER({id}).then(() => {
       message.success({
         content: "删除成功",
       });
-      this.getUsers();
+      SET_USERS();
     });
   };
 
-  handleOk = () => {
-    let { id, user_name } = this.state.info;
-    let { password } = this.props.user;
+  const handleOk = () => {
+    let { id, user_name } = info;
     let params = {
       id,
       user_name,
       password,
     };
-    this.props.userAction.updateUser(params).then((res) => {
+    userAction.UPDATE_USER(params).then((res) => {
       if (res.code === 200) {
         message.success({
           content: "密码修改成功",
         });
-        this.getUsers();
+        SET_USERS();
       }
     });
-    this.setState({
-      isModalVisible: false,
-    });
+    setModal(false)
   };
 
-  handleCancel = () => {
-    this.setState({
-      isModalVisible: false,
-    });
-  };
+  const getPass = (val)=>{
+    setPassword(val)
+  }
+
+  return (
+    <section>
+      <Card hoverable>
+        <strong>管理员可修改密码，普通用户可删除</strong>
+        <UserTable
+          tableData={users}
+          userAction={userAction}
+          onModal={onEdit}
+          onDelete={onDelete}
+        />
+      </Card>
+      <Modal
+        title="修改密码"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={()=>setModal(false)}
+      >
+        <PassChange fn={getPass} />
+      </Modal>
+    </section>
+  );
 }
 
 const mapStateToProps = (state) => {

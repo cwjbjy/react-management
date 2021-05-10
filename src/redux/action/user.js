@@ -1,11 +1,5 @@
 import API from '../../service'
-import { SETPASSWORD,SETTIME } from "../../constant/store";
-const setPassword = (value)=>{
-    return{
-        type:SETPASSWORD,
-        value
-    }
-}
+import { SETTIME } from "../../constant/store";
 
 const SET_USER = (params)=>{
     return dispatch=>{
@@ -18,16 +12,16 @@ const SET_USER = (params)=>{
     }
 }
 
-const deleteUser = (params)=>{
+const DELETE_USER = (params)=>{
     return dispatch=>{
         return API.deleteUser(params)
     }
 }
 
-const updateUser = (params)=>{
+const UPDATE_USER = (params)=>{
     return dispatch=>{
         return API.updateUser(params)
     }
 }
 
-export {setPassword,SET_USER,deleteUser,updateUser}
+export {SET_USER,DELETE_USER,UPDATE_USER}

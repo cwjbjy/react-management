@@ -1,11 +1,8 @@
 import { Form, Input } from "antd";
-import { useState } from "react";
 
 const PassChange = (props) => {
-  const [password, setPassword] = useState("");
   const onPassword = (e) => {
-    setPassword(e.target.value);
-    props.userAction.setPassword(e.target.value)
+    props.fn(e.target.value)
   };
   return (
     <Form name="basic">
@@ -14,7 +11,7 @@ const PassChange = (props) => {
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
-        <Input.Password value={password} onChange={onPassword} />
+        <Input.Password  onChange={onPassword} />
       </Form.Item>
     </Form>
   );
