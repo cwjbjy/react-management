@@ -1,18 +1,17 @@
 import { Card } from "antd";
-import { Component } from "react";
+import { useEffect } from "react/cjs/react.development";
 import "./index.scss";
-class Magnifying extends Component {
-  constructor() {
-    super();
-    this.state = {
-      src:
-        "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-    };
-  }
-  componentDidMount() {
-    this.init();
-  }
-  init() {
+
+const Magnifying = () => {
+
+  const src =
+    "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg";
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = () => {
     var span = document.createElement("span");
     var box = document.getElementById("small_Box");
     var img = document.createElement("img");
@@ -27,7 +26,7 @@ class Magnifying extends Component {
     span.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
     span.style.cursor = "pointer";
     box.appendChild(span);
-    img.setAttribute("src", this.state.src);
+    img.setAttribute("src", src);
     img.setAttribute("alt", "加载失败");
     img.style.width = scale * boxWidth + "px";
     img.style.height = scale * boxHeight + "px";
@@ -59,23 +58,21 @@ class Magnifying extends Component {
     box.onmouseout = function (e) {
       span.style.display = "none";
     };
-  }
-  render() {
-    let { src } = this.state;
-    return (
-      <section>
-        <Card hoverable>
-          <strong>
-            请将鼠标移动到图片上，体验效果 <br />
-            <br /> IE、Edge浏览器无法正常体验，请更换其他浏览器体验该效果{" "}
-          </strong>
-          <div className="block frontArea" id="small_Box">
-            <img src={src} className="imageBox" alt="加载失败" />
-          </div>
-        </Card>
-      </section>
-    );
-  }
-}
+  };
+
+  return (
+    <section>
+      <Card hoverable>
+        <strong>
+          请将鼠标移动到图片上，体验效果 <br />
+          <br /> IE、Edge浏览器无法正常体验，请更换其他浏览器体验该效果{" "}
+        </strong>
+        <div className="block frontArea" id="small_Box">
+          <img src={src} className="imageBox" alt="加载失败" />
+        </div>
+      </Card>
+    </section>
+  );
+};
 
 export default Magnifying;

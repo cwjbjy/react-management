@@ -1,34 +1,33 @@
 import { Card, Modal, message } from "antd";
 import { connect } from "react-redux";
 import * as userAction from "../../redux/action/user";
-import { SET_USERS } from '../../redux/action/users'
+import { SET_USERS } from "../../redux/action/users";
 import { bindActionCreators } from "redux";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
 import "./index.scss";
 import { useEffect, useState } from "react/cjs/react.development";
+import API from "../../service";
 
-const UserManage = (props)=>{
+const UserManage = (props) => {
+  const [info, setInfo] = useState({});
+  const [isModalVisible, setModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const { userAction, SET_USERS, users } = props;
 
-  const [ info , setInfo] = useState({})
-  const [ isModalVisible , setModal] = useState(false)
-  const [ password , setPassword] = useState('')
-
-  let { userAction,SET_USERS,users } = props;
-
-  useEffect(()=>{
-    SET_USERS()
-  },[])
+  useEffect(() => {
+    SET_USERS();
+  }, []);
 
   const onEdit = (params) => {
-    let {isModalVisible,info} = params
-    setModal(isModalVisible)
-    setInfo(info)
+    let { isModalVisible, info } = params;
+    setModal(isModalVisible);
+    setInfo(info);
   };
 
   const onDelete = (value) => {
     let { id } = value;
-    userAction.DELETE_USER({id}).then(() => {
+    API.deleteUser({ id }).then(() => {
       message.success({
         content: "删除成功",
       });
@@ -43,7 +42,7 @@ const UserManage = (props)=>{
       user_name,
       password,
     };
-    userAction.UPDATE_USER(params).then((res) => {
+    API.updateUser(params).then((res) => {
       if (res.code === 200) {
         message.success({
           content: "密码修改成功",
@@ -51,12 +50,12 @@ const UserManage = (props)=>{
         SET_USERS();
       }
     });
-    setModal(false)
+    setModal(false);
   };
 
-  const getPass = (val)=>{
-    setPassword(val)
-  }
+  const getPass = (val) => {
+    setPassword(val);
+  };
 
   return (
     <section>
@@ -73,13 +72,13 @@ const UserManage = (props)=>{
         title="修改密码"
         visible={isModalVisible}
         onOk={handleOk}
-        onCancel={()=>setModal(false)}
+        onCancel={() => setModal(false)}
       >
         <PassChange fn={getPass} />
       </Modal>
     </section>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return state;
@@ -88,7 +87,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     userAction: bindActionCreators(userAction, dispatch),
-    SET_USERS:()=>{dispatch(SET_USERS())}
+    SET_USERS: () => {
+      dispatch(SET_USERS());
+    },
   };
 };
 

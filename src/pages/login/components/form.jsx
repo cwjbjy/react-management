@@ -5,22 +5,28 @@ import PropTypes from "prop-types";
 import "./form.scss";
 
 const LoginForm = (props) => {
-  let { loginAction, history, userInfo } = props;
-  let icon = {
+
+  const { loginAction, history, userInfo } = props;
+
+  const icon = {
     color: "#c0c4cc",
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   const login = () => {
     history.push("/firstItem");
   };
+
   const onFinish = (params) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
     formData.append("passWord", params.passWord);
     loginAction.SET_LOGIN(formData, login);
   };
+
   return (
     <Form
       name="basic"

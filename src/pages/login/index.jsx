@@ -1,15 +1,16 @@
 import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from "./components/register";
-import "./index.scss";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as loginAction from "@/redux/action/login";
 import { Fragment } from "react";
+import "./index.scss";
 
 const Login = (props) => {
-  let { login, loginAction } = props;
+
+  const { login, loginAction } = props;
+
   const onTab = () => {
     loginAction.SET_USER({
       flag: !props.login.flag,
@@ -17,6 +18,7 @@ const Login = (props) => {
       passWord: props.login.passWord,
     });
   };
+
   return (
     <div className="login">
       <header>

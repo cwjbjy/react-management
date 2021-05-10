@@ -1,9 +1,11 @@
 import { Form, Input } from "antd";
 
 const PassChange = (props) => {
+
   const onPassword = (e) => {
     props.fn(e.target.value)
   };
+  
   return (
     <Form name="basic">
       <Form.Item

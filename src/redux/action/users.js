@@ -1,7 +1,5 @@
 import API from '../../service'
-import {
-    SETUSERS
-} from '../../constant/store'
+import { SETUSERS } from '../../constant/store'
 
 const SET_USERS = ()=>{
     return dispatch=>{

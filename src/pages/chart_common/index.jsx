@@ -2,10 +2,10 @@ import React from "react";
 import userImage from "@/assets/images/home/user.jpg";
 import "./index.scss";
 export default class CommonChart extends React.Component {
-    constructor(){
-        super()
-        this.mygoChart = React.createRef()
-    }
+  constructor() {
+    super();
+    this.mygoChart = React.createRef();
+  }
   componentDidMount() {
     this.dealShow();
   }

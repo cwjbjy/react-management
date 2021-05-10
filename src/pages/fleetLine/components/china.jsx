@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react";
-import { geoCoordMap, apiData} from "./chinaConfig";
-
-var myChart;
+import { geoCoordMap, apiData } from "../../../constant/map";
 
 const FleetModel = () => {
+
   const echart = useRef();
-  var convertData = function (data) {
+  let myChart;
+
+  useEffect(() => {
+    initial();
+  });
+
+  const convertData = function (data) {
     var res = [];
     for (let i = 0, len = data.length; i < len; i++) {
       var geoCoord = geoCoordMap[data[i].fromName];
@@ -24,7 +29,8 @@ const FleetModel = () => {
     }
     return res;
   };
-  var buildLines = function (data, geoCoordMap) {
+
+  const buildLines = function (data, geoCoordMap) {
     var planePath =
       "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
     let arr = [];
@@ -80,14 +86,11 @@ const FleetModel = () => {
     });
     return arr;
   };
-  useEffect(() => {
-    if (myChart !== null && myChart !== "" && myChart !== undefined) {
-      myChart.dispose();
-    }
+
+  const initial = () => {
     myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
-    //   backgroundColor: this.fleetBg,
       title: {
         text: "模拟航线",
         subtext: "数据纯属虚构",
@@ -181,7 +184,7 @@ const FleetModel = () => {
         ...buildLines(apiData, geoCoordMap),
       ],
     });
-  });
+  };
   return <div ref={echart} className="myChart"></div>;
 };
 

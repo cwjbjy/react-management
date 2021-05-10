@@ -7,8 +7,11 @@ import Scale from '../../components/baseEcharts/scale'
 import Line from '../../components/baseEcharts/line'
 import Cylinder from '../../components/baseEcharts/cylinder'
 import "./index.scss";
+
 const Chart = (props) => {
-    let {theme} = props;
+
+  const {theme} = props;
+
   return (
     <section>
       <Row className="chart">

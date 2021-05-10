@@ -4,18 +4,18 @@ import "./index.scss";
 export default class PositionChart extends React.Component {
   constructor() {
     super();
-    this.state={
-        myDiagram:null
-    }
+    this.state = {
+      myDiagram: null,
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.dealShow();
     let doc = document.querySelector("#myDiagramDiv").lastElementChild;
     let str = doc.getAttribute("style");
-    str = str.replace("overflow: auto","overflow: hidden");
-    doc.setAttribute("style",str)
+    str = str.replace("overflow: auto", "overflow: hidden");
+    doc.setAttribute("style", str);
   }
-  dealShow = ()=>{
+  dealShow = () => {
     var $ = go.GraphObject.make; // for conciseness in defining templates
     // some constants that will be reused within templates
     var mt8 = new go.Margin(8, 0, 0, 0);
@@ -36,17 +36,17 @@ export default class PositionChart extends React.Component {
             angle: 90,
             layerSpacing: 80,
             alternateAngle: 90,
-            alternateAlignment: go.TreeLayout.AlignmentBus
+            alternateAlignment: go.TreeLayout.AlignmentBus,
           }
-        )
+        ),
       }
     );
     function textStyle(field) {
       return [
         {
           font: "12px Roboto, sans-serif",
-          stroke: "rgba(0, 0, 0, .60)"
-        }
+          stroke: "rgba(0, 0, 0, .60)",
+        },
       ];
     }
     // define the Node template
@@ -68,14 +68,14 @@ export default class PositionChart extends React.Component {
             { fill: null, stroke: "#409eff", strokeWidth: 3 } //选中之后节点边框颜色
           ),
           $(go.Placeholder)
-        ) // end Adornment
+        ), // end Adornment
       },
       $(
         go.Shape,
         "RoundedRectangle",
         { fill: "#ffffff", strokeWidth: 0 },
         // 搜索时，被搜索到就变色
-        new go.Binding("fill", "isHighlighted", function(h) {
+        new go.Binding("fill", "isHighlighted", function (h) {
           return h ? "#409eff" : "#ffffff";
         }).ofObject()
       ),
@@ -101,7 +101,7 @@ export default class PositionChart extends React.Component {
                 alignment: go.Spot.Left, //第一行的内容
                 font: "16px Roboto, sans-serif",
                 stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, NaN)
+                maxSize: new go.Size(160, NaN),
               },
               new go.Binding("text", "name")
             )
@@ -130,7 +130,7 @@ export default class PositionChart extends React.Component {
             stroke: "rgba(0, 0, 0, .60)",
             strokeWidth: 1,
             height: 1,
-            stretch: go.GraphObject.Horizontal
+            stretch: go.GraphObject.Horizontal,
           },
           new go.Binding("visible").ofObject("INFO") // only visible when info is expanded
         ),
@@ -141,15 +141,15 @@ export default class PositionChart extends React.Component {
             name: "INFO", // identify to the PanelExpanderButton
             stretch: go.GraphObject.Horizontal, // take up whole available width
             margin: 8,
-            defaultAlignment: go.Spot.Left // thus no need to specify alignment on each element
+            defaultAlignment: go.Spot.Left, // thus no need to specify alignment on each element
           },
           $(
             go.TextBlock,
             textStyle("headOf"),
-            new go.Binding("text", "headOf", function(head) {
+            new go.Binding("text", "headOf", function (head) {
               return "" + head;
             }),
-            new go.Binding("margin", "headOf", function() {
+            new go.Binding("margin", "headOf", function () {
               return mt8;
             }) // some space above if there is also a headOf value
           )
@@ -177,7 +177,7 @@ export default class PositionChart extends React.Component {
         name: "村、社区出现病例或爆发疫情",
         nation: "bodyguard",
         title: "Secretary-General of the United Nations",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 1,
@@ -185,7 +185,7 @@ export default class PositionChart extends React.Component {
         name: "县疾控中心",
         nation: "Seychelles",
         title: "Vice Chairman of the Committee on Confidentiality",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 2,
@@ -194,14 +194,14 @@ export default class PositionChart extends React.Component {
         nation: "Ireland",
         title:
           "Under-Secretary-General for Legal Affairs and United Nations Legal Counsel",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 3,
         boss: 1,
         name: "健康教育",
         nation: "bodyguard",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 4,
@@ -209,7 +209,7 @@ export default class PositionChart extends React.Component {
         name: "信息告知",
         nation: "Denmark",
         title: "Assistant Secretary-General for Legal Affairs",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
 
       {
@@ -218,7 +218,7 @@ export default class PositionChart extends React.Component {
         name: "疫区返回人员管理",
         nation: "Argentina",
         title: "General Legal Division Director",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
 
       {
@@ -227,7 +227,7 @@ export default class PositionChart extends React.Component {
         name: "环境卫生治理",
         nation: "CzechRepublic",
         title: "Codification Division Director",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
 
       {
@@ -236,7 +236,7 @@ export default class PositionChart extends React.Component {
         name: "物资保障",
         nation: "Russia",
         title: "Division for Ocean Affairs and the Law of the Sea Director",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 12,
@@ -245,7 +245,7 @@ export default class PositionChart extends React.Component {
         nation: "Brazil",
         title:
           "Chairman of the Commission on the Limits of the Continental Shelf",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 17,
@@ -253,7 +253,7 @@ export default class PositionChart extends React.Component {
         name: "加强消毒",
         nation: "Ireland",
         title: "Chairman of the Committee on Confidentiality",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 32,
@@ -261,7 +261,7 @@ export default class PositionChart extends React.Component {
         name: "摸排登记、自我隔离",
         nation: "Japan",
         title: "Vice Chairman of the Committee on Confidentiality",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 33,
@@ -269,7 +269,7 @@ export default class PositionChart extends React.Component {
         name: "每天2次体温测量",
         nation: "Argentina",
         title: "Member of the Committee on Confidentiality",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 34,
@@ -277,7 +277,7 @@ export default class PositionChart extends React.Component {
         name: "实行居家隔离",
         nation: "Russia",
         title: "Member of the Committee on Confidentiality",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 18,
@@ -286,56 +286,56 @@ export default class PositionChart extends React.Component {
         nation: "Australia",
         title:
           "Chairman of the Committee on provision of scientific and technical advice to coastal States",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 35,
         boss: 12,
         name: "每天2次体温测量",
         nation: "Cameroon",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 36,
         boss: 12,
         name: "生活垃圾",
         nation: "India",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 37,
         boss: 12,
         name: "出现症状",
         nation: "TrinidadAndTobago",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 38,
         boss: 17,
         name: "疫点终末消毒",
         nation: "Romania",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 19,
         boss: 17,
         name: "疫点日常消毒",
         nation: "Nigeria",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 20,
         boss: 32,
         name: "村、社区",
         nation: "Norway",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 21,
         boss: 33,
         name: "乡镇卫生院",
         nation: "SouthKorea",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 22,
@@ -344,7 +344,7 @@ export default class PositionChart extends React.Component {
         nation: "Malaysia",
         linktext: "出现症状",
         title: "Chairman of the Editorial Committee",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 23,
@@ -352,42 +352,42 @@ export default class PositionChart extends React.Component {
         name: "村、社区",
         nation: "Mexico",
         title: "Chairman of the Training Committee",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 24,
         boss: 18,
         name: "家庭消毒",
         nation: "Mauritius",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 25,
         boss: 35,
         name: "乡镇卫生院",
         nation: "Georgia",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 26,
         boss: 36,
         name: "村收集",
         nation: "China",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 27,
         boss: 37,
         name: "报疾控中心",
         nation: "Ghana",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 28,
         boss: 27,
         name: "按规定转诊就医",
         nation: "Portugal",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 8,
@@ -395,7 +395,7 @@ export default class PositionChart extends React.Component {
         name: "村、社区、乡村医生",
         nation: "Netherlands",
         title: "Treaty Section Chief",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
       {
         key: 14,
@@ -403,7 +403,7 @@ export default class PositionChart extends React.Component {
         name: "专人运送到暂存点",
         nation: "UnitedStates",
         title: "Substantive Legal Issues Head",
-        headOf: "社会防控工作流程图"
+        headOf: "社会防控工作流程图",
       },
 
       {
@@ -412,14 +412,14 @@ export default class PositionChart extends React.Component {
         name: "乡镇卫生院消毒处置",
         nation: "Russia",
         title: "Technical/Legal Issues Head",
-        headOf: "Technical/Legal Issues"
-      }
+        headOf: "Technical/Legal Issues",
+      },
     ];
 
     // create the Model with data for the tree, and assign to the Diagram
     this.state.myDiagram.model = $(go.TreeModel, {
       nodeParentKeyProperty: "boss", // this property refers to the parent node data
-      nodeDataArray: nodeDataArray
+      nodeDataArray: nodeDataArray,
     });
 
     // Overview
@@ -428,8 +428,8 @@ export default class PositionChart extends React.Component {
       "myOverviewDiv", // the HTML DIV element for the Overview
       { observed: this.state.myDiagram, contentAlignment: go.Spot.Center }
     ); // tell it which Diagram to show and pan
-  }
-  searchDiagram = ()=>{
+  };
+  searchDiagram = () => {
     var input = document.getElementById("mySearch");
     if (!input) return;
     input.focus();
@@ -447,17 +447,14 @@ export default class PositionChart extends React.Component {
     }
 
     this.state.myDiagram.commitTransaction("highlight search");
-  }
+  };
   render() {
     return (
       <div id="sample">
         <div id="myDiagramDiv"></div>
         <div id="myOverviewDiv"></div>
         <div className="search">
-          <input
-            type="search"
-            id="mySearch"
-          />
+          <input type="search" id="mySearch" />
           <button onClick={this.searchDiagram}>查询</button>
         </div>
       </div>

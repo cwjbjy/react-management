@@ -10,8 +10,9 @@ import { SET_USER } from "../../redux/action/user";
 import { useEffect } from "react";
 import "./index.scss";
 const HomePage = (props) => {
-  let {theme,img,user,SET_USER} = props;
-  let userName = localStorage.getItem("userName");
+  
+  const {theme,img,user,SET_USER} = props;
+  const userName = localStorage.getItem("userName");
   
   useEffect(() => {
     let params = {

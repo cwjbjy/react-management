@@ -11,6 +11,7 @@ import {
 } from "antd";
 
 import "./index.scss";
+
 const originData = [];
 
 for (let i = 0; i < 100; i++) {

@@ -5,6 +5,7 @@ import { message } from "antd";
 import "./third.scss";
 
 const LoginOther = () => {
+  
   const thirdLogin = () => {
     message.warning({
       content: "功能未开发，请使用用户注册",

@@ -12,6 +12,10 @@ const RegisterForm = (props) => {
   const { loginAction } = props;
   const [verifyCode, set_verifyCode] = useState(null);
 
+  const icon = {
+    color: "#c0c4cc",
+  };
+
   useEffect(() => {
     set_verifyCode(new window.GVerify("v_container"));
   }, []);
@@ -38,10 +42,6 @@ const RegisterForm = (props) => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  };
-
-  const icon = {
-    color: "#c0c4cc",
   };
 
   return (

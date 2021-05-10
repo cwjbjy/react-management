@@ -2,7 +2,6 @@ import React from "react";
 import "./index.scss";
 
 export default class FoldChart extends React.Component {
-
   componentDidMount() {
     this.dealShow();
   }

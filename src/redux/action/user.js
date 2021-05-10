@@ -12,16 +12,4 @@ const SET_USER = (params)=>{
     }
 }
 
-const DELETE_USER = (params)=>{
-    return dispatch=>{
-        return API.deleteUser(params)
-    }
-}
-
-const UPDATE_USER = (params)=>{
-    return dispatch=>{
-        return API.updateUser(params)
-    }
-}
-
-export {SET_USER,DELETE_USER,UPDATE_USER}
+export {SET_USER}
