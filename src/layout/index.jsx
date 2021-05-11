@@ -21,10 +21,6 @@ const AppHome = (props) => {
   } = props;
 
   useEffect(() => {
-    if (!readCookie("auth")) {
-      history.push("/login");
-      return;
-    }
     getMenu();
     getImage();
     /* 页面刷新 */
@@ -37,7 +33,7 @@ const AppHome = (props) => {
     let arr = [];
     let authMenus = readCookie("auth");
     menus.forEach((item) => {
-      if (item.key && authMenus.includes(item.key)) {
+      if (authMenus && authMenus.includes(item.key)) {
         arr.push(item);
       }
     });
