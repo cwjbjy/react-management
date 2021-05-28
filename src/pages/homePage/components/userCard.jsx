@@ -40,4 +40,10 @@ UserCard.propTypes = {
   imageUrl:PropTypes.string.isRequired
 }
 
+UserCard.defaultProps = {
+  userName:'一叶扁舟',
+  registerTime:'2021-03-21',
+  imageUrl:''
+}
+
 export default UserCard;
