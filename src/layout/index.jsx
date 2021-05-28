@@ -21,12 +21,12 @@ const AppHome = (props) => {
   } = props;
 
   useEffect(() => {
-    getMenu();
-    getImage();
     /* 页面刷新 */
     if (location.pathname !== "/firstItem") {
       history.push("/firstItem");
     }
+    getMenu();
+    getImage();
   }, []);
 
   const getMenu = () => {
