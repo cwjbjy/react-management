@@ -17,7 +17,7 @@ const UserManage = lazy(()=>import(/* webpackChunkName: "userManage" */'@/pages/
 
 export default [
     {
-        path:'/firstItem',
+        path:'/home/firstItem',
         Component:HomePage,
         auth:true,
         meta:{
@@ -25,7 +25,7 @@ export default [
         }
     },
     {
-        path:'/fleet',
+        path:'/home/fleet',
         Component:FleetLine,
         auth:true,
         meta:{
@@ -33,7 +33,7 @@ export default [
         }
     },
     {
-        path:'/pdf',
+        path:'/home/pdf',
         Component:PdfPreview,
         auth:true,
         meta:{
@@ -41,7 +41,7 @@ export default [
         }
     },
     {
-        path:'/baseEcharts',
+        path:'/home/baseEcharts',
         Component:BaseEchart,
         auth:true,
         meta:{
@@ -49,7 +49,7 @@ export default [
         }
     },
     {
-        path:'/baseTable',
+        path:'/home/baseTable',
         Component:BaseTable,
         auth:true,
         meta:{
@@ -57,7 +57,7 @@ export default [
         }
     },
     {
-        path:'/dragList',
+        path:'/home/dragList',
         Component:DragList,
         auth:true,
         meta:{
@@ -65,7 +65,7 @@ export default [
         }
     },
     {
-        path:'/dragDialog',
+        path:'/home/dragDialog',
         Component:DragDialog,
         auth:true,
         meta:{
@@ -73,7 +73,7 @@ export default [
         }
     },
     {
-        path:'/I18n',
+        path:'/home/I18n',
         Component:I18n,
         auth:true,
         meta:{
@@ -81,7 +81,7 @@ export default [
         }
     },
     {
-        path:'/commonChart',
+        path:'/home/commonChart',
         Component:CommonChart,
         auth:true,
         meta:{
@@ -89,7 +89,7 @@ export default [
         }
     },
     {
-        path:'/positionChart',
+        path:'/home/positionChart',
         Component:PositionChart,
         auth:true,
         meta:{
@@ -97,7 +97,7 @@ export default [
         }
     },
     {
-        path:'/foldChart',
+        path:'/home/foldChart',
         Component:FoldChart,
         auth:true,
         meta:{
@@ -105,7 +105,7 @@ export default [
         }
     },
     {
-        path:'/chatRoom',
+        path:'/home/chatRoom',
         Component:ChatRoom,
         auth:true,
         meta:{
@@ -113,7 +113,7 @@ export default [
         }
     },
     {
-        path:'/magnifying',
+        path:'/home/magnifying',
         Component:Magnifying,
         auth:true,
         meta:{
@@ -121,7 +121,7 @@ export default [
         }
     },
     {
-        path:'/manage',
+        path:'/home/manage',
         Component:UserManage,
         auth:true,
         meta:{

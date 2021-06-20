@@ -22,8 +22,8 @@ const AppHome = (props) => {
 
   useEffect(() => {
     /* 页面刷新 */
-    if (location.pathname !== "/firstItem") {
-      history.push("/firstItem");
+    if (location.pathname !== "/home/firstItem") {
+      history.push("/home/firstItem");
     }
     getMenu();
     getImage();

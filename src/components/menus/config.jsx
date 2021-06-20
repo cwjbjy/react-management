@@ -15,31 +15,31 @@ import './config.scss'
 
 export const menus = [{
         name: "系统首页",
-        path: "/firstItem",
+        path: "/home/firstItem",
         key: "firstItem",
         icon: <img src={Home} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "模拟航线",
-        path: "/fleet",
+        path: "/home/fleet",
         key: "fleet",
         icon: <img src={ChinaMap} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "文件预览",
-        path: "/pdf",
+        path: "/home/pdf",
         key: "pdf",
         icon: <img src={Pdf} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "基础图表",
-        path: "/baseEcharts",
+        path: "/home/baseEcharts",
         key: "baseEcharts",
         icon: <img src={Echarts} alt="加载失败" className="menuIcon"></img>,
     },
     {
         name: "基础表格",
-        path: "/baseTable",
+        path: "/home/baseTable",
         key: "baseTable",
         icon: <img src={BaseTable} alt="加载失败" className="menuIcon"></img>,
     },
@@ -49,12 +49,12 @@ export const menus = [{
         icon: <img src={Drag} alt="加载失败" className="menuIcon"></img>,
         children: [{
                 name: "拖拽列表",
-                path: "/dragList",
+                path: "/home/dragList",
                 key: "dragList",
             },
             {
                 name: "拖拽弹框",
-                path: "/dragDialog",
+                path: "/home/dragDialog",
                 key: "dragDialog",
             },
         ],
@@ -62,7 +62,7 @@ export const menus = [{
     {
         name: "语言转换",
         icon: <img src={I18n} alt="加载失败" className="menuIcon"></img>,
-        path: "/I18n",
+        path: "/home/I18n",
         key: "I18n",
     },
     {
@@ -71,24 +71,24 @@ export const menus = [{
         icon: <img src={FlowChart} alt="加载失败" className="menuIcon"></img>,
         children: [{
                 name: "一般流程图",
-                path: "/commonChart",
+                path: "/home/commonChart",
                 key: "commonChart",
             },
             {
                 name: "定位流程图",
-                path: "/positionChart",
+                path: "/home/positionChart",
                 key: "positionChart",
             },
             {
                 name: "折叠流程图",
-                path: "/foldChart",
+                path: "/home/foldChart",
                 key: "foldChart",
             },
         ],
     },
     {
         name: "放大镜",
-        path: "/magnifying",
+        path: "/home/magnifying",
         key: "magnifying",
         icon: <img src={Magnifying} alt="加载失败" className="menuIcon"></img>,
     },

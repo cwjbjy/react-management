@@ -23,7 +23,7 @@ const buildRouter = ({ path, Component, children, auth, meta }, key) => {
         key={key}
         path={path}
         render={(props) => {
-          document.title = meta.title || '文杰仓库'
+          document.title = meta.title || "文杰仓库";
           return !auth || readCookie("token") ? (
             <Component {...props} />
           ) : (
@@ -48,25 +48,24 @@ const BuildRoutes = () => {
   return (
     <Switch>
       {noLayoutRoutes}
-      <Route
-        path="/"
-        render={(props) => (
-          <LayoutView
-            {...props}
-            routes={
-              <Suspense
-                fallback={
-                  <div className="loadBox">
-                    <Spin tip="Loading..." delay="1000" size="large" />
-                  </div>
-                }
-              >
-                <Switch>{layoutRoutes}</Switch>
-              </Suspense>
+      <Route path="/home" render={(props)=>(
+        <LayoutView
+        {...props}
+        routes={
+          <Suspense
+            fallback={
+              <div className="loadBox">
+                <Spin tip="Loading..." delay="1000" size="large" />
+              </div>
             }
-          />
-        )}
+          >
+            <Switch>{layoutRoutes}</Switch>
+          </Suspense>
+        }
       />
+      )}>
+      </Route>
+      <Redirect from="/" to="/login"></Redirect>
     </Switch>
   );
 };

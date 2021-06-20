@@ -17,7 +17,7 @@ const LoginForm = (props) => {
   };
 
   const login = () => {
-    history.push("/firstItem");
+    history.push("/home/firstItem");
   };
 
   const onFinish = (params) => {
