@@ -1,6 +1,5 @@
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { rules } from "@/utils/rules.js";
 import { message } from "antd";
 import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
@@ -22,8 +21,6 @@ const RegisterForm = (props) => {
 
   const onFinish = async (params) => {
     if (params.authCode && verifyCode.validate(params.authCode)) {
-      await rules.isValidPass(params.rge_pass);
-      await rules.equal(params.rge_pass, params.rge_passAgain);
       let user = {
         userName: params.reg_name,
         passWord: params.rge_pass,
@@ -73,6 +70,10 @@ const RegisterForm = (props) => {
             required: true,
             message: "Please input your password!",
           },
+          {
+            pattern:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/,
+            message:"请输入8-16位由数字与字母组成的密码"
+          }
         ]}
       >
         <Input.Password
@@ -88,6 +89,14 @@ const RegisterForm = (props) => {
             required: true,
             message: "Please input your password!",
           },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('rge_pass') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          })
         ]}
       >
         <Input.Password

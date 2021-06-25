@@ -9,7 +9,6 @@ const SET_LOGIN = (params, fn) => {
                 dispatch(SET_USER({
                     userName: params.get('userName'),
                     passWord: params.get('passWord'),
-                    flag: true
                 }))
                 localStorage.setItem("userName", params.get('userName'))
                 saveCookie("token", res.value);
