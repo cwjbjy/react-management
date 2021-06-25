@@ -13,9 +13,7 @@ const Login = (props) => {
 
   const onTab = () => {
     loginAction.SET_USER({
-      flag: !props.login.flag,
-      userName: props.login.userName,
-      passWord: props.login.passWord,
+      flag: !login.flag,
     });
   };
 
@@ -28,13 +26,13 @@ const Login = (props) => {
         <div className="form">
           <div className="tab">
             <div
-              className={`${login.flag ? "title_active" : ""} tab_title`}
+              className={`${login.flag && "title_active"} tab_title`}
               onClick={onTab}
             >
               用户登录
             </div>
             <div
-              className={`${!login.flag ? "title_active" : ""} tab_title`}
+              className={`${!login.flag && "title_active"} tab_title`}
               onClick={onTab}
             >
               用户注册

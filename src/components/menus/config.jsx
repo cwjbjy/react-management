@@ -102,7 +102,7 @@ export const menus = [
   // },
   {
     name: "后台管理",
-    path: "/manage",
+    path: "/home/manage",
     key: "manage",
     icon: <img src={Manage} alt="加载失败" className="menuIcon"></img>,
   },
