@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 function Header(props) {
   const {theme,changeTheme} = useContext(ThemeContext)
-  let {imageUrl,history} = props
+  let {imageUrl,history,username} = props
 
   const onList = ({ key }) => {
     if (key === "1") {
@@ -73,7 +73,7 @@ function Header(props) {
           <div className="userImage">
             <img src={imageUrl} className="user-img" alt="加载失败" />
             <span style={{ marginRight: 5 }}>
-              <span style={{ marginRight: 2 }}>{localStorage.getItem("userName")}</span>
+              <span style={{ marginRight: 2 }}>{username}</span>
               <CaretDownOutlined />
             </span>
           </div>

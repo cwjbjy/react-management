@@ -14,8 +14,9 @@ import API from "@/service";
 import { useState } from "react/cjs/react.development";
 const HomePage = (props) => {
   const { theme } = useContext(ThemeContext);
-  const { imageUrl } = props;
-  const userName = localStorage.getItem("userName");
+  const { login } = props;
+  const imageUrl = localStorage.getItem('imgUrl');
+  const { userName } = login;
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const HomePage = (props) => {
           />
           <ProgressCard />
         </Space>
-        <Col flex="auto" style={{paddingLeft:20}}>
+        <Col flex="auto" style={{ paddingLeft: 20 }}>
           <Message />
           <div className="Schedule">
             <Schedule />
@@ -61,7 +62,7 @@ const HomePage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state.img;
+  return state;
 };
 
 export default connect(mapStateToProps)(HomePage);

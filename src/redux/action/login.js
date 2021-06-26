@@ -2,7 +2,7 @@ import API from '@/service/index'
 import { saveCookie } from "@/utils/cookie.js";
 import { message } from "antd";
 import { SETUSER } from "../../constant/store";
-
+import { img_url } from "@/service/lib/baseUrl.js";
 const SET_LOGIN = (params, fn) => {
     return dispatch => {
         return API.login(params).then((res) => {
@@ -10,9 +10,13 @@ const SET_LOGIN = (params, fn) => {
                     userName: params.get('userName'),
                     passWord: params.get('passWord'),
                 }))
-                localStorage.setItem("userName", params.get('userName'))
                 saveCookie("token", res.value);
                 localStorage.setItem('menu',res.auth)
+                API.getImage({ user_name: params.get('userName') }).then(res => {
+                    let fileName = res.Data[0]?.photo;
+                    let imgURL = `${img_url}${fileName}`;
+                    localStorage.setItem('imgUrl',imgURL)
+                })
                 fn()
             })
             .catch((err) => {

@@ -3,7 +3,6 @@ import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
 import { connect } from "react-redux";
 import "./index.scss";
-import { SET_IMAGE } from "@/redux/action/img";
 import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
 import { useCallback } from "react";
@@ -16,7 +15,11 @@ const AppHome = (props) => {
     setTheme(color);
   }, []);
 
-  const { history, location, routes, imageUrl, dispatch } = props;
+  const { history, location, routes, login } = props;
+
+  const imageUrl = localStorage.getItem('imgUrl');
+
+  const { userName } = login;
 
   useEffect(() => {
     /* 页面刷新 */
@@ -39,14 +42,10 @@ const AppHome = (props) => {
     getMenu();
   }, []);
 
-  useEffect(() => {
-    dispatch(SET_IMAGE({ user_name: localStorage.getItem("userName") }));
-  }, []);
-
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
       <div className={theme}>
-        <Header imageUrl={imageUrl} />
+        <Header imageUrl={imageUrl} username={userName} />
         <main className="wrapper">
           <aside>
             <Menus menus={newMenus} />
@@ -59,7 +58,7 @@ const AppHome = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state.img;
+  return state;
 };
 
 export default connect(mapStateToProps)(AppHome);
