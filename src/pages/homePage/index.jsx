@@ -9,9 +9,11 @@ import { connect } from "react-redux";
 import { SET_USER } from "../../redux/action/user";
 import { useEffect } from "react";
 import "./index.scss";
+import ThemeContext from '../../layout/themeContext'
+import { useContext } from "react";
 const HomePage = (props) => {
-  
-  const {theme,img,user,SET_USER} = props;
+  const {theme} = useContext(ThemeContext)
+  const {img,user,SET_USER} = props;
   const userName = localStorage.getItem("userName");
   
   useEffect(() => {

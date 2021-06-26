@@ -1,5 +1,4 @@
 import { Row, Col, Card } from "antd";
-import { connect } from "react-redux";
 import Bar from '../../components/baseEcharts/bar'
 import Pie from '../../components/baseEcharts/pie'
 import Scatter from '../../components/baseEcharts/scatter'
@@ -7,11 +6,11 @@ import Scale from '../../components/baseEcharts/scale'
 import Line from '../../components/baseEcharts/line'
 import Cylinder from '../../components/baseEcharts/cylinder'
 import "./index.scss";
+import ThemeContext from '../../layout/themeContext'
+import { useContext } from "react";
 
-const Chart = (props) => {
-
-  const {theme} = props;
-
+const Chart = () => {
+  const {theme} = useContext(ThemeContext)
   return (
     <section>
       <Row className="chart">
@@ -42,8 +41,4 @@ const Chart = (props) => {
   );
 };
 
-const mapStateToProps = (state)=>{
-    return state
-}
-
-export default connect(mapStateToProps,null)(Chart);
+export default Chart;

@@ -3,9 +3,12 @@ import { CaretDownOutlined } from "@ant-design/icons";
 import "./index.scss";
 import {removeCookie} from '@/utils/cookie'
 import { withRouter } from "react-router-dom";
-function Header(props) {
+import ThemeContext from '../../layout/themeContext'
+import { useContext } from "react";
 
-  let {imageUrl,themeColor,themeAction,history} = props
+function Header(props) {
+  const {theme,changeTheme} = useContext(ThemeContext)
+  let {imageUrl,history} = props
 
   const onList = ({ key }) => {
     if (key === "1") {
@@ -13,9 +16,11 @@ function Header(props) {
       removeCookie("token");
     }
   };
+
   const onColor = ({ key }) => {
-    themeAction.SET_THEME(key);
+    changeTheme(key);
   };
+  
 
   const menu = (
     <Menu onClick={onList}>
@@ -36,19 +41,19 @@ function Header(props) {
     <Menu onClick={onColor}>
       <Menu.Item
         key="theme-gray"
-        className={themeColor === "theme-gray" ? "themeActive" : ""}
+        className={theme === "theme-gray" && "themeActive"}
       >
         简约灰
       </Menu.Item>
       <Menu.Item
         key="theme-blue"
-        className={themeColor === "theme-blue" ? "themeActive" : ""}
+        className={theme === "theme-blue" && "themeActive"}
       >
         胖次蓝
       </Menu.Item>
       <Menu.Item
         key="theme-black"
-        className={themeColor === "theme-black" ? "themeActive" : ""}
+        className={theme === "theme-black" && "themeActive"}
       >
         夜间模式
       </Menu.Item>

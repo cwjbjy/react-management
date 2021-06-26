@@ -4,63 +4,69 @@ import { menus } from "../components/menus/config.jsx";
 import { connect } from "react-redux";
 import "./index.scss";
 import * as imgAction from "@/redux/action/img";
-import * as themeAction from "@/redux/action/theme";
 import { bindActionCreators } from "redux";
 import { readCookie } from "@/utils/cookie";
 import { useEffect, useState } from "react/cjs/react.development";
+import ThemeContext from "./themeContext";
+import { useCallback } from "react";
 const AppHome = (props) => {
+
   const [newMenus, setMenu] = useState([]);
-  const {
-    history,
-    location,
-    imgAction,
-    routes,
-    theme,
-    themeAction,
-    img,
-  } = props;
+
+  const [theme,setThemeState] = useState('theme-gray')
+
+  const changeTheme = useCallback((color)=>{
+    setThemeState(color)
+  },[])
+  
+  const { history, location, imgAction, routes, img } =
+    props;
 
   useEffect(() => {
     /* 页面刷新 */
     if (location.pathname !== "/home/firstItem") {
       history.push("/home/firstItem");
     }
+  }, []);
+
+  useEffect(() => {
+    const getMenu = () => {
+      let arr = [];
+      let authMenus = readCookie("auth");
+      menus.forEach((item) => {
+        if (authMenus && authMenus.includes(item.key)) {
+          arr.push(item);
+        }
+      });
+      setMenu(arr);
+    };
     getMenu();
+  }, []);
+
+  useEffect(() => {
+    const getImage = () => {
+      let params = {
+        user_name: localStorage.getItem("userName"),
+      };
+      imgAction.SET_IMAGE(params);
+    };
     getImage();
   }, []);
 
-  const getMenu = () => {
-    let arr = [];
-    let authMenus = readCookie("auth");
-    menus.forEach((item) => {
-      if (authMenus && authMenus.includes(item.key)) {
-        arr.push(item);
-      }
-    });
-    setMenu(arr);
-  };
-
-  const getImage = () => {
-    let params = {
-      user_name: localStorage.getItem("userName"),
-    };
-    imgAction.SET_IMAGE(params);
-  };
-  
   return (
-    <div className={theme}>
-      <Header
-        imageUrl={img.imageUrl}
-        themeAction={themeAction}
-        themeColor={theme}
-      />
-      <main className="wrapper">
-        <aside>
-          <Menus newMenus={newMenus} />
-        </aside>
-        <article>{routes}</article>
-      </main>
-    </div>
+    <ThemeContext.Provider value={{theme,changeTheme}}>
+      <div className={theme}>
+        <Header
+          imageUrl={img.imageUrl}
+        />
+        <main className="wrapper">
+          <aside>
+            <Menus newMenus={newMenus} />
+          </aside>
+          <article>{routes}</article>
+        </main>
+      </div>
+    </ThemeContext.Provider>
   );
 };
 
@@ -71,7 +77,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     imgAction: bindActionCreators(imgAction, dispatch),
-    themeAction: bindActionCreators(themeAction, dispatch),
   };
 };
 
