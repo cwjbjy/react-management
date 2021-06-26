@@ -1,26 +1,23 @@
 import { Menu, Dropdown } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
 import "./index.scss";
-import {removeCookie} from '@/utils/cookie'
+import { removeCookie } from "@/utils/cookie";
 import { withRouter } from "react-router-dom";
-import ThemeContext from '../../layout/themeContext'
+import ThemeContext from "../../layout/themeContext";
 import { useContext } from "react";
+import React from "react";
 
-function Header(props) {
-  const {theme,changeTheme} = useContext(ThemeContext)
-  let {imageUrl,history,username} = props
+const Header = React.memo((props) => {
+  const { theme, changeTheme } = useContext(ThemeContext);
+
+  let { imageUrl, history, username } = props;
 
   const onList = ({ key }) => {
     if (key === "1") {
-      history.push('/login')
+      history.push("/login");
       removeCookie("token");
     }
   };
-
-  const onColor = ({ key }) => {
-    changeTheme(key);
-  };
-  
 
   const menu = (
     <Menu onClick={onList}>
@@ -38,7 +35,7 @@ function Header(props) {
     </Menu>
   );
   const colorMenu = (
-    <Menu onClick={onColor}>
+    <Menu onClick={({ key }) => changeTheme(key)}>
       <Menu.Item
         key="theme-gray"
         className={theme === "theme-gray" && "themeActive"}
@@ -59,7 +56,7 @@ function Header(props) {
       </Menu.Item>
     </Menu>
   );
-  
+
   return (
     <header className="header">
       <div className="header_left">
@@ -81,6 +78,6 @@ function Header(props) {
       </div>
     </header>
   );
-}
+});
 
 export default withRouter(Header);

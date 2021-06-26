@@ -7,19 +7,20 @@ import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
 import { useCallback } from "react";
 const AppHome = (props) => {
+
+  const { history, location, routes, login } = props;
+
   const [newMenus, setMenu] = useState([]);
 
   const [theme, setTheme] = useState("theme-gray");
 
-  const changeTheme = useCallback((color) => {
-    setTheme(color);
-  }, []);
-
-  const { history, location, routes, login } = props;
-
   const imageUrl = localStorage.getItem('imgUrl');
 
   const { userName } = login;
+
+  const changeTheme = useCallback((color) => {
+    setTheme(color);
+  }, []);
 
   useEffect(() => {
     /* 页面刷新 */

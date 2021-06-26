@@ -45,7 +45,7 @@ const HomePage = (props) => {
           </div>
         </Col>
       </Row>
-      <Row style={{ marginBottom: 20 }}>
+      <Row style={{ marginBottom: 10 }}>
         <Col span={12} lg={12} xl={12} className="echarts-box">
           <Card hoverable>
             <Bar theme={theme} />

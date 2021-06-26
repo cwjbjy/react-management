@@ -1,14 +1,16 @@
 
 import { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu } from "antd";
+import React from 'react'
+
 import "./index.scss";
 
 const { SubMenu } = Menu;
 
 const rootSubmenuKeys = ["drag", "flowChart"];
 
-const Menus = (props) => {
+const Menus = React.memo((props) => {
 
   const [openKeys, setOpenKeys] = useState([]);
 
@@ -51,6 +53,6 @@ const Menus = (props) => {
       )}
     </Menu>
   );
-};
+});
 
-export default withRouter(Menus);
+export default Menus;
