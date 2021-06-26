@@ -1,14 +1,14 @@
 .icon-area {
     height: 100px;
     .icon-box {
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-right: 20px;
       .icon-content {
         display: flex;
       }
       .icon-info {
         flex: 1;
         text-align: center;
+        min-width: 100px;
         @extend %column_center;
         .grid-num {
           font-size: 30px;
@@ -28,6 +28,9 @@
             line-height: 1.5;
         }
       }
+    }
+    .icon-box:nth-of-type(3){
+      padding-right: 0;
     }
     .grid-con-icon {
       font-size: 50px;

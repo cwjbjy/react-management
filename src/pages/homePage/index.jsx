@@ -1,4 +1,4 @@
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Space } from "antd";
 import UserCard from "./components/userCard";
 import ProgressCard from "./components/progressCard";
 import Message from "./components/message";
@@ -27,17 +27,17 @@ const HomePage = (props) => {
   }, []);
 
   return (
-    <div className="homePage">
+    <section style={{ paddingLeft: 20 }}>
       <Row>
-        <Col span={8} lg={8} xl={8}>
+        <Space direction="vertical" size={20}>
           <UserCard
             imageUrl={img.imageUrl}
             userName={userName}
             registerTime={time}
           />
           <ProgressCard />
-        </Col>
-        <Col span={16} lg={16} xl={16}>
+        </Space>
+        <Col flex="auto" style={{paddingLeft:20}}>
           <Message />
           <div className="Schedule">
             <Schedule />
@@ -56,7 +56,7 @@ const HomePage = (props) => {
           </Card>
         </Col>
       </Row>
-    </div>
+    </section>
   );
 };
 

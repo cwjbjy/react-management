@@ -16,7 +16,7 @@ const AppHome = (props) => {
     setTheme(color);
   }, []);
 
-  const { history, location, routes, img, dispatch } = props;
+  const { history, location, routes, imageUrl, dispatch } = props;
 
   console.log(props);
 
@@ -48,7 +48,7 @@ const AppHome = (props) => {
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
       <div className={theme}>
-        <Header imageUrl={img.imageUrl} />
+        <Header imageUrl={imageUrl} />
         <main className="wrapper">
           <aside>
             <Menus newMenus={newMenus} />
@@ -61,7 +61,7 @@ const AppHome = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.img;
 };
 
 export default connect(mapStateToProps)(AppHome);
