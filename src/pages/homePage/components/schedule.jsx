@@ -1,5 +1,6 @@
 import { Table, Tag, Card } from "antd";
 import './schedule.scss'
+import React from 'react'
 const { Column } = Table;
 
 const data = [
@@ -44,7 +45,7 @@ const data = [
   },
 ];
 
-const Schedule = () => {
+const Schedule = React.memo(() => {
   return (
     <Card
       hoverable
@@ -73,6 +74,6 @@ const Schedule = () => {
       </Table>
     </Card>
   );
-};
+});
 
 export default Schedule;

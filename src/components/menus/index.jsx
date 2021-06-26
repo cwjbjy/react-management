@@ -30,7 +30,7 @@ const Menus = (props) => {
       className="Menu"
       onOpenChange={onOpenChange}
     >
-      {props.newMenus.map((item) =>
+      {props.menus.map((item) =>
         !item.children ? (
           <Menu.Item key={item.key} icon={item.icon}>
             <Link exact="true" to={item.path}>

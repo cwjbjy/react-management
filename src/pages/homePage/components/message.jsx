@@ -4,7 +4,8 @@ import {
     UserOutlined,NotificationOutlined,FileDoneOutlined
   } from '@ant-design/icons';
 import './message.scss'
-const Message = () => {
+import React from 'react'
+const Message = React.memo(() => {
   return (
     <Row className="icon-area" style={{ marginBottom: 20 }}>
       <Col span="8" className="icon-box">
@@ -42,6 +43,6 @@ const Message = () => {
       </Col>
     </Row>
   );
-};
+});
 
 export default Message;

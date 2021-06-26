@@ -1,5 +1,6 @@
 import { Card,Progress } from "antd";
 import './progressCard.scss'
+import React from 'react'
 
 const format = (percent)=>{
     if (percent >= 90) {
@@ -13,7 +14,7 @@ const format = (percent)=>{
       }
 }
 
-const ProgressCard = () => {
+const ProgressCard = React.memo(() => {
   return (
     <Card  title="语言详情" hoverable  className="user">
     Vue<Progress percent={98} strokeColor="#42b983" format={format}/>
@@ -22,6 +23,6 @@ const ProgressCard = () => {
     Nuxt<Progress percent={87} strokeColor="#f56c6c" format={format}/>
     </Card>
   );
-};
+});
 
 export default ProgressCard;

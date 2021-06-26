@@ -3,8 +3,9 @@ import { Row, Col } from "antd";
 import { register } from "@/filter";
 import PropTypes from 'prop-types'
 import "./userCard.scss";
+import React from 'react'
 
-const UserCard = (props) => {
+const UserCard = React.memo((props) => {
 
   const { userName, registerTime,imageUrl } = props;
   
@@ -32,7 +33,7 @@ const UserCard = (props) => {
       </Row>
     </Card>
   );
-};
+});
 
 UserCard.propTypes = {
   userName:PropTypes.string.isRequired,

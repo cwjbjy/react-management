@@ -18,8 +18,6 @@ const AppHome = (props) => {
 
   const { history, location, routes, imageUrl, dispatch } = props;
 
-  console.log(props);
-
   useEffect(() => {
     /* 页面刷新 */
     if (location.pathname !== "/home/firstItem") {
@@ -51,7 +49,7 @@ const AppHome = (props) => {
         <Header imageUrl={imageUrl} />
         <main className="wrapper">
           <aside>
-            <Menus newMenus={newMenus} />
+            <Menus menus={newMenus} />
           </aside>
           <article>{routes}</article>
         </main>

@@ -14,7 +14,7 @@ import API from "@/service";
 import { useState } from "react/cjs/react.development";
 const HomePage = (props) => {
   const { theme } = useContext(ThemeContext);
-  const { img } = props;
+  const { imageUrl } = props;
   const userName = localStorage.getItem("userName");
   const [time, setTime] = useState("");
 
@@ -31,7 +31,7 @@ const HomePage = (props) => {
       <Row>
         <Space direction="vertical" size={20}>
           <UserCard
-            imageUrl={img.imageUrl}
+            imageUrl={imageUrl}
             userName={userName}
             registerTime={time}
           />
@@ -61,7 +61,7 @@ const HomePage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.img;
 };
 
 export default connect(mapStateToProps)(HomePage);
