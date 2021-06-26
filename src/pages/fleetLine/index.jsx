@@ -1,12 +1,12 @@
-import FleetModel from './components/china'
-import './index.scss'
-const FleetLine = ()=>{
-  
-    return(
-        <div className="fleetLine">
-            <FleetModel/>
-        </div>
-    )
-}
+import FleetModel from "./components/china";
+import "./index.scss";
 
-export default FleetLine
+const FleetLine = () => {
+  return (
+    <div className="fleetLine">
+      <FleetModel />
+    </div>
+  );
+};
+
+export default FleetLine;
