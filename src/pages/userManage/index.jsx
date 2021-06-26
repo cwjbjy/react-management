@@ -1,8 +1,6 @@
 import { Card, Modal, message } from "antd";
 import { connect } from "react-redux";
-import * as userAction from "../../redux/action/user";
 import { SET_USERS } from "../../redux/action/users";
-import { bindActionCreators } from "redux";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
 import "./index.scss";
@@ -13,7 +11,7 @@ const UserManage = (props) => {
   const [info, setInfo] = useState({});
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState("");
-  const { userAction, SET_USERS, users } = props;
+  const { SET_USERS, users } = props;
 
   useEffect(() => {
     SET_USERS();
@@ -63,7 +61,6 @@ const UserManage = (props) => {
         <strong>管理员可修改密码，普通用户可删除</strong>
         <UserTable
           tableData={users}
-          userAction={userAction}
           onModal={onEdit}
           onDelete={onDelete}
         />
@@ -86,7 +83,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    userAction: bindActionCreators(userAction, dispatch),
     SET_USERS: () => {
       dispatch(SET_USERS());
     },

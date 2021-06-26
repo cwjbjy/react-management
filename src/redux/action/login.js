@@ -12,7 +12,7 @@ const SET_LOGIN = (params, fn) => {
                 }))
                 localStorage.setItem("userName", params.get('userName'))
                 saveCookie("token", res.value);
-                saveCookie("auth", res.auth);
+                localStorage.setItem('menu',res.auth)
                 fn()
             })
             .catch((err) => {

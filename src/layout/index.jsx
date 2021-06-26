@@ -3,24 +3,22 @@ import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
 import { connect } from "react-redux";
 import "./index.scss";
-import * as imgAction from "@/redux/action/img";
-import { bindActionCreators } from "redux";
-import { readCookie } from "@/utils/cookie";
+import { SET_IMAGE } from "@/redux/action/img";
 import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
 import { useCallback } from "react";
 const AppHome = (props) => {
-
   const [newMenus, setMenu] = useState([]);
 
-  const [theme,setThemeState] = useState('theme-gray')
+  const [theme, setTheme] = useState("theme-gray");
 
-  const changeTheme = useCallback((color)=>{
-    setThemeState(color)
-  },[])
-  
-  const { history, location, imgAction, routes, img } =
-    props;
+  const changeTheme = useCallback((color) => {
+    setTheme(color);
+  }, []);
+
+  const { history, location, routes, img, dispatch } = props;
+
+  console.log(props);
 
   useEffect(() => {
     /* 页面刷新 */
@@ -32,7 +30,7 @@ const AppHome = (props) => {
   useEffect(() => {
     const getMenu = () => {
       let arr = [];
-      let authMenus = readCookie("auth");
+      let authMenus = localStorage.getItem("menu");
       menus.forEach((item) => {
         if (authMenus && authMenus.includes(item.key)) {
           arr.push(item);
@@ -44,21 +42,13 @@ const AppHome = (props) => {
   }, []);
 
   useEffect(() => {
-    const getImage = () => {
-      let params = {
-        user_name: localStorage.getItem("userName"),
-      };
-      imgAction.SET_IMAGE(params);
-    };
-    getImage();
+    dispatch(SET_IMAGE({ user_name: localStorage.getItem("userName") }));
   }, []);
 
   return (
-    <ThemeContext.Provider value={{theme,changeTheme}}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
       <div className={theme}>
-        <Header
-          imageUrl={img.imageUrl}
-        />
+        <Header imageUrl={img.imageUrl} />
         <main className="wrapper">
           <aside>
             <Menus newMenus={newMenus} />
@@ -74,10 +64,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    imgAction: bindActionCreators(imgAction, dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppHome);
+export default connect(mapStateToProps)(AppHome);
