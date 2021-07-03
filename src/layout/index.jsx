@@ -1,26 +1,37 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import "./index.scss";
 import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
 import { useCallback } from "react";
+import API from '@/service/index'
+import { img_url } from "@/service/lib/baseUrl.js";
+
 const AppHome = (props) => {
 
-  const { history, location, routes, login } = props;
+  const { history, location, routes } = props;
 
   const [newMenus, setMenu] = useState([]);
 
+  const [imageUrl,setImageUrl] = useState('')
+
   const [theme, setTheme] = useState("theme-gray");
 
-  const imageUrl = localStorage.getItem('imgUrl');
-
-  const { userName } = login;
+  const userName = useSelector(state=>state.login.userName)
 
   const changeTheme = useCallback((color) => {
     setTheme(color);
   }, []);
+
+  useEffect(()=>{
+    API.getImage({ user_name: userName }).then(res => {
+      let fileName = res.Data[0]?.photo;
+      let imgURL = `${img_url}${fileName}`;
+      setImageUrl(imgURL)
+  })
+  },[userName])
 
   useEffect(() => {
     /* 页面刷新 */
@@ -58,8 +69,4 @@ const AppHome = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-export default connect(mapStateToProps)(AppHome);
+export default AppHome;

@@ -10,7 +10,7 @@ import React from "react";
 const Header = React.memo((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
-  let { imageUrl, history, username } = props;
+  let { imageUrl,history, username } = props;
 
   const onList = ({ key }) => {
     if (key === "1") {

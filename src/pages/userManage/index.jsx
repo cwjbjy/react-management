@@ -1,20 +1,21 @@
 import { Card, Modal, message } from "antd";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_USERS } from "../../redux/action/users";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
-import "./index.scss";
 import { useEffect, useState } from "react/cjs/react.development";
 import API from "../../service";
+import "./index.scss";
 
 const UserManage = (props) => {
   const [info, setInfo] = useState({});
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState("");
-  const { SET_USERS, users } = props;
+  const users = useSelector(state=>state.users)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    SET_USERS();
+    dispatch(SET_USERS());
   }, []);
 
   const onEdit = (params) => {
@@ -29,7 +30,7 @@ const UserManage = (props) => {
       message.success({
         content: "删除成功",
       });
-      SET_USERS();
+      dispatch(SET_USERS());
     });
   };
 
@@ -45,7 +46,7 @@ const UserManage = (props) => {
         message.success({
           content: "密码修改成功",
         });
-        SET_USERS();
+        dispatch(SET_USERS());
       }
     });
     setModal(false);
@@ -77,16 +78,4 @@ const UserManage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    SET_USERS: () => {
-      dispatch(SET_USERS());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
+export default UserManage;

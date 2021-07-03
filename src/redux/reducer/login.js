@@ -8,7 +8,7 @@ const initState = {
     flag: true
 }
 
-export default (state = initState, action) => {
+const login = (state = initState, action) => {
     switch (action.type) {
         case SETUSER:
             return Object.assign({}, state, action.value)
@@ -16,3 +16,5 @@ export default (state = initState, action) => {
             return state
     }
 }
+
+export default login

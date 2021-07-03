@@ -3,10 +3,12 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
+import { useDispatch } from "react-redux";
 
 const LoginForm = (props) => {
+  const dispatch = useDispatch()
 
-  const { loginAction, history, userInfo } = props;
+  const { SET_LOGIN, history, userInfo } = props;
 
   const icon = {
     color: "#c0c4cc",
@@ -24,7 +26,7 @@ const LoginForm = (props) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
     formData.append("passWord", params.passWord);
-    loginAction.SET_LOGIN(formData, login);
+    dispatch(SET_LOGIN(formData, login))
   };
 
   return (
@@ -72,7 +74,7 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   userInfo: PropTypes.object,
-  loginAction: PropTypes.object.isRequired,
+  SET_LOGIN: PropTypes.func,
 };
 
 export default withRouter(LoginForm);

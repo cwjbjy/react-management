@@ -5,19 +5,27 @@ import Message from "./components/message";
 import Schedule from "./components/schedule";
 import Bar from "./components/bar";
 import BarLine from "./components/barLine";
-import { connect } from "react-redux";
-import { useEffect } from "react";
-import "./index.scss";
 import ThemeContext from "../../layout/themeContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { useEffect, useContext, useState } from "react";
 import API from "@/service";
-import { useState } from "react/cjs/react.development";
-const HomePage = (props) => {
+import { img_url } from "@/service/lib/baseUrl.js";
+import "./index.scss";
+
+const HomePage = () => {
   const { theme } = useContext(ThemeContext);
-  const { login } = props;
-  const imageUrl = localStorage.getItem("imgUrl");
-  const { userName } = login;
+  const userName = useSelector((state) => state.login.userName);
+
   const [time, setTime] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    API.getImage({ user_name: userName }).then((res) => {
+      let fileName = res.Data[0]?.photo;
+      let imgURL = `${img_url}${fileName}`;
+      setImageUrl(imgURL);
+    });
+  }, [userName]);
 
   useEffect(() => {
     API.getUser({
@@ -38,7 +46,7 @@ const HomePage = (props) => {
           />
           <ProgressCard />
         </Space>
-        <div style={{marginLeft:20}}>
+        <div style={{ marginLeft: 20 }}>
           <Message />
           <div className="Schedule">
             <Schedule />
@@ -61,8 +69,4 @@ const HomePage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

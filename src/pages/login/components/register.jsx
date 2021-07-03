@@ -5,10 +5,11 @@ import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
 import "./register.scss";
 import { useEffect, useState } from "react/cjs/react.development";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = (props) => {
-
-  const { loginAction } = props;
+  const dispatch = useDispatch()
+  const { ADD_USER } = props;
   const [verifyCode, set_verifyCode] = useState(null);
 
   const icon = {
@@ -28,7 +29,7 @@ const RegisterForm = (props) => {
         createTime: getTime(),
         photo: "userlogo.png",
       };
-      loginAction.ADD_USER(user);
+      dispatch(ADD_USER(user))
     } else {
       message.error({
         content: "验证码错误",
@@ -125,7 +126,7 @@ const RegisterForm = (props) => {
 };
 
 RegisterForm.propTypes = {
-  loginAction: PropTypes.object.isRequired,
+  ADD_USER: PropTypes.func,
 };
 
 export default RegisterForm;

@@ -1,20 +1,21 @@
 import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from "./components/register";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as loginAction from "@/redux/action/login";
+import { useDispatch, useSelector } from "react-redux";
+import {SET_LOGIN,ADD_USER,SET_USER} from "@/redux/action/login";
 import { Fragment } from "react";
 import "./index.scss";
+import { useEffect } from "react";
 
-const Login = (props) => {
+const Login = () => {
 
-  const { login, loginAction } = props;
+  const login = useSelector(state=>state.login)
+  const dispatch = useDispatch()
 
   const onTab = () => {
-    loginAction.SET_USER({
+    dispatch(SET_USER({
       flag: !login.flag,
-    });
+    }));
   };
 
   return (
@@ -42,12 +43,12 @@ const Login = (props) => {
             <Fragment>
               <LoginForm
                 userInfo={login}
-                loginAction={loginAction}
+                SET_LOGIN={SET_LOGIN}
               ></LoginForm>
               <LoginOther></LoginOther>
             </Fragment>
           ) : (
-            <RegisterForm loginAction={loginAction}></RegisterForm>
+            <RegisterForm ADD_USER={ADD_USER}></RegisterForm>
           )}
         </div>
       </main>
@@ -55,14 +56,4 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginAction: bindActionCreators(loginAction, dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

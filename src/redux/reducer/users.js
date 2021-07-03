@@ -4,7 +4,7 @@ import {
 
 const initState = []
 
-export default (state = initState, action) => {
+const users = (state = initState, action) => {
     switch (action.type) {
         case SETUSERS:
             return action.value
@@ -12,3 +12,5 @@ export default (state = initState, action) => {
             return state
     }
 }
+
+export default users
