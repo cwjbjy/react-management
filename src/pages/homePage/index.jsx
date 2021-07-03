@@ -15,7 +15,7 @@ import { useState } from "react/cjs/react.development";
 const HomePage = (props) => {
   const { theme } = useContext(ThemeContext);
   const { login } = props;
-  const imageUrl = localStorage.getItem('imgUrl');
+  const imageUrl = localStorage.getItem("imgUrl");
   const { userName } = login;
   const [time, setTime] = useState("");
 
@@ -25,11 +25,11 @@ const HomePage = (props) => {
     }).then((res) => {
       setTime(res.Data[0].createTime);
     });
-  }, []);
+  }, [userName]);
 
   return (
     <section style={{ paddingLeft: 20 }}>
-      <Row>
+      <div className="row1">
         <Space direction="vertical" size={20}>
           <UserCard
             imageUrl={imageUrl}
@@ -38,13 +38,13 @@ const HomePage = (props) => {
           />
           <ProgressCard />
         </Space>
-        <Col flex="auto" style={{ paddingLeft: 20 }}>
+        <div style={{marginLeft:20}}>
           <Message />
           <div className="Schedule">
             <Schedule />
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
       <Row style={{ marginBottom: 10 }}>
         <Col span={12} lg={12} xl={12} className="echarts-box">
           <Card hoverable>
