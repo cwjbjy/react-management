@@ -1,22 +1,24 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { center } from "./flex";
 
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: rgba(25, 202, 173, 1);
+  background-color: ${props=>props.theme.background};
 `;
 
-export const Header = styled(center)`
+export const Header = styled.header`
   font-size: 50px;
   letter-spacing: 5px;
   height: 20vh;
   color: #fff;
+  ${center}
 `;
 
-export const Main = styled(center)`
+export const Main = styled.main`
   width: 100%;
   min-height: 450px;
+  ${center}
 `;
 
 export const Form = styled.div`

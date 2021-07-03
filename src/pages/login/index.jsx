@@ -7,6 +7,10 @@ import { Helmet } from "react-helmet";
 import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
 import cn from "classnames";
 
+const theme= {
+  background:'rgba(25, 202, 173, 1)',
+}
+
 const Login = () => {
   const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -24,7 +28,7 @@ const Login = () => {
       <Helmet>
         <title>登录</title>
       </Helmet>
-      <Container>
+      <Container theme={theme}>
         <Header>PC端管理系统(React版)</Header>
         <Main>
           <Form>
