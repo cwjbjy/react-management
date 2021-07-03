@@ -17,45 +17,30 @@ const ChatRoom = lazy(() => import( /* webpackChunkName: "homePage" */ '@/pages/
 const Magnifying = lazy(() => import( /* webpackChunkName: "magnifying" */ '@/pages/magnifying/index.jsx'))
 const UserManage = lazy(() => import( /* webpackChunkName: "userManage" */ '@/pages/userManage/index.jsx'))
 
-export default [{
+const home = [{
         path: '/home/firstItem',
         Component: HomePage,
         auth: true,
-        meta: {
-            title: '系统首页'
-        }
     },
     {
         path: '/home/fleet',
         Component: FleetLine,
         auth: true,
-        meta: {
-            title: '模拟航线'
-        }
     },
     {
         path: '/home/pdf',
         Component: PdfPreview,
         auth: true,
-        meta: {
-            title: 'pdf'
-        }
     },
     {
         path: '/home/baseEcharts',
         Component: BaseEchart,
         auth: true,
-        meta: {
-            title: '基础图表'
-        }
     },
     {
         path: '/home/baseTable',
         Component: BaseTable,
         auth: true,
-        meta: {
-            title: '基础表格'
-        }
     },
     {
         path: '/drag',
@@ -63,17 +48,11 @@ export default [{
                 path: '/home/drag/dragList',
                 Component: DragList,
                 auth: true,
-                meta: {
-                    title: '拖拽列表'
-                }
             },
             {
                 path: '/home/drag/dragDialog',
                 Component: DragDialog,
                 auth: true,
-                meta: {
-                    title: '拖拽弹框'
-                }
             },
         ]
     },
@@ -81,9 +60,6 @@ export default [{
         path: '/home/I18n',
         Component: I18n,
         auth: true,
-        meta: {
-            title: '语言转换'
-        }
     },
     {
         path: '/chart',
@@ -91,25 +67,16 @@ export default [{
                 path: '/home/chart/commonChart',
                 Component: CommonChart,
                 auth: true,
-                meta: {
-                    title: '一般流程图'
-                }
             },
             {
                 path: '/home/chart/positionChart',
                 Component: PositionChart,
                 auth: true,
-                meta: {
-                    title: '定位流程图'
-                }
             },
             {
                 path: '/home/chart/foldChart',
                 Component: FoldChart,
                 auth: true,
-                meta: {
-                    title: '折叠流程图'
-                }
             },
         ]
     },
@@ -117,24 +84,17 @@ export default [{
         path: '/home/chatRoom',
         Component: ChatRoom,
         auth: true,
-        meta: {
-            title: '聊天室'
-        }
     },
     {
         path: '/home/magnifying',
         Component: Magnifying,
         auth: true,
-        meta: {
-            title: '放大镜'
-        }
     },
     {
         path: '/home/manage',
         Component: UserManage,
         auth: true,
-        meta: {
-            title: '后台管理'
-        }
     },
 ]
+
+export default home 

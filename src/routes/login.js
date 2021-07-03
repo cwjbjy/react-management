@@ -8,9 +8,6 @@ const login = [
         Component:Login,
         auth:false,
         layout:'NONE',
-        meta:{
-            title:'登录'
-        }
     },
 ]
 

@@ -23,7 +23,6 @@ const buildRouter = ({ path, Component, children, auth, meta }, key) => {
         key={key}
         path={path}
         render={(props) => {
-          document.title = meta.title || "文杰仓库";
           return !auth || readCookie("token") ? (
             <Component {...props} />
           ) : (
