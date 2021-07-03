@@ -7,6 +7,8 @@ import { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import "./index.scss";
 
+import cn from 'classnames'
+
 const Login = () => {
   const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
@@ -32,13 +34,13 @@ const Login = () => {
           <div className="form">
             <div className="tab">
               <div
-                className={`${login.flag && "title_active"} tab_title`}
+                className={cn({'title_active':login.flag},'tab_title')}
                 onClick={onTab}
               >
                 用户登录
               </div>
               <div
-                className={`${!login.flag && "title_active"} tab_title`}
+                className={cn({'title_active':!login.flag},'tab_title')}
                 onClick={onTab}
               >
                 用户注册
