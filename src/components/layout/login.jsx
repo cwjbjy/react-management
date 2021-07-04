@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { center } from "./flex";
 
 export const Container = styled.div`

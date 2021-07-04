@@ -2,14 +2,13 @@ import routes from "@/routes";
 import LayoutView from "@/layout/index.jsx";
 import { readCookie } from "@/utils/cookie";
 import { Suspense } from "react";
-import { Spin } from "antd";
+import {FullScreenLoading} from '@/components/layout/loading.jsx'
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import "./index.scss";
 
 const buildRouter = ({ path, Component, children, auth, meta }, key) => {
   if (children) {
@@ -53,9 +52,7 @@ const BuildRoutes = () => {
         routes={
           <Suspense
             fallback={
-              <div className="loadBox">
-                <Spin tip="Loading..." delay="1000" size="large" />
-              </div>
+              <FullScreenLoading/>
             }
           >
             <Switch>{layoutRoutes}</Switch>
@@ -74,9 +71,7 @@ const RouterView = () => {
     <Router>
       <Suspense
         fallback={
-          <div className="loadBox">
-            <Spin tip="Loading..." delay="1000" size="large" />
-          </div>
+          <FullScreenLoading/>
         }
       >
         <BuildRoutes />
