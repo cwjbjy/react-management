@@ -46,7 +46,7 @@ const HomePage = () => {
           />
           <ProgressCard />
         </Space>
-        <div style={{ marginLeft: 20 }}>
+        <div style={{ marginLeft: 20,flex:1 }}>
           <Message />
           <div className="Schedule">
             <Schedule />
