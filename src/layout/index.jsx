@@ -6,9 +6,9 @@ import "./index.scss";
 import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
 import { useCallback } from "react";
-import API from "@/service/index";
-import { img_url } from "@/service/lib/baseUrl.js";
+
 import { Helmet } from "react-helmet";
+import { useMemo } from "react";
 
 let _isMounted = true;
 
@@ -16,8 +16,6 @@ const AppHome = (props) => {
   const { history, location, routes } = props;
 
   const [newMenus, setMenu] = useState([]);
-
-  const [imageUrl, setImageUrl] = useState("");
 
   const [theme, setTheme] = useState("theme-gray");
 
@@ -27,19 +25,7 @@ const AppHome = (props) => {
     setTheme(color);
   }, []);
 
-  useEffect(() => {
-    _isMounted = true
-    const getImage = () => {
-      API.getImage({ user_name: userName }).then((res) => {
-        let fileName = res.Data[0]?.photo;
-        let imgURL = `${img_url}${fileName}`;
-        if(!_isMounted) return
-        setImageUrl(imgURL);
-      });
-    };
-    getImage();
-    return ()=>(_isMounted = false)
-  }, []);
+  const imageUrl = useMemo(()=>localStorage.getItem('imgUrl'),[])
 
   useEffect(() => {
     /* 页面刷新 */

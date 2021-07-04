@@ -19,6 +19,7 @@ const Login = () => {
 
   useEffect(()=>{
     removeCookie('token')
+    localStorage.removeItem('imgUrl')
   },[])
 
   const onTab = () => {

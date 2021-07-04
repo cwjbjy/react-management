@@ -6,6 +6,7 @@ import "./form.scss";
 import { useDispatch } from "react-redux";
 import API from '@/service/index'
 import { saveCookie } from "@/utils/cookie.js";
+import { img_url } from "@/service/lib/baseUrl.js";
 const LoginForm = (props) => {
   const dispatch = useDispatch();
 
@@ -37,7 +38,12 @@ const LoginForm = (props) => {
         );
         saveCookie("token", res.value);
         localStorage.setItem("menu", res.auth);
-        login()
+        API.getImage({ user_name: params.userName }).then((res) => {
+          let fileName = res.Data[0]?.photo;
+          let imgURL = `${img_url}${fileName}`;
+          localStorage.setItem('imgUrl',imgURL)
+          login()
+        });
       })
       .catch((err) => {
         if (err.status === 400) {

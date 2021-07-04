@@ -7,32 +7,29 @@ import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
 import { useSelector } from "react-redux";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState ,useMemo} from "react";
 import API from "@/service";
-import { img_url } from "@/service/lib/baseUrl.js";
 import "./index.scss";
+
+let _isMounted = true;
 
 const HomePage = () => {
   const { theme } = useContext(ThemeContext);
   const userName = useSelector((state) => state.login.userName);
 
   const [time, setTime] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+
+  const imageUrl = useMemo(()=>localStorage.getItem('imgUrl'),[])
 
   useEffect(() => {
-    API.getImage({ user_name: userName }).then((res) => {
-      let fileName = res.Data[0]?.photo;
-      let imgURL = `${img_url}${fileName}`;
-      setImageUrl(imgURL);
-    });
-  }, []);
-
-  useEffect(() => {
+    _isMounted = true
     API.getUser({
       user_name: userName,
     }).then((res) => {
+      if(!_isMounted) return
       setTime(res.Data[0].createTime);
     });
+    return ()=>(_isMounted = false)
   }, []);
 
   return (
