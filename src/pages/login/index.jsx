@@ -2,7 +2,7 @@ import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from "./components/register";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_LOGIN, ADD_USER, SET_USER } from "@/redux/action/login";
+import { ADD_USER, SET_USER } from "@/redux/action/login";
 import { Helmet } from "react-helmet";
 import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
 import cn from "classnames";
@@ -48,7 +48,7 @@ const Login = () => {
             </div>
             {login.flag ? (
               <>
-                <LoginForm userInfo={login} SET_LOGIN={SET_LOGIN}></LoginForm>
+                <LoginForm userInfo={login} SET_USER={SET_USER}></LoginForm>
                 <LoginOther></LoginOther>
               </>
             ) : (

@@ -4,11 +4,12 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
 import { useDispatch } from "react-redux";
-
+import API from '@/service/index'
+import { saveCookie } from "@/utils/cookie.js";
 const LoginForm = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { SET_LOGIN, history, userInfo } = props;
+  const { SET_USER, history, userInfo } = props;
 
   const icon = {
     color: "#c0c4cc",
@@ -26,7 +27,31 @@ const LoginForm = (props) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
     formData.append("passWord", params.passWord);
-    dispatch(SET_LOGIN(formData, login))
+    API.login(formData)
+      .then((res) => {
+        dispatch(
+          SET_USER({
+            userName: params.userName,
+            passWord: params.passWord,
+          })
+        );
+        saveCookie("token", res.value);
+        localStorage.setItem("menu", res.auth);
+        login()
+      })
+      .catch((err) => {
+        if (err.status === 400) {
+          message.error({
+            content: "密码错误",
+            className: "custom-message",
+          });
+        } else if (err.status === 401) {
+          message.error({
+            content: "用户名错误",
+            className: "custom-message",
+          });
+        }
+      });
   };
 
   return (

@@ -1,34 +1,7 @@
 import API from '@/service/index'
-import { saveCookie } from "@/utils/cookie.js";
+
 import { message } from "antd";
 import { SETUSER } from "../../constant/store";
-
-const SET_LOGIN = (params, fn) => {
-    return dispatch => {
-        return API.login(params).then((res) => {
-                dispatch(SET_USER({
-                    userName: params.get('userName'),
-                    passWord: params.get('passWord'),
-                }))
-                saveCookie("token", res.value);
-                localStorage.setItem('menu',res.auth)
-                fn()
-            })
-            .catch((err) => {
-                if (err.status === 400) {
-                    message.error({
-                        content: "密码错误",
-                        className: "custom-message",
-                    });
-                } else if (err.status === 401) {
-                    message.error({
-                        content: "用户名错误",
-                        className: "custom-message",
-                    });
-                }
-            });
-    }
-}
 
 const ADD_USER = (params) => {
     let {
@@ -66,7 +39,6 @@ const SET_USER = (value) => {
 }
 
 export {
-    SET_LOGIN,
     ADD_USER,
     SET_USER
 }
