@@ -1,21 +1,18 @@
-import {
-    lazy
-} from "react";
-
-const HomePage = lazy(() => import( /* webpackChunkName: "homePage" */ '@/pages/homePage/index.jsx'))
-const FleetLine = lazy(() => import( /* webpackChunkName: "fleetLine" */ '@/pages/fleetLine/index.jsx'))
-const PdfPreview = lazy(() => import( /* webpackChunkName: "PdfPreview" */ '@/pages/pdfPreview/index.jsx'))
-const BaseEchart = lazy(() => import( /* webpackChunkName: "baseEchart" */ '@/pages/baseEchart/index.jsx'))
-const BaseTable = lazy(() => import( /* webpackChunkName: "baseTable" */ '@/pages/baseTable/index.jsx'))
-const DragList = lazy(() => import( /* webpackChunkName: "DragList" */ '@/pages/drag_list/index.jsx'))
-const DragDialog = lazy(() => import( /* webpackChunkName: "DragDialog" */ '@/pages/drag_dialog/index.jsx'))
-const I18n = lazy(() => import( /* webpackChunkName: "I18n" */ '@/pages/I18n/index.jsx'))
-const CommonChart = lazy(() => import( /* webpackChunkName: "chart_common" */ '@/pages/chart_common/index.jsx'))
-const PositionChart = lazy(() => import( /* webpackChunkName: "chart_position" */ '@/pages/chart_position/index.jsx'))
-const FoldChart = lazy(() => import( /* webpackChunkName: "chart_fold" */ '@/pages/chart_fold/index.jsx'))
-const ChatRoom = lazy(() => import( /* webpackChunkName: "homePage" */ '@/pages/chatRoom/index.jsx'))
-const Magnifying = lazy(() => import( /* webpackChunkName: "magnifying" */ '@/pages/magnifying/index.jsx'))
-const UserManage = lazy(() => import( /* webpackChunkName: "userManage" */ '@/pages/userManage/index.jsx'))
+import loadable from "@/utils/loadable"
+const HomePage = loadable(() => import( /* webpackChunkName: "homePage" */ '@/pages/homePage/index.jsx'))
+const FleetLine = loadable(() => import( /* webpackChunkName: "fleetLine" */ '@/pages/fleetLine/index.jsx'))
+const PdfPreview = loadable(() => import( /* webpackChunkName: "PdfPreview" */ '@/pages/pdfPreview/index.jsx'))
+const BaseEchart = loadable(() => import( /* webpackChunkName: "baseEchart" */ '@/pages/baseEchart/index.jsx'))
+const BaseTable = loadable(() => import( /* webpackChunkName: "baseTable" */ '@/pages/baseTable/index.jsx'))
+const DragList = loadable(() => import( /* webpackChunkName: "DragList" */ '@/pages/drag_list/index.jsx'))
+const DragDialog = loadable(() => import( /* webpackChunkName: "DragDialog" */ '@/pages/drag_dialog/index.jsx'))
+// const I18n = loadable(() => import( /* webpackChunkName: "I18n" */ '@/pages/I18n/index.jsx'))
+const CommonChart = loadable(() => import( /* webpackChunkName: "chart_common" */ '@/pages/chart_common/index.jsx'))
+const PositionChart = loadable(() => import( /* webpackChunkName: "chart_position" */ '@/pages/chart_position/index.jsx'))
+const FoldChart = loadable(() => import( /* webpackChunkName: "chart_fold" */ '@/pages/chart_fold/index.jsx'))
+const ChatRoom = loadable(() => import( /* webpackChunkName: "homePage" */ '@/pages/chatRoom/index.jsx'))
+const Magnifying = loadable(() => import( /* webpackChunkName: "magnifying" */ '@/pages/magnifying/index.jsx'))
+const UserManage = loadable(() => import( /* webpackChunkName: "userManage" */ '@/pages/userManage/index.jsx'))
 
 const home = [{
         path: '/home/firstItem',
@@ -56,11 +53,11 @@ const home = [{
             },
         ]
     },
-    {
-        path: '/home/I18n',
-        Component: I18n,
-        auth: true,
-    },
+    // {
+    //     path: '/home/I18n',
+    //     Component: I18n,
+    //     auth: true,
+    // },
     {
         path: '/chart',
         children: [{

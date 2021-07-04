@@ -1,8 +1,6 @@
 import routes from "@/routes";
 import LayoutView from "@/layout/index.jsx";
 import { readCookie } from "@/utils/cookie";
-import { Suspense } from "react";
-import {FullScreenLoading} from '@/components/layout/loading.jsx'
 import {
   BrowserRouter as Router,
   Route,
@@ -50,13 +48,7 @@ const BuildRoutes = () => {
         <LayoutView
         {...props}
         routes={
-          <Suspense
-            fallback={
-              <FullScreenLoading/>
-            }
-          >
-            <Switch>{layoutRoutes}</Switch>
-          </Suspense>
+          <Switch>{layoutRoutes}</Switch>
         }
       />
       )}>
@@ -69,13 +61,7 @@ const BuildRoutes = () => {
 const RouterView = () => {
   return (
     <Router>
-      <Suspense
-        fallback={
-          <FullScreenLoading/>
-        }
-      >
-        <BuildRoutes />
-      </Suspense>
+      <BuildRoutes />
     </Router>
   );
 };

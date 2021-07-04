@@ -1,6 +1,5 @@
-
-import {lazy} from "react";
-const Login = lazy(()=>import(/* webpackChunkName: "Login" */ '@/pages/login/index.jsx'))
+import loadable from "@/utils/loadable"
+const Login = loadable(()=>import(/* webpackChunkName: "Login" */ '@/pages/login/index.jsx'))
 
 const login = [
     {
