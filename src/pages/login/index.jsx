@@ -6,6 +6,8 @@ import { ADD_USER, SET_USER } from "@/redux/action/login";
 import { Helmet } from "react-helmet";
 import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
 import cn from "classnames";
+import { useEffect } from "react";
+import {removeCookie} from '@/utils/cookie'
 
 const theme= {
   background:'rgba(25, 202, 173, 1)',
@@ -14,6 +16,10 @@ const theme= {
 const Login = () => {
   const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    removeCookie('token')
+  },[])
 
   const onTab = () => {
     dispatch(

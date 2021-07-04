@@ -8,7 +8,9 @@ import ThemeContext from "./themeContext";
 import { useCallback } from "react";
 import API from "@/service/index";
 import { img_url } from "@/service/lib/baseUrl.js";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+
+let _isMounted = true;
 
 const AppHome = (props) => {
   const { history, location, routes } = props;
@@ -26,12 +28,18 @@ const AppHome = (props) => {
   }, []);
 
   useEffect(() => {
-    API.getImage({ user_name: userName }).then((res) => {
-      let fileName = res.Data[0]?.photo;
-      let imgURL = `${img_url}${fileName}`;
-      setImageUrl(imgURL);
-    });
-  }, [userName]);
+    _isMounted = true
+    const getImage = () => {
+      API.getImage({ user_name: userName }).then((res) => {
+        let fileName = res.Data[0]?.photo;
+        let imgURL = `${img_url}${fileName}`;
+        if(!_isMounted) return
+        setImageUrl(imgURL);
+      });
+    };
+    getImage();
+    return ()=>(_isMounted = false)
+  }, []);
 
   useEffect(() => {
     /* 页面刷新 */
@@ -41,6 +49,7 @@ const AppHome = (props) => {
   }, []);
 
   useEffect(() => {
+    _isMounted = true
     const getMenu = () => {
       let arr = [];
       let authMenus = localStorage.getItem("menu");
@@ -49,9 +58,11 @@ const AppHome = (props) => {
           arr.push(item);
         }
       });
+      if(!_isMounted) return
       setMenu(arr);
     };
     getMenu();
+    return ()=>(_isMounted = false)
   }, []);
 
   return (

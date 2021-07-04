@@ -13,85 +13,81 @@ const FoldChart = loadable(() => import( /* webpackChunkName: "chart_fold" */ '@
 const ChatRoom = loadable(() => import( /* webpackChunkName: "homePage" */ '@/pages/chatRoom/index.jsx'))
 const Magnifying = loadable(() => import( /* webpackChunkName: "magnifying" */ '@/pages/magnifying/index.jsx'))
 const UserManage = loadable(() => import( /* webpackChunkName: "userManage" */ '@/pages/userManage/index.jsx'))
-
+const HomeLayout = loadable(() => import( /* webpackChunkName: "homeLayout" */ "@/layout/index.jsx"));
 const home = [{
-        path: '/home/firstItem',
-        Component: HomePage,
-        auth: true,
-    },
-    {
-        path: '/home/fleet',
-        Component: FleetLine,
-        auth: true,
-    },
-    {
-        path: '/home/pdf',
-        Component: PdfPreview,
-        auth: true,
-    },
-    {
-        path: '/home/baseEcharts',
-        Component: BaseEchart,
-        auth: true,
-    },
-    {
-        path: '/home/baseTable',
-        Component: BaseTable,
-        auth: true,
-    },
-    {
-        path: '/drag',
-        children: [{
-                path: '/home/drag/dragList',
-                Component: DragList,
-                auth: true,
-            },
-            {
-                path: '/home/drag/dragDialog',
-                Component: DragDialog,
-                auth: true,
-            },
-        ]
-    },
-    // {
-    //     path: '/home/I18n',
-    //     Component: I18n,
-    //     auth: true,
-    // },
-    {
-        path: '/chart',
-        children: [{
-                path: '/home/chart/commonChart',
-                Component: CommonChart,
-                auth: true,
-            },
-            {
-                path: '/home/chart/positionChart',
-                Component: PositionChart,
-                auth: true,
-            },
-            {
-                path: '/home/chart/foldChart',
-                Component: FoldChart,
-                auth: true,
-            },
-        ]
-    },
-    {
-        path: '/home/chatRoom',
-        Component: ChatRoom,
-        auth: true,
-    },
-    {
-        path: '/home/magnifying',
-        Component: Magnifying,
-        auth: true,
-    },
-    {
-        path: '/home/manage',
-        Component: UserManage,
-        auth: true,
-    },
-]
+    path: '/home',
+    Component: HomeLayout,
+    children: [{
+            path: '/home/firstItem',
+            Component: HomePage,
+            auth: true,
+        },
+        {
+            path: '/home/fleet',
+            Component: FleetLine,
+            auth: true,
+        },
+        {
+            path: '/home/pdf',
+            Component: PdfPreview,
+            auth: true,
+        },
+        {
+            path: '/home/baseEcharts',
+            Component: BaseEchart,
+            auth: true,
+        },
+        {
+            path: '/home/baseTable',
+            Component: BaseTable,
+            auth: true,
+        },
+        {
+            path: '/home/drag/dragList',
+            Component: DragList,
+            auth: true,
+        },
+        {
+            path: '/home/drag/dragDialog',
+            Component: DragDialog,
+            auth: true,
+        },
+        // {
+        //     path: '/home/I18n',
+        //     Component: I18n,
+        //     auth: true,
+        // },
+        {
+            path: '/home/chart/commonChart',
+            Component: CommonChart,
+            auth: true,
+        },
+        {
+            path: '/home/chart/positionChart',
+            Component: PositionChart,
+            auth: true,
+        },
+        {
+            path: '/home/chart/foldChart',
+            Component: FoldChart,
+            auth: true,
+        },
+        {
+            path: '/home/chatRoom',
+            Component: ChatRoom,
+            auth: true,
+        },
+        {
+            path: '/home/magnifying',
+            Component: Magnifying,
+            auth: true,
+        },
+        {
+            path: '/home/manage',
+            Component: UserManage,
+            auth: true,
+        },
+    ]
+}]
 
-export default home 
+export default home

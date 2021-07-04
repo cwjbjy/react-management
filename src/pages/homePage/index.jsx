@@ -25,7 +25,7 @@ const HomePage = () => {
       let imgURL = `${img_url}${fileName}`;
       setImageUrl(imgURL);
     });
-  }, [userName]);
+  }, []);
 
   useEffect(() => {
     API.getUser({
@@ -33,7 +33,7 @@ const HomePage = () => {
     }).then((res) => {
       setTime(res.Data[0].createTime);
     });
-  }, [userName]);
+  }, []);
 
   return (
     <section style={{ paddingLeft: 20 }}>
