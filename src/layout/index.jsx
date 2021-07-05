@@ -10,6 +10,8 @@ import { useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useMemo } from "react";
 
+import RouterView from '../routes/routerView'
+
 let _isMounted = true;
 
 const AppHome = (props) => {
@@ -63,7 +65,9 @@ const AppHome = (props) => {
             <aside>
               <Menus menus={newMenus} />
             </aside>
-            <article>{routes}</article>
+            <article>
+              <RouterView/>
+            </article>
           </main>
         </div>
       </ThemeContext.Provider>
