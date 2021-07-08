@@ -24,6 +24,8 @@ const LoginForm = (props) => {
     history.push("/home/firstItem");
   };
 
+  const [form] = Form.useForm();
+
   const onFinish = (params) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
@@ -47,15 +49,19 @@ const LoginForm = (props) => {
       })
       .catch((err) => {
         if (err.status === 400) {
-          message.error({
-            content: "密码错误",
-            className: "custom-message",
-          });
+          form.setFields([
+            {
+              name:'passWord',
+              errors:["密码错误"]
+            }
+          ])
         } else if (err.status === 401) {
-          message.error({
-            content: "用户名错误",
-            className: "custom-message",
-          });
+          form.setFields([
+            {
+              name:'userName',
+              errors:["用户名错误"]
+            }
+          ])
         }
       });
   };
@@ -65,6 +71,7 @@ const LoginForm = (props) => {
       name="basic"
       initialValues={userInfo}
       size="large"
+      form={form}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >

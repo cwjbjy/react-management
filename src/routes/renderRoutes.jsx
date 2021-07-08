@@ -31,7 +31,7 @@ const renderRoutes = (routes) => {
           />
         );
       })}
-       <Redirect from="/" to="/login"></Redirect>
+       <Redirect from="/" to="/login" exact></Redirect>
     </Switch>
   );
 };
