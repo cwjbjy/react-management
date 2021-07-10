@@ -5,6 +5,8 @@ import { useState } from "react/cjs/react.development";
 import API from "../../service";
 import "./index.scss";
 import { useRequest } from "ahooks";
+import { SET_USER} from '@/redux/action/login'
+import { useDispatch } from "react-redux";
 
 const setData = (data) => {
   let newArr = [];
@@ -19,6 +21,7 @@ const UserManage = () => {
   const [info, setInfo] = useState({});
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
 
   const onEdit = (params) => {
     let { isModalVisible, info } = params;
@@ -55,6 +58,11 @@ const UserManage = () => {
         message.success({
           content: "密码修改成功",
         });
+        dispatch(SET_USER({
+          userName:user_name,
+          passWord:password,
+          flag: true,
+      }))
       }
     });
     setModal(false);
