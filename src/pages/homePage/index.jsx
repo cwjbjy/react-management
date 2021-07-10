@@ -7,30 +7,22 @@ import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
 import { useSelector } from "react-redux";
-import { useEffect, useContext, useState ,useMemo} from "react";
+import { useContext, useMemo } from "react";
 import API from "@/service";
 import "./index.scss";
-
-let _isMounted = true;
+import { useRequest } from "ahooks";
 
 const HomePage = () => {
   const { theme } = useContext(ThemeContext);
   const userName = useSelector((state) => state.login.userName);
 
-  const [time, setTime] = useState("");
+  const imageUrl = useMemo(() => localStorage.getItem("imgUrl"), []);
 
-  const imageUrl = useMemo(()=>localStorage.getItem('imgUrl'),[])
-
-  useEffect(() => {
-    _isMounted = true
+  const { data } = useRequest(() =>
     API.getUser({
       user_name: userName,
-    }).then((res) => {
-      if(!_isMounted) return
-      setTime(res.Data[0].createTime);
-    });
-    return ()=>(_isMounted = false)
-  }, []);
+    })
+  );
 
   return (
     <section style={{ paddingLeft: 20 }}>
@@ -39,11 +31,11 @@ const HomePage = () => {
           <UserCard
             imageUrl={imageUrl}
             userName={userName}
-            registerTime={time}
+            registerTime={data && data.Data[0].createTime}
           />
           <ProgressCard />
         </Space>
-        <div style={{ marginLeft: 20,flex:1 }}>
+        <div style={{ marginLeft: 20, flex: 1 }}>
           <Message />
           <div className="Schedule">
             <Schedule />

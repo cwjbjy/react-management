@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 // import RouterView from './routes/index.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import renderRoutes from './routes/renderRoutes'
-import routeConfig from './config/routeConfig.jsx'
+import routeConfig from './config/routeConfig.js'
 
 ReactDOM.render(
   <Provider store={store}>
