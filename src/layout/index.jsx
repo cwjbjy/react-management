@@ -1,33 +1,40 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import { useSelector } from "react-redux";
 import "./index.scss";
-import { useEffect, useState } from "react/cjs/react.development";
 import ThemeContext from "./themeContext";
-import { useCallback } from "react";
-
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import { useMemo } from "react";
-
-import RouterView from '../routes/routerView'
-
-let _isMounted = true;
+import RouterView from "../routes/routerView";
+import { useUnmountedRef } from "ahooks";
+import ls from "local-storage";
+import { useRequest } from "ahooks";
+import API from "@/service/index";
 
 const AppHome = (props) => {
-  const { history, location, routes } = props;
+  const { history, location } = props;
+
+  const unmountRef = useUnmountedRef();
 
   const [newMenus, setMenu] = useState([]);
 
   const [theme, setTheme] = useState("theme-gray");
 
-  const userName = useSelector((state) => state.login.userName);
+  const userName = useMemo(() => {
+    return ls.get("userInfo").userName;
+  }, []);
 
   const changeTheme = useCallback((color) => {
     setTheme(color);
   }, []);
 
-  const imageUrl = useMemo(()=>localStorage.getItem('imgUrl'),[])
+  const { data } = useRequest(() => API.getImage({ user_name: userName }),{
+    ready:!!userName
+  });
+
+  const fileName = useMemo(() => {
+    return data && data.Data[0].photo;
+  }, [data]);
 
   useEffect(() => {
     /* 页面刷新 */
@@ -37,7 +44,6 @@ const AppHome = (props) => {
   }, []);
 
   useEffect(() => {
-    _isMounted = true
     const getMenu = () => {
       let arr = [];
       let authMenus = localStorage.getItem("menu");
@@ -46,11 +52,9 @@ const AppHome = (props) => {
           arr.push(item);
         }
       });
-      if(!_isMounted) return
-      setMenu(arr);
+      !unmountRef.current && setMenu(arr);
     };
     getMenu();
-    return ()=>(_isMounted = false)
   }, []);
 
   return (
@@ -60,13 +64,13 @@ const AppHome = (props) => {
       </Helmet>
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div className={theme}>
-          <Header imageUrl={imageUrl} username={userName} />
+          <Header fileName={fileName} username={userName} />
           <main className="wrapper">
             <aside>
               <Menus menus={newMenus} />
             </aside>
             <article>
-              <RouterView/>
+              <RouterView />
             </article>
           </main>
         </div>

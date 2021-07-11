@@ -1,21 +1,27 @@
 import { Card } from "antd";
 import { Row, Col } from "antd";
 import { register } from "@/filter";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import "./userCard.scss";
-import React from 'react'
+import React from "react";
+import { img_url } from "@/service/lib/baseUrl.js";
 
 const UserCard = React.memo((props) => {
+  const { userName, registerTime, fileName } = props;
 
-  const { userName, registerTime,imageUrl } = props;
-  
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
 
   return (
-    <Card hoverable  className="user">
+    <Card hoverable className="user">
       <Row className="user-top">
         <Col span="12">
-          <img src={imageUrl} className="user-img" alt="加载失败" />
+          {fileName && (
+            <img
+              src={`${img_url}${fileName}`}
+              className="user-img"
+              alt="加载失败"
+            />
+          )}
         </Col>
         <Col span="12" className="user-area">
           <div className="user-name">{userName}</div>
@@ -36,15 +42,15 @@ const UserCard = React.memo((props) => {
 });
 
 UserCard.propTypes = {
-  userName:PropTypes.string.isRequired,
-  registerTime:PropTypes.string.isRequired,
-  imageUrl:PropTypes.string.isRequired
-}
+  userName: PropTypes.string,
+  registerTime: PropTypes.string.isRequired,
+  fileName: PropTypes.string.isRequired,
+};
 
 UserCard.defaultProps = {
-  userName:'一叶扁舟',
-  registerTime:'2021-03-21',
-  imageUrl:''
-}
+  userName: "一叶扁舟",
+  registerTime: "2021-03-21",
+  fileName: "",
+};
 
 export default UserCard;

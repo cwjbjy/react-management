@@ -6,11 +6,12 @@ import { withRouter } from "react-router-dom";
 import ThemeContext from "../../layout/themeContext";
 import { useContext } from "react";
 import React from "react";
+import { img_url } from "@/service/lib/baseUrl.js";
 
 const Header = React.memo((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
-  let { imageUrl,history, username } = props;
+  let { fileName, history, username } = props;
 
   const onList = ({ key }) => {
     if (key === "1") {
@@ -68,7 +69,13 @@ const Header = React.memo((props) => {
         </Dropdown>
         <Dropdown overlay={menu} className="user-drop">
           <div className="userImage">
-            <img src={imageUrl} className="user-img" alt="加载失败" />
+            {fileName && (
+              <img
+                src={`${img_url}${fileName}`}
+                className="user-img"
+                alt="加载失败"
+              />
+            )}
             <span style={{ marginRight: 5 }}>
               <span style={{ marginRight: 2 }}>{username}</span>
               <CaretDownOutlined />

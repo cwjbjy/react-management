@@ -3,17 +3,12 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
-import { useDispatch } from "react-redux";
 import API from "@/service/index";
 import { saveCookie } from "@/utils/cookie.js";
-import { img_url } from "@/service/lib/baseUrl.js";
-
 import { useRequest } from "ahooks";
 
 const LoginForm = (props) => {
   const { SET_USER, history, userInfo } = props;
-
-  const dispatch = useDispatch();
 
   const icon = {
     color: "#c0c4cc",
@@ -36,18 +31,23 @@ const LoginForm = (props) => {
     run(formData);
   };
 
-  const { run, params } = useRequest(API.login, {
+  const { run } = useRequest(API.login, {
     manual: true,
     throwOnError: true, //自己处理错误
     onSuccess: (data, params) => {
       saveCookie("token", data.value);
       localStorage.setItem("menu", data.auth);
-      dispatch(
-        SET_USER({
-          userName: params[0].get("userName"),
-          passWord: params[0].get("passWord"),
-        })
+      SET_USER(
+        Object.assign(
+          {},
+          {
+            userName: params[0].get("userName"),
+            passWord: params[0].get("passWord"),
+            flag: true,
+          }
+        )
       );
+      login();
     },
     onError: (error) => {
       if (error.status === 400) {
@@ -65,16 +65,6 @@ const LoginForm = (props) => {
           },
         ]);
       }
-    },
-  });
-
-  useRequest(() => API.getImage({ user_name: params[0].get("userName") }), {
-    ready: !!params.length,
-    onSuccess: (data) => {
-      let fileName = data.Data[0]?.photo;
-      let imgURL = `${img_url}${fileName}`;
-      localStorage.setItem("imgUrl", imgURL);
-      login();
     },
   });
 

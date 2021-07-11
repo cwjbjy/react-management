@@ -5,16 +5,44 @@ import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
 import "./register.scss";
 import { useEffect, useState } from "react/cjs/react.development";
-import { useDispatch } from "react-redux";
+import API from "@/service/index";
+import { useRequest } from "ahooks";
 
 const RegisterForm = (props) => {
-  const dispatch = useDispatch()
-  const { ADD_USER } = props;
+  const { SET_USER } = props;
   const [verifyCode, set_verifyCode] = useState(null);
 
   const icon = {
     color: "#c0c4cc",
   };
+
+  const { run } = useRequest(API.register, {
+    manual: true,
+    onSuccess: (data, params) => {
+      message.success({
+        content: data.message,
+        className: "custom-message",
+      });
+      SET_USER(
+        Object.assign(
+          {},
+          {
+            userName: params[0].userName,
+            passWord: params[0].passWord,
+            flag: true,
+          }
+        )
+      );
+    },
+    onError:(error)=>{
+      if (error.status === 403) {
+        message.error({
+            content: "用户名已存在，请重新选择用户名",
+            className: "custom-message",
+        });
+    }
+    }
+  });
 
   useEffect(() => {
     set_verifyCode(new window.GVerify("v_container"));
@@ -29,7 +57,7 @@ const RegisterForm = (props) => {
         createTime: getTime(),
         photo: "userlogo.png",
       };
-      dispatch(ADD_USER(user))
+      run(user);
     } else {
       message.error({
         content: "验证码错误",
@@ -72,9 +100,9 @@ const RegisterForm = (props) => {
             message: "Please input your password!",
           },
           {
-            pattern:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/,
-            message:"请输入8-16位由数字与字母组成的密码"
-          }
+            pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/,
+            message: "请输入8-16位由数字与字母组成的密码",
+          },
         ]}
       >
         <Input.Password
@@ -92,12 +120,14 @@ const RegisterForm = (props) => {
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
-              if (!value || getFieldValue('rge_pass') === value) {
+              if (!value || getFieldValue("rge_pass") === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              return Promise.reject(
+                new Error("The two passwords that you entered do not match!")
+              );
             },
-          })
+          }),
         ]}
       >
         <Input.Password
@@ -126,7 +156,7 @@ const RegisterForm = (props) => {
 };
 
 RegisterForm.propTypes = {
-  ADD_USER: PropTypes.func,
+  SET_USER: PropTypes.func,
 };
 
 export default RegisterForm;

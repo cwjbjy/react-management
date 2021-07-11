@@ -1,33 +1,33 @@
 import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from "./components/register";
-import { useDispatch, useSelector } from "react-redux";
-import { ADD_USER, SET_USER } from "@/redux/action/login";
 import { Helmet } from "react-helmet";
 import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
 import cn from "classnames";
 import { useEffect } from "react";
-import {removeCookie} from '@/utils/cookie'
+import clearInfo from '@/utils/clearInfo.js'
+import {useLocalStorageState} from 'ahooks'
 
 const theme= {
   background:'rgba(25, 202, 173, 1)',
 }
 
+const initState = {
+  userName: '一叶扁舟',
+  passWord: '123456zx',
+  flag: true
+}
+
 const Login = () => {
-  const login = useSelector((state) => state.login);
-  const dispatch = useDispatch();
+
+  const [user,setUser] = useLocalStorageState('userInfo',initState)
 
   useEffect(()=>{
-    removeCookie('token')
-    localStorage.removeItem('imgUrl')
+    clearInfo()
   },[])
 
   const onTab = () => {
-    dispatch(
-      SET_USER({
-        flag: !login.flag,
-      })
-    );
+    setUser({...user,flag:!user.flag})
   };
 
   return (
@@ -41,25 +41,25 @@ const Login = () => {
           <Form>
             <div className="tab">
               <div
-                className={cn({ title_active: login.flag }, "tab_title")}
+                className={cn({ title_active: user.flag }, "tab_title")}
                 onClick={onTab}
               >
                 用户登录
               </div>
               <div
-                className={cn({ title_active: !login.flag }, "tab_title")}
+                className={cn({ title_active: !user.flag }, "tab_title")}
                 onClick={onTab}
               >
                 用户注册
               </div>
             </div>
-            {login.flag ? (
+            {user.flag ? (
               <>
-                <LoginForm userInfo={login} SET_USER={SET_USER}></LoginForm>
+                <LoginForm userInfo={user} SET_USER={setUser}></LoginForm>
                 <LoginOther></LoginOther>
               </>
             ) : (
-              <RegisterForm ADD_USER={ADD_USER}></RegisterForm>
+              <RegisterForm SET_USER={setUser}></RegisterForm>
             )}
           </Form>
         </Main>

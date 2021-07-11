@@ -6,19 +6,29 @@ import Schedule from "./components/schedule";
 import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
-import { useSelector } from "react-redux";
 import { useContext, useMemo } from "react";
 import API from "@/service";
 import "./index.scss";
 import { useRequest } from "ahooks";
+import ls from 'local-storage'
+
 
 const HomePage = () => {
   const { theme } = useContext(ThemeContext);
-  const userName = useSelector((state) => state.login.userName);
 
-  const imageUrl = useMemo(() => localStorage.getItem("imgUrl"), []);
+  const userName = useMemo(()=>{
+    return ls.get('userInfo').userName
+  },[]);
 
-  const { data } = useRequest(() =>
+  const { data } = useRequest(() => API.getImage({ user_name: userName },{
+    ready:!!userName,
+  }));
+
+  const fileName = useMemo(() => {
+    return data && data.Data[0].photo;
+  }, [data]);
+
+  const time = useRequest(() =>
     API.getUser({
       user_name: userName,
     })
@@ -29,9 +39,9 @@ const HomePage = () => {
       <div className="row1">
         <Space direction="vertical" size={20}>
           <UserCard
-            imageUrl={imageUrl}
+            fileName={fileName}
             userName={userName}
-            registerTime={data && data.Data[0].createTime}
+            registerTime={time.data && time.data.Data[0].createTime}
           />
           <ProgressCard />
         </Space>
