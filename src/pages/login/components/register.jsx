@@ -23,25 +23,20 @@ const RegisterForm = (props) => {
         content: data.message,
         className: "custom-message",
       });
-      SET_USER(
-        Object.assign(
-          {},
-          {
-            userName: params[0].userName,
-            passWord: params[0].passWord,
-            flag: true,
-          }
-        )
-      );
+      SET_USER({
+        userName: params[0].userName,
+        passWord: params[0].passWord,
+        flag: true,
+      });
     },
-    onError:(error)=>{
+    onError: (error) => {
       if (error.status === 403) {
         message.error({
-            content: "用户名已存在，请重新选择用户名",
-            className: "custom-message",
+          content: "用户名已存在，请重新选择用户名",
+          className: "custom-message",
         });
-    }
-    }
+      }
+    },
   });
 
   useEffect(() => {

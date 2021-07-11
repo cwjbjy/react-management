@@ -37,16 +37,11 @@ const LoginForm = (props) => {
     onSuccess: (data, params) => {
       saveCookie("token", data.value);
       localStorage.setItem("menu", data.auth);
-      SET_USER(
-        Object.assign(
-          {},
-          {
-            userName: params[0].get("userName"),
-            passWord: params[0].get("passWord"),
-            flag: true,
-          }
-        )
-      );
+      SET_USER({
+        userName: params[0].get("userName"),
+        passWord: params[0].get("passWord"),
+        flag: true,
+      });
       login();
     },
     onError: (error) => {
