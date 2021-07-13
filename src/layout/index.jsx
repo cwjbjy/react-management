@@ -9,7 +9,7 @@ import RouterView from "../routes/routerView";
 import { useUnmountedRef } from "ahooks";
 import ls from "local-storage";
 import { useRequest } from "ahooks";
-import API from "@/service/index";
+import API from "@/service/fetch/index";
 
 const AppHome = (props) => {
   const { history, location } = props;

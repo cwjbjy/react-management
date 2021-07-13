@@ -5,7 +5,7 @@ import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
 import "./register.scss";
 import { useEffect, useState } from "react/cjs/react.development";
-import API from "@/service/index";
+import API from "@/service/fetch/index";
 import { useRequest } from "ahooks";
 
 const RegisterForm = (props) => {

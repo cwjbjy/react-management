@@ -4,7 +4,7 @@ import { register } from "@/filter";
 import PropTypes from "prop-types";
 import "./userCard.scss";
 import React from "react";
-import { img_url } from "@/service/lib/baseUrl.js";
+import { img_url } from "@/service/fetch/lib/baseUrl.js";
 
 const UserCard = React.memo((props) => {
   const { userName, registerTime, fileName } = props;

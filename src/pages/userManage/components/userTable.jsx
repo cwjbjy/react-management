@@ -1,6 +1,6 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Table, Image, Button, Popconfirm } from "antd";
-import { img_url } from "@/service/lib/baseUrl";
+import { img_url } from "@/service/fetch/lib/baseUrl";
 const UserTable = (props) => {
 
   const { tableData, onModal, onDelete } = props;

@@ -1,4 +1,4 @@
-import API from '@/service/index'
+import API from '@/service/fetch/index'
 
 import { message } from "antd";
 import { SETUSER } from "../../constant/store";

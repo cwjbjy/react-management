@@ -6,8 +6,8 @@ import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
 import cn from "classnames";
 import { useEffect } from "react";
 import clearInfo from '@/utils/clearInfo.js'
-import {useLocalStorageState} from 'ahooks'
-
+import {useRequest,useLocalStorageState} from 'ahooks'
+import {getData} from '@/apis/user.js'
 const theme= {
   background:'rgba(25, 202, 173, 1)',
 }
@@ -21,6 +21,8 @@ const initState = {
 const Login = () => {
 
   const [user,setUser] = useLocalStorageState('userInfo',initState)
+
+  useRequest(getData)
 
   useEffect(()=>{
     clearInfo()

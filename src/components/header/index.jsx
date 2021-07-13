@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import ThemeContext from "../../layout/themeContext";
 import { useContext } from "react";
 import React from "react";
-import { img_url } from "@/service/lib/baseUrl.js";
+import { img_url } from "@/service/fetch/lib/baseUrl.js";
 
 const Header = React.memo((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);

@@ -7,7 +7,7 @@ import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
 import { useContext, useMemo } from "react";
-import API from "@/service";
+import API from "@/service/fetch/index";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from 'local-storage'
