@@ -5,7 +5,8 @@ import { useState } from "react/cjs/react.development";
 import API from "@/service/fetch/index";
 import "./index.scss";
 import { useRequest } from "ahooks";
-import ls from 'local-storage'
+import ls from "local-storage";
+import { useCallback } from "react";
 
 const setData = (data) => {
   let newArr = [];
@@ -13,7 +14,7 @@ const setData = (data) => {
     let newItem = Object.assign({}, item, { key: index });
     newArr.push(newItem);
   });
-  return newArr
+  return newArr;
 };
 
 const UserManage = () => {
@@ -21,13 +22,29 @@ const UserManage = () => {
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState("");
 
-  const onEdit = (params) => {
+  const onModal = (params) => {
     let { isModalVisible, info } = params;
     setModal(isModalVisible);
     setInfo(info);
   };
 
   const { data, run } = useRequest(API.getUsers);
+
+  const amend = useRequest(API.updateUser, {
+    manual: true,
+    onSuccess: (data, params) => {
+      if (data.code === 200) {
+        message.success({
+          content: "密码修改成功",
+        });
+        ls.set("userInfo", {
+          userName: params[0].user_name,
+          passWord: params[0].password,
+          flag: true,
+        });
+      }
+    },
+  });
 
   const deleteUser = useRequest(API.deleteUser, {
     manual: true,
@@ -46,29 +63,16 @@ const UserManage = () => {
 
   const handleOk = () => {
     let { id, user_name } = info;
-    let params = {
+    const params = {
       id,
       user_name,
       password,
     };
-    API.updateUser(params).then((res) => {
-      if (res.code === 200) {
-        message.success({
-          content: "密码修改成功",
-        });
-        ls.set('userInfo',{
-          userName:user_name,
-          passWord:password,
-          flag: true,
-      })
-      }
-    });
+    amend.run(params);
     setModal(false);
   };
 
-  const getPass = (val) => {
-    setPassword(val);
-  };
+  const getPass = useCallback((val) => setPassword(val), []);
 
   return (
     <section>
@@ -76,7 +80,7 @@ const UserManage = () => {
         <strong>管理员可修改密码，普通用户可删除</strong>
         <UserTable
           tableData={data && setData(data.data)}
-          onModal={onEdit}
+          onModal={onModal}
           onDelete={onDelete}
         />
       </Card>
@@ -86,7 +90,7 @@ const UserManage = () => {
         onOk={handleOk}
         onCancel={() => setModal(false)}
       >
-        <PassChange fn={getPass} />
+        <PassChange getPass={getPass} />
       </Modal>
     </section>
   );

@@ -14,11 +14,10 @@ import ls from 'local-storage'
 
 
 const HomePage = () => {
+  
   const { theme } = useContext(ThemeContext);
 
-  const userName = useMemo(()=>{
-    return ls.get('userInfo').userName
-  },[]);
+  const userName = useMemo(()=>ls.get('userInfo').userName,[]);
 
   const { data } = useRequest(() => API.getImage({ user_name: userName },{
     ready:!!userName,

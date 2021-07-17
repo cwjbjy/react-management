@@ -7,9 +7,11 @@ import "./register.scss";
 import { useEffect, useState } from "react/cjs/react.development";
 import API from "@/service/fetch/index";
 import { useRequest } from "ahooks";
+import produce from 'immer'
 
 const RegisterForm = (props) => {
-  const { SET_USER } = props;
+
+  const { setUser } = props;
   const [verifyCode, set_verifyCode] = useState(null);
 
   const icon = {
@@ -23,11 +25,11 @@ const RegisterForm = (props) => {
         content: data.message,
         className: "custom-message",
       });
-      SET_USER({
-        userName: params[0].userName,
-        passWord: params[0].passWord,
-        flag: true,
-      });
+      setUser(produce(draft=>{
+        draft.userName = params[0].userName
+        draft.passWord =  params[0].passWord
+        draft.flag = true
+      }))
     },
     onError: (error) => {
       if (error.status === 403) {
@@ -45,7 +47,7 @@ const RegisterForm = (props) => {
 
   const onFinish = async (params) => {
     if (params.authCode && verifyCode.validate(params.authCode)) {
-      let user = {
+      const user = {
         userName: params.reg_name,
         passWord: params.rge_pass,
         authority: 2,
@@ -151,7 +153,7 @@ const RegisterForm = (props) => {
 };
 
 RegisterForm.propTypes = {
-  SET_USER: PropTypes.func,
+  setUser: PropTypes.func,
 };
 
 export default RegisterForm;

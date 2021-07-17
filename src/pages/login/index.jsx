@@ -2,34 +2,36 @@ import LoginForm from "./components/form";
 import LoginOther from "./components/third";
 import RegisterForm from "./components/register";
 import { Helmet } from "react-helmet";
-import { Container, Header,Main,Form } from "@/components/layout/login.jsx";
-import cn from "classnames";
+import { Container, Header, Main, Form } from "@/components/layout/login.jsx";
 import { useEffect } from "react";
-import clearInfo from '@/utils/clearInfo.js'
-import {useRequest,useLocalStorageState} from 'ahooks'
-import {getData} from '@/apis/user.js'
-const theme= {
-  background:'rgba(25, 202, 173, 1)',
-}
+import { useRequest, useLocalStorageState } from "ahooks";
+import { getData } from "@/apis/user.js";
+import cn from "classnames";
+import clearInfo from "@/utils/clearInfo.js";
+import produce from "immer";
 
 const initState = {
-  userName: '一叶扁舟',
-  passWord: '123456zx',
-  flag: true
-}
+  userName: "一叶扁舟",
+  passWord: "123456zx",
+  flag: true,
+};
 
 const Login = () => {
 
-  const [user,setUser] = useLocalStorageState('userInfo',initState)
+  const [user, setUser] = useLocalStorageState("userInfo", initState);
 
-  useRequest(getData)
+  useRequest(getData);
 
-  useEffect(()=>{
-    clearInfo()
-  },[])
+  useEffect(() => {
+    clearInfo();
+  }, []);
 
   const onTab = () => {
-    setUser({...user,flag:!user.flag})
+    setUser((prev) =>
+      produce(prev, (draft) => {
+        draft.flag = !prev.flag;
+      })
+    );
   };
 
   return (
@@ -37,7 +39,7 @@ const Login = () => {
       <Helmet>
         <title>登录</title>
       </Helmet>
-      <Container theme={theme}>
+      <Container>
         <Header>PC端管理系统(React版)</Header>
         <Main>
           <Form>
@@ -57,11 +59,11 @@ const Login = () => {
             </div>
             {user.flag ? (
               <>
-                <LoginForm userInfo={user} SET_USER={setUser}></LoginForm>
+                <LoginForm userInfo={user} setUser={setUser}></LoginForm>
                 <LoginOther></LoginOther>
               </>
             ) : (
-              <RegisterForm SET_USER={setUser}></RegisterForm>
+              <RegisterForm setUser={setUser}></RegisterForm>
             )}
           </Form>
         </Main>

@@ -1,17 +1,17 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import "./index.scss";
-import ThemeContext from "./themeContext";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet";
-import RouterView from "../routes/routerView";
-import { useUnmountedRef } from "ahooks";
+import { useUnmountedRef,useRequest } from "ahooks";
 import ls from "local-storage";
-import { useRequest } from "ahooks";
+import ThemeContext from "./themeContext";
+import RouterView from "../routes/routerView";
 import API from "@/service/fetch/index";
+import "./index.scss";
 
 const AppHome = (props) => {
+
   const { history, location } = props;
 
   const unmountRef = useUnmountedRef();
@@ -20,9 +20,7 @@ const AppHome = (props) => {
 
   const [theme, setTheme] = useState("theme-gray");
 
-  const userName = useMemo(() => {
-    return ls.get("userInfo").userName;
-  }, []);
+  const userName = useMemo(() =>ls.get("userInfo").userName, []);
 
   const changeTheme = useCallback((color) => {
     setTheme(color);
@@ -36,6 +34,12 @@ const AppHome = (props) => {
     return data && data.Data[0].photo;
   }, [data]);
 
+  const getMenu = () => {
+    let authMenus = ls.get("menu");
+    let newMenus = menus.filter(item=>authMenus && authMenus.includes(item.key))
+    !unmountRef.current && setMenu(newMenus);
+  };
+
   useEffect(() => {
     /* 页面刷新 */
     if (location.pathname !== "/home/firstItem") {
@@ -44,16 +48,6 @@ const AppHome = (props) => {
   }, []);
 
   useEffect(() => {
-    const getMenu = () => {
-      let arr = [];
-      let authMenus = localStorage.getItem("menu");
-      menus.forEach((item) => {
-        if (authMenus && authMenus.includes(item.key)) {
-          arr.push(item);
-        }
-      });
-      !unmountRef.current && setMenu(arr);
-    };
     getMenu();
   }, []);
 

@@ -6,9 +6,12 @@ import "./form.scss";
 import API from "@/service/fetch/index";
 import { saveCookie } from "@/utils/cookie.js";
 import { useRequest } from "ahooks";
+import ls from 'local-storage'
+import produce from 'immer'
 
 const LoginForm = (props) => {
-  const { SET_USER, history, userInfo } = props;
+  
+  const { setUser, history, userInfo } = props;
 
   const icon = {
     color: "#c0c4cc",
@@ -24,24 +27,17 @@ const LoginForm = (props) => {
 
   const [form] = Form.useForm();
 
-  const onFinish = (params) => {
-    let formData = new FormData();
-    formData.append("userName", params.userName);
-    formData.append("passWord", params.passWord);
-    run(formData);
-  };
-
   const { run } = useRequest(API.login, {
     manual: true,
     throwOnError: true, //自己处理错误
     onSuccess: (data, params) => {
       saveCookie("token", data.value);
-      localStorage.setItem("menu", data.auth);
-      SET_USER({
-        userName: params[0].get("userName"),
-        passWord: params[0].get("passWord"),
-        flag: true,
-      });
+      ls.set("menu", data.auth);
+      setUser(produce(draft=>{
+        draft.userName = params[0].get("userName")
+        draft.passWord =  params[0].get("passWord")
+        draft.flag = true
+      }))
       login();
     },
     onError: (error) => {
@@ -62,6 +58,13 @@ const LoginForm = (props) => {
       }
     },
   });
+
+  const onFinish = (params) => {
+    let formData = new FormData();
+    formData.append("userName", params.userName);
+    formData.append("passWord", params.passWord);
+    run(formData);
+  };
 
   return (
     <Form
@@ -109,7 +112,7 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   userInfo: PropTypes.object,
-  SET_LOGIN: PropTypes.func,
+  setUser: PropTypes.func,
 };
 
 export default withRouter(LoginForm);

@@ -3,7 +3,7 @@ import { Form, Input } from "antd";
 const PassChange = (props) => {
 
   const onPassword = (e) => {
-    props.fn(e.target.value)
+    props.getPass(e.target.value)
   };
   
   return (

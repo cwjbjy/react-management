@@ -4,8 +4,10 @@ import { center } from "./flex";
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
-  background-color: ${props=>props.theme.background};
+  background: rgba(25, 202, 173, 1)
 `;
+
+// background-color: ${props=>props.theme.background};
 
 export const Header = styled.header`
   font-size: 50px;
