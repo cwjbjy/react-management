@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react";
 import { themeColor } from "@/constant/theme";
+import React from 'react'
 
 const BarLine = (props) => {
   const echart = useRef();
   let myChart;
+  const { theme } = props;
 
   useEffect(() => {
     const initial = () => {
-      let { theme } = props;
       myChart = window.echarts.init(echart.current);
       myChart.clear();
       myChart.setOption({
@@ -178,7 +179,7 @@ const BarLine = (props) => {
       });
     };
     initial();
-  }, [props]);
+  }, [theme]);
 
   useEffect(() => {
     window.addEventListener("resize", autoSize, false);
@@ -191,7 +192,8 @@ const BarLine = (props) => {
     let echartsInstance = window.echarts.getInstanceByDom(echart.current);
     echartsInstance.resize();
   };
+
   return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };
 
-export default BarLine;
+export default React.memo(BarLine);

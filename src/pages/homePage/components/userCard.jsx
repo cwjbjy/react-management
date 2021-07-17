@@ -6,7 +6,7 @@ import "./userCard.scss";
 import React from "react";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
 
-const UserCard = React.memo((props) => {
+const UserCard = (props) => {
   const { userName, registerTime, fileName } = props;
 
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
@@ -39,7 +39,7 @@ const UserCard = React.memo((props) => {
       </Row>
     </Card>
   );
-});
+}
 
 UserCard.propTypes = {
   userName: PropTypes.string,
@@ -53,4 +53,4 @@ UserCard.defaultProps = {
   fileName: "",
 };
 
-export default UserCard;
+export default React.memo(UserCard);

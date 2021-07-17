@@ -28,7 +28,7 @@ const UserManage = () => {
     setInfo(info);
   };
 
-  const { data, run } = useRequest(API.getUsers);
+  const { data, run, loading } = useRequest(API.getUsers);
 
   const amend = useRequest(API.updateUser, {
     manual: true,
@@ -76,22 +76,26 @@ const UserManage = () => {
 
   return (
     <section>
-      <Card hoverable>
-        <strong>管理员可修改密码，普通用户可删除</strong>
-        <UserTable
-          tableData={data && setData(data.data)}
-          onModal={onModal}
-          onDelete={onDelete}
-        />
-      </Card>
-      <Modal
-        title="修改密码"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={() => setModal(false)}
-      >
-        <PassChange getPass={getPass} />
-      </Modal>
+      {!loading && (
+        <>
+          <Card hoverable>
+            <strong>管理员可修改密码，普通用户可删除</strong>
+            <UserTable
+              tableData={data && setData(data.data)}
+              onModal={onModal}
+              onDelete={onDelete}
+            />
+          </Card>
+          <Modal
+            title="修改密码"
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={() => setModal(false)}
+          >
+            <PassChange getPass={getPass} />
+          </Modal>
+        </>
+      )}
     </section>
   );
 };

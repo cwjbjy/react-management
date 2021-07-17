@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { themeColor } from "@/constant/theme";
+import React from 'react'
 
 const Bar = (props) => {
   const echart = useRef();
@@ -67,4 +68,4 @@ const Bar = (props) => {
   return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };
 
-export default Bar;
+export default React.memo(Bar);

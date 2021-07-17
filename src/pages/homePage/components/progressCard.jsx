@@ -14,7 +14,7 @@ const format = (percent)=>{
       }
 }
 
-const ProgressCard = React.memo(() => {
+const ProgressCard = () => {
   return (
     <Card  title="语言详情" hoverable  className="user">
     Vue<Progress percent={98} strokeColor="#42b983" format={format}/>
@@ -23,6 +23,6 @@ const ProgressCard = React.memo(() => {
     Nuxt<Progress percent={87} strokeColor="#f56c6c" format={format}/>
     </Card>
   );
-});
+};
 
-export default ProgressCard;
+export default React.memo(ProgressCard);

@@ -14,7 +14,6 @@ import ls from 'local-storage'
 
 
 const HomePage = () => {
-  
   const { theme } = useContext(ThemeContext);
 
   const userName = useMemo(()=>ls.get('userInfo').userName,[]);

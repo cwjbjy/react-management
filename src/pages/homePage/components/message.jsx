@@ -5,7 +5,7 @@ import {
   } from '@ant-design/icons';
 import './message.scss'
 import React from 'react'
-const Message = React.memo(() => {
+const Message = () => {
   return (
     <Row className="icon-area" style={{ marginBottom: 20 }}>
       <Col span="8" className="icon-box">
@@ -43,6 +43,6 @@ const Message = React.memo(() => {
       </Col>
     </Row>
   );
-});
+};
 
-export default Message;
+export default React.memo(Message);

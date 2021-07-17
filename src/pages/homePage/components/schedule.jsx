@@ -45,7 +45,7 @@ const data = [
   },
 ];
 
-const Schedule = React.memo(() => {
+const Schedule = () => {
   return (
     <Card
       hoverable
@@ -74,6 +74,6 @@ const Schedule = React.memo(() => {
       </Table>
     </Card>
   );
-});
+};
 
-export default Schedule;
+export default React.memo(Schedule);

@@ -17,8 +17,7 @@ const initState = {
 };
 
 const Login = () => {
-
-  const [user, setUser] = useLocalStorageState("userInfo", initState);
+  const [userInfo, setUser] = useLocalStorageState("userInfo", initState);
 
   useRequest(getData);
 
@@ -45,21 +44,21 @@ const Login = () => {
           <Form>
             <div className="tab">
               <div
-                className={cn({ title_active: user.flag }, "tab_title")}
+                className={cn({ title_active: userInfo.flag }, "tab_title")}
                 onClick={onTab}
               >
                 用户登录
               </div>
               <div
-                className={cn({ title_active: !user.flag }, "tab_title")}
+                className={cn({ title_active: !userInfo.flag }, "tab_title")}
                 onClick={onTab}
               >
                 用户注册
               </div>
             </div>
-            {user.flag ? (
+            {userInfo.flag ? (
               <>
-                <LoginForm userInfo={user} setUser={setUser}></LoginForm>
+                <LoginForm userInfo={userInfo} setUser={setUser}></LoginForm>
                 <LoginOther></LoginOther>
               </>
             ) : (
