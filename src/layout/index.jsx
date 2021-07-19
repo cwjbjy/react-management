@@ -35,12 +35,12 @@ const AppHome = (props) => {
     return data && data.Data[0].photo;
   }, [data]);
 
-  useEffect(() => {
-    /* 页面刷新 */
-    if (location.pathname !== "/home/firstItem") {
-      history.push("/home/firstItem");
-    }
-  }, []);
+  // useEffect(() => {
+  //   /* 页面刷新 */
+  //   if (location.pathname !== "/home/firstItem") {
+  //     history.push("/home/firstItem");
+  //   }
+  // });
 
   return (
     <>

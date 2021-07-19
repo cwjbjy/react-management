@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { geoCoordMap, apiData } from "../../../constant/map";
 
 const buildLines = function (data, geoCoordMap) {
@@ -79,111 +79,111 @@ const convertData = function (data) {
 };
 
 const FleetModel = () => {
-
   const echart = useRef();
-  let myChart;
 
-  useEffect(() => {
-    const initial = () => {
-      myChart = window.echarts.init(echart.current);
-      myChart.clear();
-      myChart.setOption({
-        title: {
-          text: "模拟航线",
-          subtext: "数据纯属虚构",
-          left: "center",
-          top: "20px",
-          textStyle: {
+  const initial = useCallback(() => {
+    let myChart;
+    myChart = window.echarts.init(echart.current);
+    myChart.clear();
+    myChart.setOption({
+      title: {
+        text: "模拟航线",
+        subtext: "数据纯属虚构",
+        left: "center",
+        top: "20px",
+        textStyle: {
+          color: "#fff",
+          fontSize: 24,
+        },
+      },
+      geo: {
+        map: "china",
+        layoutSize: "128%",
+        // layoutCenter:["39%","50%"],
+        zoom: 1,
+        label: {
+          emphasis: {
+            show: false,
             color: "#fff",
-            fontSize: 24,
           },
         },
-        geo: {
-          map: "china",
-          layoutSize: "128%",
-          // layoutCenter:["39%","50%"],
-          zoom: 1,
+        roam: true, //平移缩放
+        itemStyle: {
+          normal: {
+            areaColor: "#0045A0",
+            borderColor: "#00DFFF",
+            borderWidth: 2,
+          },
+          emphasis: {
+            areaColor: "#4499d0",
+          },
+        },
+      },
+      series: [
+        {
+          name: "散点",
+          type: "scatter",
+          coordinateSystem: "geo",
+          zlevel: 1,
           label: {
-            emphasis: {
-              show: false,
+            normal: {
+              show: true,
+              position: "right",
+              formatter: "{b}",
+            },
+          },
+          itemStyle: {
+            normal: {
               color: "#fff",
             },
           },
-          roam: true, //平移缩放
-          itemStyle: {
-            normal: {
-              areaColor: "#0045A0",
-              borderColor: "#00DFFF",
-              borderWidth: 2,
-            },
-            emphasis: {
-              areaColor: "#4499d0",
-            },
+          //coordinateSystem:"geo"只会取数组的前两位当做点坐标数据
+          data: convertData(apiData),
+          //其中第一个参数 value 为 data 中的数据值。第二个参数params 是其它的数据项参数
+          symbolSize: function (value) {
+            return value[2] / 10;
           },
         },
-        series: [
-          {
-            name: "散点",
-            type: "scatter",
-            coordinateSystem: "geo",
-            zlevel: 1,
-            label: {
-              normal: {
-                show: true,
-                position: "right",
-                formatter: "{b}",
-              },
-            },
-            itemStyle: {
-              normal: {
-                color: "#fff",
-              },
-            },
-            //coordinateSystem:"geo"只会取数组的前两位当做点坐标数据
-            data: convertData(apiData),
-            //其中第一个参数 value 为 data 中的数据值。第二个参数params 是其它的数据项参数
-            symbolSize: function (value) {
-              return value[2] / 10;
+        {
+          name: "涟漪",
+          type: "effectScatter",
+          coordinateSystem: "geo",
+          zlevel: 2,
+          rippleEffect: {
+            brushType: "stroke",
+          },
+          label: {
+            normal: {
+              show: false,
+              position: "left",
+              formatter: "{b}",
             },
           },
-          {
-            name: "涟漪",
-            type: "effectScatter",
-            coordinateSystem: "geo",
-            zlevel: 2,
-            rippleEffect: {
-              brushType: "stroke",
+          itemStyle: {
+            normal: {
+              color: "rgba(102,204,255,0.9)",
+              shadowBlur: 10,
+              shadowColor: "#0ff7ee",
             },
-            label: {
-              normal: {
-                show: false,
-                position: "left",
-                formatter: "{b}",
-              },
-            },
-            itemStyle: {
-              normal: {
-                color: "rgba(102,204,255,0.9)",
-                shadowBlur: 10,
-                shadowColor: "#0ff7ee",
-              },
-              emphasis: {
-                areaColor: "#2B91B7",
-              },
-            },
-            hoverAnimation: true,
-            showEffectOn: "render", //绘制完成后显示特效
-            data: convertData(apiData),
-            symbolSize: function (value) {
-              return value[2] / 10;
+            emphasis: {
+              areaColor: "#2B91B7",
             },
           },
-          ...buildLines(apiData, geoCoordMap),
-        ],
-      });
-    };
-    initial();
+          hoverAnimation: true,
+          showEffectOn: "render", //绘制完成后显示特效
+          data: convertData(apiData),
+          symbolSize: function (value) {
+            return value[2] / 10;
+          },
+        },
+        ...buildLines(apiData, geoCoordMap),
+      ],
+    });
   }, []);
+
+  useEffect(() => {
+    initial();
+  }, [initial]);
 
   return <div ref={echart} className="myChart"></div>;
 };

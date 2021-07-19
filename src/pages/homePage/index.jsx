@@ -6,12 +6,22 @@ import Schedule from "./components/schedule";
 import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo,useState ,useEffect} from "react";
 import API from "@/service/fetch/index";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from 'local-storage'
 
+function getData() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        xAxis: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        series: [120, 200, 150, 80, 70, 110],
+      });
+    }, 1000);
+  });
+}
 
 const HomePage = () => {
   const { theme } = useContext(ThemeContext);
@@ -31,6 +41,13 @@ const HomePage = () => {
       user_name: userName,
     })
   );
+
+  const [barModel,setBarModel] = useState()
+  useEffect(() => {
+    getData().then((res) => {
+      setBarModel({...res})
+    });
+  },[]);
 
   return (
     <section style={{ paddingLeft: 20 }}>
@@ -53,7 +70,7 @@ const HomePage = () => {
       <Row style={{ marginBottom: 10 }}>
         <Col span={12} lg={12} xl={12} className="echarts-box">
           <Card hoverable>
-            <Bar theme={theme} />
+            <Bar theme={theme} model={barModel}/>
           </Card>
         </Col>
         <Col span={12} lg={12} xl={12} className="echarts-box">
