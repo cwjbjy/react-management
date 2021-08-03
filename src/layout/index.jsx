@@ -1,7 +1,7 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { useRequest } from "ahooks";
 import ls from "local-storage";
@@ -12,7 +12,6 @@ import "./index.scss";
 import { BackTop } from "antd";
 
 const AppHome = (props) => {
-  const { history, location } = props;
 
   const overFlowRef = useRef();
 
