@@ -1,16 +1,27 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useLocation} from "react-router-dom";
 import { Menu } from "antd";
 import React from 'react'
 
 import "./index.scss";
+import { useEffect } from "react";
 
 const { SubMenu } = Menu;
 
 const rootSubmenuKeys = ["drag", "flowChart"];
 
 const Menus = React.memo((props) => {
+
+  const location = useLocation()
+
+  const [selectedKey,setselectedKeys] = useState()
+
+  useEffect(()=>{
+    let index = location.pathname.lastIndexOf('/');
+    let key =  location.pathname.substr(index+1)
+    setselectedKeys(key)
+  },[location])
 
   const [openKeys, setOpenKeys] = useState([]);
 
@@ -26,7 +37,7 @@ const Menus = React.memo((props) => {
   return (
     <Menu
       style={{ width: 256 }}
-      defaultSelectedKeys={['firstItem']}
+      selectedKeys={selectedKey}
       openKeys={openKeys}
       mode="inline"
       className="Menu"
