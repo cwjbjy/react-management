@@ -60,12 +60,12 @@ export const menus = [
       },
     ],
   },
-  // {
-  //   name: "语言转换",
-  //   icon: <img src={I18n} alt="加载失败" className="menuIcon"></img>,
-  //   path: "/home/I18n",
-  //   key: "I18n",
-  // },
+  {
+    name: "语言转换",
+    icon: <img src={I18n} alt="加载失败" className="menuIcon"></img>,
+    path: "/home/I18n",
+    key: "I18n",
+  },
   {
     name: "流程图",
     key: "flowChart",

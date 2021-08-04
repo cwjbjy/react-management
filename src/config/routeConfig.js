@@ -27,7 +27,9 @@ const DragList = loadable(() =>
 const DragDialog = loadable(() =>
   import(/* webpackChunkName: "DragDialog" */ "@/pages/drag_dialog/index.jsx")
 );
-// const I18n = loadable(() => import( /* webpackChunkName: "I18n" */ '@/pages/I18n/index.jsx'))
+const I18n = loadable(() =>
+  import(/* webpackChunkName: "I18n" */ "@/pages/I18n/index.jsx")
+);
 const CommonChart = loadable(() =>
   import(
     /* webpackChunkName: "chart_common" */ "@/pages/chart_common/index.jsx"
@@ -114,12 +116,12 @@ const routeConfig = [
         exact: true,
         key: "dragDialog",
       },
-      // {
-      //     path: '/home/I18n',
-      //     component: I18n,
-      //     requireAuth: true,
-      //     exact: true,
-      // },
+      {
+        path: "/home/I18n",
+        component: I18n,
+        requireAuth: true,
+        exact: true,
+      },
       {
         path: "/home/chart/commonChart",
         component: CommonChart,
