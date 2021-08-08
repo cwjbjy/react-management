@@ -11,6 +11,7 @@ import API from "@/service/fetch/index";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from 'local-storage'
+import {connect} from 'react-redux'
 
 function getData() {
   return new Promise((resolve) => {
@@ -23,18 +24,13 @@ function getData() {
   });
 }
 
-const HomePage = () => {
+const HomePage = (props) => {
+
+  const {fileName} = props
+
   const { theme } = useContext(ThemeContext);
 
   const userName = useMemo(()=>ls.get('userInfo').userName,[]);
-
-  const { data } = useRequest(() => API.getImage({ user_name: userName },{
-    ready:!!userName,
-  }));
-
-  const fileName = useMemo(() => {
-    return data && data.Data[0].photo;
-  }, [data]);
 
   const time = useRequest(() =>
     API.getUser({
@@ -83,4 +79,8 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state)=>{
+  return state
+}
+
+export default connect(mapStateToProps)(HomePage);

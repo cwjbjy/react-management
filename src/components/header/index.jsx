@@ -4,14 +4,28 @@ import "./index.scss";
 import { removeCookie } from "@/utils/cookie";
 import { withRouter } from "react-router-dom";
 import ThemeContext from "../../layout/themeContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import React from "react";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
+import { SET_FILENAME } from "@/redux/action/img";
+import { connect } from "react-redux";
+import { useRequest } from "ahooks";
+import API from "@/service/fetch/index";
 
-const Header = React.memo((props) => {
+const Header = withRouter((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
-  let { fileName, history, username } = props;
+  let { history, userName, SETFILENAME, fileName } = props;
+
+  const { data } = useRequest(() => API.getImage({ user_name: userName }), {
+    ready: !!userName,
+  });
+
+  useEffect(() => {
+    if (data) {
+      SETFILENAME(data.Data[0].photo);
+    }
+  }, [data, SETFILENAME]);
 
   const onList = ({ key }) => {
     if (key === "1") {
@@ -77,7 +91,7 @@ const Header = React.memo((props) => {
               />
             )}
             <span style={{ marginRight: 5 }}>
-              <span style={{ marginRight: 2 }}>{username}</span>
+              <span style={{ marginRight: 2 }}>{userName}</span>
               <CaretDownOutlined />
             </span>
           </div>
@@ -87,4 +101,14 @@ const Header = React.memo((props) => {
   );
 });
 
-export default withRouter(Header);
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SETFILENAME: (params) => dispatch(SET_FILENAME(params)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

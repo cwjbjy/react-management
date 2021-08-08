@@ -8,7 +8,9 @@ import ls from "local-storage";
 import { useRequest } from "ahooks";
 import API from "@/service/fetch/index";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import { SET_FILENAME } from "@/redux/action/img";
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -22,9 +24,9 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
-const FileUp = () => {
+const FileUp = (props) => {
+  let { fileName, SETFILENAME } = props;
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
   const imgAction = useMemo(() => {
     return process.env.NODE_ENV === "development"
       ? "http://127.0.0.1:9000/api/uploadImage"
@@ -34,6 +36,12 @@ const FileUp = () => {
   const { data, run } = useRequest(API.getImage, {
     manual: true,
   });
+
+  useEffect(() => {
+    if (data) {
+      SETFILENAME(data.Data[0].photo);
+    }
+  }, [data, SETFILENAME]);
 
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -69,9 +77,9 @@ const FileUp = () => {
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
-          {data ? (
+          {fileName ? (
             <img
-              src={`${img_url}${data.Data[0].photo}`}
+              src={`${img_url}${fileName}`}
               alt="avatar"
               style={{ width: "100%" }}
             />
@@ -85,8 +93,14 @@ const FileUp = () => {
   );
 };
 
-const mapStateToProps = (state)=>{
-  return state
-}
+const mapStateToProps = (state) => {
+  return state;
+};
 
-export default connect(mapStateToProps)(FileUp);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SETFILENAME: (params) => dispatch(SET_FILENAME(params)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileUp);

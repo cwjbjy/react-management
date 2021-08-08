@@ -1,21 +1,16 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import { useState, useCallback, useMemo, useRef, useEffect } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { useRequest } from "ahooks";
 import ls from "local-storage";
 import ThemeContext from "./themeContext";
 import RouterView from "../routes/routerView";
-import API from "@/service/fetch/index";
+
 import "./index.scss";
 import { BackTop } from "antd";
-import { SET_FILENAME } from "@/redux/action/img";
-import {connect} from 'react-redux'
 
-const AppHome = (props) => {
-
-  const {SETFILENAME} = props
+const AppHome = () => {
 
   const overFlowRef = useRef();
 
@@ -32,17 +27,6 @@ const AppHome = (props) => {
     setTheme(color);
   }, []);
 
-  const { data } = useRequest(() => API.getImage({ user_name: userName }), {
-    ready: !!userName,
-  });
-
-  const fileName = useMemo(() => {
-    if (data) {
-      SETFILENAME(data.Data[0].photo)
-      return data.Data[0].photo;
-    }
-  }, [data,SETFILENAME]);
-
   return (
     <>
       <Helmet>
@@ -51,7 +35,7 @@ const AppHome = (props) => {
       <BackTop visibilityHeight={100} target={() => overFlowRef.current} />
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div className={theme}>
-          <Header fileName={fileName} username={userName} />
+          <Header userName={userName} />
           <main className="wrapper">
             <aside>
               <Menus menus={newMenus} />
@@ -66,10 +50,4 @@ const AppHome = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch)=>{
-  return {
-    SETFILENAME:(params)=>dispatch(SET_FILENAME(params))
-  }
-}
-
-export default connect(null,mapDispatchToProps)(AppHome);
+export default AppHome;
