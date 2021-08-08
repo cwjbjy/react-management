@@ -1,7 +1,7 @@
 import Header from "../components/header/index.jsx";
 import Menus from "../components/menus/index.jsx";
 import { menus } from "../components/menus/config.jsx";
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useRequest } from "ahooks";
 import ls from "local-storage";
@@ -10,8 +10,12 @@ import RouterView from "../routes/routerView";
 import API from "@/service/fetch/index";
 import "./index.scss";
 import { BackTop } from "antd";
+import { SET_FILENAME } from "@/redux/action/img";
+import {connect} from 'react-redux'
 
 const AppHome = (props) => {
+
+  const {SETFILENAME} = props
 
   const overFlowRef = useRef();
 
@@ -33,15 +37,18 @@ const AppHome = (props) => {
   });
 
   const fileName = useMemo(() => {
-    return data && data.Data[0].photo;
-  }, [data]);
+    if (data) {
+      SETFILENAME(data.Data[0].photo)
+      return data.Data[0].photo;
+    }
+  }, [data,SETFILENAME]);
 
   return (
     <>
       <Helmet>
         <title>react管理系统</title>
       </Helmet>
-      <BackTop visibilityHeight={100} target={() => overFlowRef.current}/>
+      <BackTop visibilityHeight={100} target={() => overFlowRef.current} />
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div className={theme}>
           <Header fileName={fileName} username={userName} />
@@ -59,4 +66,10 @@ const AppHome = (props) => {
   );
 };
 
-export default AppHome;
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    SETFILENAME:(params)=>dispatch(SET_FILENAME(params))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(AppHome);

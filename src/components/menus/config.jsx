@@ -7,6 +7,7 @@ import Drag from "@/assets/images/menus/drag.png";
 import I18n from "@/assets/images/menus/I18n.png";
 import FlowChart from "@/assets/images/menus/flowChart.png";
 import Magnifying from "@/assets/images/menus/magnifying.png";
+import Upload from "@/assets/images/menus/upload.png";
 import Chat from "@/assets/images/menus/chat.png";
 import Manage from "@/assets/images/menus/manage.png";
 
@@ -24,6 +25,12 @@ export const menus = [
     path: "/home/fleet",
     key: "fleet",
     icon: <img src={ChinaMap} alt="加载失败" className="menuIcon"></img>,
+  },
+  {
+    name: "图片上传",
+    path: "/home/fileUp",
+    key: "fileUp",
+    icon: <img src={Upload} alt="加载失败" className="menuIcon"></img>,
   },
   {
     name: "文件预览",

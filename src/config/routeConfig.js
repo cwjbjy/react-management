@@ -12,6 +12,10 @@ const HomePage = loadable(() =>
 const FleetLine = loadable(() =>
   import(/* webpackChunkName: "fleetLine" */ "@/pages/fleetLine/index.jsx")
 );
+const FileUp = loadable(() =>
+  import(/* webpackChunkName: "fileUp" */ "@/pages/fileUp/index.jsx")
+);
+
 const PdfPreview = loadable(() =>
   import(/* webpackChunkName: "PdfPreview" */ "@/pages/pdfPreview/index.jsx")
 );
@@ -80,6 +84,13 @@ const routeConfig = [
         requireAuth: true,
         exact: true,
         key: "fleet",
+      },
+      {
+        path: "/home/fileUp",
+        component: FileUp,
+        requireAuth: true,
+        exact: true,
+        key: "fileUp",
       },
       {
         path: "/home/pdf",
