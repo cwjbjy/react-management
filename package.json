@@ -59,6 +59,7 @@
     "postcss-safe-parser": "5.0.2",
     "prompts": "2.4.0",
     "prop-types": "^15.7.2",
+    "pubsub-js": "^1.9.3",
     "react": "^17.0.1",
     "react-app-polyfill": "^2.0.0",
     "react-beautiful-dnd": "^13.0.0",

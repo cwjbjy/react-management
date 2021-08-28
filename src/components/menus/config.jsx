@@ -101,12 +101,12 @@ export const menus = [
     key: "magnifying",
     icon: <img src={Magnifying} alt="加载失败" className="menuIcon"></img>,
   },
-  // {
-  //     name: "聊天室",
-  //     path: "/chatRoom",
-  //     key: "chatRoom",
-  //     icon: <img src={Chat} alt="加载失败" className="menuIcon"></img>,
-  // },
+  {
+      name: "聊天室",
+      path: "/home/chatRoom",
+      key: "chatRoom",
+      icon: <img src={Chat} alt="加载失败" className="menuIcon"></img>,
+  },
   {
     name: "后台管理",
     path: "/home/manage",
