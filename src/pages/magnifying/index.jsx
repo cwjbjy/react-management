@@ -56,7 +56,7 @@ const Magnifying = () => {
       };
     };
     init();
-  }, []);
+  }, [src]);
 
   return (
     <section>
