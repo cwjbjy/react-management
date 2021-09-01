@@ -48,7 +48,7 @@ const FoldChart = loadable(() =>
   import(/* webpackChunkName: "chart_fold" */ "@/pages/chart_fold/index.jsx")
 );
 const ChatRoom = loadable(() =>
-  import(/* webpackChunkName: "homePage" */ "@/pages/chatRoom/index.jsx")
+  import(/* webpackChunkName: "chatRoom" */ "@/pages/chatRoom/index.jsx")
 );
 const Magnifying = loadable(() =>
   import(/* webpackChunkName: "magnifying" */ "@/pages/magnifying/index.jsx")
@@ -132,6 +132,7 @@ const routeConfig = [
         component: I18n,
         requireAuth: true,
         exact: true,
+        key: "I18n",
       },
       {
         path: "/home/chart/commonChart",
@@ -155,17 +156,18 @@ const routeConfig = [
         key: "foldChart",
       },
       {
-        path: "/home/chatRoom",
-        component: ChatRoom,
-        requireAuth: true,
-        exact: true,
-      },
-      {
         path: "/home/magnifying",
         component: Magnifying,
         requireAuth: true,
         exact: true,
         key: "magnifying",
+      },
+      {
+        path: "/home/chatRoom",
+        component: ChatRoom,
+        requireAuth: true,
+        exact: true,
+        key: "chatRoom",
       },
       {
         path: "/home/manage",

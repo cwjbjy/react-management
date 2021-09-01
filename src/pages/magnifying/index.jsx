@@ -1,10 +1,10 @@
 import { Card } from "antd";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
+import Deer from "@/assets/images/magnifying/deer.jpg"
 import "./index.scss";
 
 const Magnifying = () => {
-  const src =
-    "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg";
+  const src = Deer
 
   useEffect(() => {
     const init = () => {
