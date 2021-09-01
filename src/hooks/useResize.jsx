@@ -4,7 +4,7 @@ import { throttle } from "lodash";
 export default function useResize(echartRef) {
   const autoSize = throttle(() => {
     let echartsInstance = window.echarts.getInstanceByDom(echartRef.current);
-    echartsInstance.resize();
+    echartsInstance && echartsInstance.resize();
   }, 300);
   useEffect(() => {
     window.addEventListener("resize", autoSize, false);
