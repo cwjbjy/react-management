@@ -137,7 +137,7 @@ const ChatRoom = () => {
           </div>
           <div className="chart-button">
             <Input
-              placeholder="Basic usage"
+              placeholder="请输入"
               ref={inputRef}
               onPressEnter={send}
             />
