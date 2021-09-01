@@ -1,4 +1,4 @@
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import Drag from "./drag";
 
 const Toast = () => {
