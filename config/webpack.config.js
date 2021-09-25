@@ -596,6 +596,13 @@ module.exports = function (webpackEnv) {
             : undefined
         )
       ),
+
+      new WorkboxWebpackPlugin.GenerateSW({
+        // 这些选项帮助快速启用 ServiceWorkers
+        // 不允许遗留任何“旧的” ServiceWorkers
+        clientsClaim: true,
+        skipWaiting: true,
+    }),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
