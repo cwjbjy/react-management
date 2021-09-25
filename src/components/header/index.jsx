@@ -7,7 +7,7 @@ import ThemeContext from "../../layout/themeContext";
 import { useContext, useEffect } from "react";
 import React from "react";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
-import { SET_FILENAME } from "@/redux/action/img";
+import { SET_FILENAME } from "@/store/action/img";
 import { connect } from "react-redux";
 import { useRequest } from "ahooks";
 import API from "@/service/fetch/index";
@@ -15,7 +15,7 @@ import API from "@/service/fetch/index";
 const Header = withRouter((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);
 
-  let { history, userName, SETFILENAME, fileName } = props;
+  let { history, userName, setFileName, fileName } = props;
 
   const { data } = useRequest(() => API.getImage({ user_name: userName }), {
     ready: !!userName,
@@ -23,9 +23,9 @@ const Header = withRouter((props) => {
 
   useEffect(() => {
     if (data) {
-      SETFILENAME(data.Data[0].photo);
+      setFileName(data.Data[0].photo);
     }
-  }, [data, SETFILENAME]);
+  }, [data, setFileName]);
 
   const onList = ({ key }) => {
     if (key === "1") {
@@ -107,7 +107,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    SETFILENAME: (params) => dispatch(SET_FILENAME(params)),
+    setFileName: (params) => dispatch(SET_FILENAME(params)),
   };
 };
 

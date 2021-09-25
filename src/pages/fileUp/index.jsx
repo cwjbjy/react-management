@@ -10,7 +10,7 @@ import API from "@/service/fetch/index";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import { SET_FILENAME } from "@/redux/action/img";
+import { SET_FILENAME } from "@/store/action/img";
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -25,7 +25,7 @@ function beforeUpload(file) {
 }
 
 const FileUp = (props) => {
-  let { fileName, SETFILENAME } = props;
+  let { fileName, setFileName } = props;
   const [loading, setLoading] = useState(false);
   const imgAction = useMemo(() => {
     return process.env.NODE_ENV === "development"
@@ -39,9 +39,9 @@ const FileUp = (props) => {
 
   useEffect(() => {
     if (data) {
-      SETFILENAME(data.Data[0].photo);
+      setFileName(data.Data[0].photo);
     }
-  }, [data, SETFILENAME]);
+  }, [data, setFileName]);
 
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    SETFILENAME: (params) => dispatch(SET_FILENAME(params)),
+    setFileName: (params) => dispatch(SET_FILENAME(params)),
   };
 };
 
