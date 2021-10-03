@@ -12590,9 +12590,9 @@ webidl-conversions@^6.1.0:
   resolved "https://registry.npm.taobao.org/webidl-conversions/download/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha1-kRG01+qArNQPUnDWZmIa+ni2lRQ=
 
-webpack-bundle-analyzer@^4.3.0:
+webpack-bundle-analyzer@^4.4.2:
   version "4.4.2"
-  resolved "https://registry.nlark.com/webpack-bundle-analyzer/download/webpack-bundle-analyzer-4.4.2.tgz?cache=0&sync_timestamp=1621259099265&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwebpack-bundle-analyzer%2Fdownload%2Fwebpack-bundle-analyzer-4.4.2.tgz#39898cf6200178240910d629705f0f3493f7d666"
+  resolved "https://registry.nlark.com/webpack-bundle-analyzer/download/webpack-bundle-analyzer-4.4.2.tgz#39898cf6200178240910d629705f0f3493f7d666"
   integrity sha1-OYmM9iABeCQJENYpcF8PNJP31mY=
   dependencies:
     acorn "^8.0.4"

@@ -1,6 +1,6 @@
 {
   "name": "myapps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -123,7 +123,7 @@
     "antd": "^4.10.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
-    "webpack-bundle-analyzer": "^4.3.0"
+    "webpack-bundle-analyzer": "^4.4.2"
   },
   "jest": {
     "roots": [

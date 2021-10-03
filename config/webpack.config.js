@@ -304,6 +304,14 @@ module.exports = function (webpackEnv) {
       splitChunks: {
         chunks: "all",
         name: false,
+        cacheGroups:{
+          antd: {
+            name: "antd",
+            chunks: "all",
+            test: /[\\/]node_modules[\\/](antd|@ant-design)[\\/]/,
+            priority: 40,
+          },
+        }
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
@@ -598,6 +606,8 @@ module.exports = function (webpackEnv) {
             : undefined
         )
       ),
+
+      new BundleAnalyzerPlugin(),
 
       isEnvProduction
         ? new WorkboxWebpackPlugin.GenerateSW({
