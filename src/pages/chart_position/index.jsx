@@ -1,27 +1,15 @@
-import React from "react";
+import { useRef,useEffect } from "react";
 import "./index.scss";
 
-export default class PositionChart extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      myDiagram: null,
-    };
-  }
-  componentDidMount() {
-    this.dealShow();
-    let doc = document.querySelector("#myDiagramDiv").lastElementChild;
-    let str = doc.getAttribute("style");
-    str = str.replace("overflow: auto", "overflow: hidden");
-    doc.setAttribute("style", str);
-  }
-  dealShow = () => {
+const PositionChart = () => {
+  const myDiagram = useRef();
+  const dealShow = () => {
     var $ = go.GraphObject.make; // for conciseness in defining templates
     // some constants that will be reused within templates
     var mt8 = new go.Margin(8, 0, 0, 0);
     var mr8 = new go.Margin(0, 8, 0, 0);
     var ml8 = new go.Margin(0, 0, 0, 8);
-    this.state.myDiagram = $(
+    myDiagram.current = $(
       go.Diagram,
       "myDiagramDiv", // the DIV HTML element
       {
@@ -50,7 +38,7 @@ export default class PositionChart extends React.Component {
       ];
     }
     // define the Node template
-    this.state.myDiagram.nodeTemplate = $(
+    myDiagram.current.nodeTemplate = $(
       go.Node,
       "Auto",
       {
@@ -158,7 +146,7 @@ export default class PositionChart extends React.Component {
     );
 
     // define the Link template, a simple orthogonal line
-    this.state.myDiagram.linkTemplate = $(
+    myDiagram.current.linkTemplate = $(
       go.Link,
       { routing: go.Link.Orthogonal, corner: 15, selectable: false },
       $(go.Shape, { strokeWidth: 3, stroke: "#424242" }),
@@ -417,7 +405,7 @@ export default class PositionChart extends React.Component {
     ];
 
     // create the Model with data for the tree, and assign to the Diagram
-    this.state.myDiagram.model = $(go.TreeModel, {
+    myDiagram.current.model = $(go.TreeModel, {
       nodeParentKeyProperty: "boss", // this property refers to the parent node data
       nodeDataArray: nodeDataArray,
     });
@@ -426,38 +414,45 @@ export default class PositionChart extends React.Component {
     var myOverview = $(
       go.Overview,
       "myOverviewDiv", // the HTML DIV element for the Overview
-      { observed: this.state.myDiagram, contentAlignment: go.Spot.Center }
+      { observed: myDiagram.current, contentAlignment: go.Spot.Center }
     ); // tell it which Diagram to show and pan
   };
-  searchDiagram = () => {
+  const searchDiagram = () => {
     var input = document.getElementById("mySearch");
     if (!input) return;
     input.focus();
 
-    this.state.myDiagram.startTransaction("highlight search");
+    myDiagram.current.startTransaction("highlight search");
 
     if (input.value) {
       var regex = new RegExp(input.value, "i");
-      var results = this.state.myDiagram.findNodesByExample({ name: regex });
-      this.state.myDiagram.highlightCollection(results);
+      var results = myDiagram.current.findNodesByExample({ name: regex });
+      myDiagram.current.highlightCollection(results);
       if (results.count > 0)
-        this.state.myDiagram.centerRect(results.first().actualBounds);
+        myDiagram.current.centerRect(results.first().actualBounds);
     } else {
-      this.state.myDiagram.clearHighlighteds();
+      myDiagram.current.clearHighlighteds();
     }
 
-    this.state.myDiagram.commitTransaction("highlight search");
+    myDiagram.current.commitTransaction("highlight search");
   };
-  render() {
-    return (
-      <div id="sample">
-        <div id="myDiagramDiv"></div>
-        <div id="myOverviewDiv"></div>
-        <div className="search">
-          <input type="search" id="mySearch" />
-          <button onClick={this.searchDiagram}>查询</button>
-        </div>
+  useEffect(() => {
+    dealShow();
+    let doc = document.querySelector("#myDiagramDiv").lastElementChild;
+    let str = doc.getAttribute("style");
+    str = str.replace("overflow: auto", "overflow: hidden");
+    doc.setAttribute("style", str);
+  }, []);
+  return (
+    <div id="sample">
+      <div id="myDiagramDiv"></div>
+      <div id="myOverviewDiv"></div>
+      <div className="search">
+        <input type="search" id="mySearch" />
+        <button onClick={searchDiagram}>查询</button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default PositionChart
