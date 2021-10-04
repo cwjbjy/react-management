@@ -1,4 +1,4 @@
-// import "antd/dist/antd.css";
+import "antd/dist/antd.css";
 import "./assets/icon/iconfont.css";
 
 import ReactDOM from "react-dom";
