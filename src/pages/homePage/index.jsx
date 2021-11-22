@@ -6,12 +6,13 @@ import Schedule from "./components/schedule";
 import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
-import { useContext, useMemo,useState ,useEffect} from "react";
+import { useContext, useMemo, useState, useEffect } from "react";
 import API from "@/service/fetch/index";
 import "./index.scss";
 import { useRequest } from "ahooks";
-import ls from 'local-storage'
-import {connect} from 'react-redux'
+import ls from "local-storage";
+import { useSelector } from "react-redux";
+import React from "react";
 
 function getData() {
   return new Promise((resolve) => {
@@ -24,13 +25,12 @@ function getData() {
   });
 }
 
-const HomePage = (props) => {
-
-  const {fileName} = props
+const HomePage = () => {
+  const { fileName } = useSelector((state) => state.file);
 
   const { theme } = useContext(ThemeContext);
 
-  const userName = useMemo(()=>ls.get('userInfo').userName,[]);
+  const userName = useMemo(() => ls.get("userInfo").userName, []);
 
   const time = useRequest(() =>
     API.getUser({
@@ -38,12 +38,12 @@ const HomePage = (props) => {
     })
   );
 
-  const [barModel,setBarModel] = useState()
+  const [barModel, setBarModel] = useState();
   useEffect(() => {
     getData().then((res) => {
-      setBarModel({...res})
+      setBarModel({ ...res });
     });
-  },[]);
+  }, []);
 
   return (
     <section style={{ paddingLeft: 20 }}>
@@ -66,7 +66,7 @@ const HomePage = (props) => {
       <Row style={{ marginBottom: 10 }}>
         <Col span={12} lg={12} xl={12} className="echarts-box">
           <Card hoverable>
-            <Bar theme={theme} model={barModel}/>
+            <Bar theme={theme} model={barModel} />
           </Card>
         </Col>
         <Col span={12} lg={12} xl={12} className="echarts-box">
@@ -79,8 +79,4 @@ const HomePage = (props) => {
   );
 };
 
-const mapStateToProps = (state)=>{
-  return state
-}
-
-export default connect(mapStateToProps)(HomePage);
+export default React.memo(HomePage);
