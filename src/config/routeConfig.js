@@ -26,26 +26,26 @@ const BaseTable = loadable(() =>
   import(/* webpackChunkName: "baseTable" */ "@/pages/baseTable/index.jsx")
 );
 const DragList = loadable(() =>
-  import(/* webpackChunkName: "DragList" */ "@/pages/drag_list/index.jsx")
+  import(/* webpackChunkName: "DragList" */ "@/pages/drag/list/index.jsx")
 );
 const DragDialog = loadable(() =>
-  import(/* webpackChunkName: "DragDialog" */ "@/pages/drag_dialog/index.jsx")
+  import(/* webpackChunkName: "DragDialog" */ "@/pages/drag/dialog/index.jsx")
 );
 const I18n = loadable(() =>
   import(/* webpackChunkName: "I18n" */ "@/pages/I18n/index.jsx")
 );
 const CommonChart = loadable(() =>
   import(
-    /* webpackChunkName: "chart_common" */ "@/pages/chart_common/index.jsx"
+    /* webpackChunkName: "chart_common" */ "@/pages/chart/common/index.jsx"
   )
 );
 const PositionChart = loadable(() =>
   import(
-    /* webpackChunkName: "chart_position" */ "@/pages/chart_position/index.jsx"
+    /* webpackChunkName: "chart_position" */ "@/pages/chart/position/index.jsx"
   )
 );
 const FoldChart = loadable(() =>
-  import(/* webpackChunkName: "chart_fold" */ "@/pages/chart_fold/index.jsx")
+  import(/* webpackChunkName: "chart_fold" */ "@/pages/chart/fold/index.jsx")
 );
 const ChatRoom = loadable(() =>
   import(/* webpackChunkName: "chatRoom" */ "@/pages/chatRoom/index.jsx")
