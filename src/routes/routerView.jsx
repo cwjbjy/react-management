@@ -1,13 +1,9 @@
-import {RouteConsumer} from './context'
-import renderRoutes from './renderRoutes'
+import { useContext } from "react";
+import RouteContext from "./context";
+import renderRoutes from "./renderRoutes";
 
-
-export default function RouterView(){
-    return (
-        <RouteConsumer>
-            {(routes)=>{
-                return renderRoutes(routes)
-            }}
-        </RouteConsumer>
-    )
+/* 渲染子路由 */
+export default function RouterView() {
+  const routes = useContext(RouteContext);
+  return renderRoutes(routes);
 }
