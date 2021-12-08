@@ -1,14 +1,15 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./privareRoute";
-import { RouteProvider } from "./context";
+import RouteContext from "./context";
+
+const getRoute = (requireAuth) => {
+  if (requireAuth || typeof requireAuth === "undefined") {
+    return PrivateRoute;
+  }
+  return Route;
+};
 
 const renderRoutes = (routes) => {
-  const getRoute = (requireAuth) => {
-    if (requireAuth) {
-      return PrivateRoute;
-    }
-    return Route;
-  };
   return (
     <Switch>
       {routes.map((route, i) => {
@@ -22,16 +23,18 @@ const renderRoutes = (routes) => {
               return (
                 <>
                   {route.redirect && <Redirect to={route.redirect} />}
-                  <RouteProvider value={!route.routes ? [] : route.routes}>
-                    <route.component {...props} />
-                  </RouteProvider>
+                  <RouteContext.Provider
+                    value={!route.routes ? [] : route.routes}
+                  >
+                    {route.component ? <route.component {...props} /> : null}
+                  </RouteContext.Provider>
                 </>
               );
             }}
           />
         );
       })}
-       <Redirect from="/" to="/login" exact></Redirect>
+      <Redirect from="/" to="/login" exact></Redirect>
     </Switch>
   );
 };

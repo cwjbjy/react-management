@@ -1,10 +1,11 @@
 {
   "name": "myapps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
+    "@reduxjs/toolkit": "^1.6.2",
     "@svgr/webpack": "5.4.0",
     "@testing-library/jest-dom": "^5.11.7",
     "@testing-library/react": "^11.2.2",
@@ -121,9 +122,10 @@
   },
   "devDependencies": {
     "antd": "^4.10.0",
+    "compression-webpack-plugin": "5.0.1",
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
-    "webpack-bundle-analyzer": "^4.3.0"
+    "webpack-bundle-analyzer": "^4.4.2"
   },
   "jest": {
     "roots": [

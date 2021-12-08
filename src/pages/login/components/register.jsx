@@ -1,16 +1,14 @@
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { message } from "antd";
 import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
 import "./register.scss";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import API from "@/service/fetch/index";
 import { useRequest } from "ahooks";
-import produce from 'immer'
+import produce from "immer";
 
 const RegisterForm = (props) => {
-
   const { setUser } = props;
   const [verifyCode, set_verifyCode] = useState(null);
 
@@ -25,11 +23,13 @@ const RegisterForm = (props) => {
         content: data.message,
         className: "custom-message",
       });
-      setUser(produce(draft=>{
-        draft.userName = params[0].userName
-        draft.passWord =  params[0].passWord
-        draft.flag = true
-      }))
+      setUser(
+        produce((draft) => {
+          draft.userName = params[0].userName;
+          draft.passWord = params[0].passWord;
+          draft.flag = true;
+        })
+      );
     },
     onError: (error) => {
       if (error.status === 403) {

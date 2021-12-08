@@ -8,9 +8,9 @@ import ls from "local-storage";
 import { useRequest } from "ahooks";
 import API from "@/service/fetch/index";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { SET_FILENAME } from "@/redux/action/img";
+import { SETFILENAME } from "@/store/file.js";
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -24,8 +24,9 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
-const FileUp = (props) => {
-  let { fileName, SETFILENAME } = props;
+const FileUp = () => {
+  const { fileName } = useSelector((state) => state.file);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const imgAction = useMemo(() => {
     return process.env.NODE_ENV === "development"
@@ -39,9 +40,9 @@ const FileUp = (props) => {
 
   useEffect(() => {
     if (data) {
-      SETFILENAME(data.Data[0].photo);
+      dispatch(SETFILENAME(data.Data[0].photo));
     }
-  }, [data, SETFILENAME]);
+  }, [data, dispatch]);
 
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -93,14 +94,4 @@ const FileUp = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    SETFILENAME: (params) => dispatch(SET_FILENAME(params)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FileUp);
+export default React.memo(FileUp);

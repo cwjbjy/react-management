@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import { throttle } from "lodash";
 
 export default function useResize(echartRef) {
-  const autoSize = throttle(() => {
+  const autoSize = () => {
     let echartsInstance = window.echarts.getInstanceByDom(echartRef.current);
     echartsInstance && echartsInstance.resize();
-  }, 300);
+  };
   useEffect(() => {
     window.addEventListener("resize", autoSize, false);
     return () => {

@@ -20,7 +20,7 @@ const ChatRoom = () => {
   const [isModalImage, setIsModalImage] = useState(false);
   const inputRef = useRef();
   const userName = useMemo(() => ls.get("userInfo").userName, []);
-  const fileName = useSelector((state) => state.fileName);
+  const { fileName } = useSelector((state) => state.file);
   const [connectFlag, setConnectFlag] = useState(false);
   const [closeFlag, setCloseFlag] = useState(true);
   const [latestMessage, setLatestMessage] = useState();
