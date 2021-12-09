@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import React from "react";
 import { getData } from "@/apis/user.js";
 
-function getBarData() {
+const getBarData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
@@ -24,7 +24,7 @@ function getBarData() {
       });
     }, 0);
   });
-}
+};
 
 const HomePage = () => {
   const { fileName } = useSelector((state) => state.file);

@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import Deer from "@/assets/images/magnifying/deer.jpg"
 import "./index.scss";
 
-const Magnifying = () => {
-  const src = Deer
+const src = Deer
 
+const Magnifying = () => {
+  
   useEffect(() => {
     const init = () => {
       var span = document.createElement("span");
@@ -56,7 +57,7 @@ const Magnifying = () => {
       };
     };
     init();
-  }, [src]);
+  }, []);
 
   return (
     <section>

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Modal, Card, Button } from "antd";
 import Toast from "./components/index";
 import "./index.scss";
+import React from "react";
 
 const DragModel = () => {
-  
   const [visible, onVisible] = useState(false);
 
   return (
@@ -29,4 +29,4 @@ const DragModel = () => {
   );
 };
 
-export default DragModel;
+export default React.memo(DragModel);

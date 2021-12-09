@@ -1,11 +1,11 @@
 import { Form, Input } from "antd";
+import React from "react";
 
 const PassChange = (props) => {
-
   const onPassword = (e) => {
-    props.getPass(e.target.value)
+    props.getPass(e.target.value);
   };
-  
+
   return (
     <Form name="basic">
       <Form.Item
@@ -13,10 +13,10 @@ const PassChange = (props) => {
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
-        <Input.Password  onChange={onPassword} />
+        <Input.Password onChange={onPassword} />
       </Form.Item>
     </Form>
   );
 };
 
-export default PassChange;
+export default React.memo(PassChange);

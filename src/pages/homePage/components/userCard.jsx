@@ -6,9 +6,7 @@ import "./userCard.scss";
 import React from "react";
 import { img_url } from "@/service/fetch/lib/baseUrl.js";
 
-const UserCard = (props) => {
-  const { userName, registerTime, fileName } = props;
-
+const UserCard = ({ userName, registerTime, fileName }) => {
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
 
   return (
@@ -39,7 +37,7 @@ const UserCard = (props) => {
       </Row>
     </Card>
   );
-}
+};
 
 UserCard.propTypes = {
   userName: PropTypes.string,

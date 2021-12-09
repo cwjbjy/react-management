@@ -7,14 +7,18 @@ import { useEffect, useState } from "react";
 import API from "@/service/fetch/index";
 import { useRequest } from "ahooks";
 import produce from "immer";
+import React, { useCallback } from "react";
 
-const RegisterForm = (props) => {
-  const { setUser } = props;
+const icon = {
+  color: "#c0c4cc",
+};
+
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
+};
+
+const RegisterForm = ({ setUser }) => {
   const [verifyCode, set_verifyCode] = useState(null);
-
-  const icon = {
-    color: "#c0c4cc",
-  };
 
   const { run } = useRequest(API.register, {
     manual: true,
@@ -45,7 +49,7 @@ const RegisterForm = (props) => {
     set_verifyCode(new window.GVerify("v_container"));
   }, []);
 
-  const onFinish = async (params) => {
+  const onFinish = useCallback((params) => {
     if (params.authCode && verifyCode.validate(params.authCode)) {
       const user = {
         userName: params.reg_name,
@@ -61,11 +65,7 @@ const RegisterForm = (props) => {
         className: "custom-message",
       });
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  }, [run,verifyCode]);
 
   return (
     <Form
@@ -156,4 +156,4 @@ RegisterForm.propTypes = {
   setUser: PropTypes.func,
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);

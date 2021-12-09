@@ -1,5 +1,5 @@
 import { Card, Button, Modal } from "antd";
-import { useState } from "react";
+import React,{ useState } from "react";
 import "./index.scss";
 
 const PdfPreview = () => {
@@ -39,4 +39,4 @@ const PdfPreview = () => {
   );
 };
 
-export default PdfPreview;
+export default React.memo(PdfPreview);
