@@ -13,8 +13,9 @@ import { useRequest } from "ahooks";
 import ls from "local-storage";
 import { useSelector } from "react-redux";
 import React from "react";
+import { getData } from "@/apis/user.js";
 
-function getData() {
+function getBarData() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
@@ -38,9 +39,11 @@ const HomePage = () => {
     })
   );
 
+  useRequest(getData);
+
   const [barModel, setBarModel] = useState();
   useEffect(() => {
-    getData().then((res) => {
+    getBarData().then((res) => {
       setBarModel({ ...res });
     });
   }, []);

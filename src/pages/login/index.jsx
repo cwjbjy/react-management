@@ -5,10 +5,11 @@ import { Helmet } from "react-helmet";
 import { Container, Header, Main, Form } from "@/components/layout/login.jsx";
 import { useEffect } from "react";
 import { useRequest, useLocalStorageState } from "ahooks";
-import { getData } from "@/apis/user.js";
+import { getToken } from "@/apis/user.js";
 import cn from "classnames";
 import clearInfo from "@/utils/clearInfo.js";
 import produce from "immer";
+import { REFRESH_TOKEN, ACCESS_TOKEN } from "@/config/constant.js";
 
 const initState = {
   userName: "一叶扁舟",
@@ -19,11 +20,20 @@ const initState = {
 const Login = () => {
   const [userInfo, setUser] = useLocalStorageState("userInfo", initState);
 
-  useRequest(getData);
+  const { run } = useRequest(getToken, {
+    manual: true,
+    onSuccess: (res) => {
+      //存储长token
+      localStorage.setItem(REFRESH_TOKEN, res.refreshToken);
+      //存储短token
+      localStorage.setItem(ACCESS_TOKEN, res.accessToken);
+    },
+  });
 
   useEffect(() => {
+    run();
     clearInfo();
-  }, []);
+  }, [run]);
 
   const onTab = () => {
     setUser((prev) =>
