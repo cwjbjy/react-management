@@ -2,7 +2,7 @@ import { Card, Modal, message } from "antd";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
 import { useState } from "react";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from "local-storage";

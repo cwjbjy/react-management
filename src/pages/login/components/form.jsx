@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import { saveCookie } from "@/utils/cookie.js";
 import { useRequest } from "ahooks";
 import ls from "local-storage";

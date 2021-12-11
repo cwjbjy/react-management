@@ -10,8 +10,10 @@ import {
 import { REFRESH_ACTION } from "@/config/apiMap";
 import { ACCESS_TOKEN, AUTH } from "@/config/constant";
 
+const baseURL = process.env.REACT_APP_AUTH_URL
+
 const instance = axios.create({
-  baseURL: "",
+  baseURL,
   timeout: 30000,
 });
 

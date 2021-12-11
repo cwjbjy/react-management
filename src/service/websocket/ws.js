@@ -3,7 +3,7 @@ export default {
     websocketFun(params) {
         if ("WebSocket" in window){
             console.log('您的浏览器支持 WebSocket!')
-            let baseUrl = process.env.VUE_APP_WS;
+            let baseUrl = process.env.REACT_APP_WS;
             let ws = new WebSocket(baseUrl);
             console.log(ws)
             ws.onclose = function () {

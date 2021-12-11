@@ -1,6 +1,7 @@
 import { bus } from "@/constant/bus.js";
-import { ws } from "@/config/urlMap.js";
 import PubSub from 'pubsub-js'
+
+const ws = process.env.REACT_APP_WS
 export default class WebsocketClass {
   constructor({ topic = "", closeCallBack = null } = {}) {
     this.client = null; //客户端WebSocket实例

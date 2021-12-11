@@ -4,7 +4,8 @@ import { register } from "@/filter";
 import PropTypes from "prop-types";
 import "./userCard.scss";
 import React from "react";
-import { img_url } from "@/service/fetch/lib/baseUrl.js";
+
+const img_url = process.env.REACT_APP_IMG_URL;
 
 const UserCard = ({ userName, registerTime, fileName }) => {
   let role = userName === "一叶扁舟" ? "管理员" : "普通用户";

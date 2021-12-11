@@ -1,11 +1,31 @@
-import { GET_DATA, GET_TOKEN } from "@/config/apiMap";
-import { auth_url } from "@/config/urlMap.js";
-import instance from "@/service/axios/index.js";
+import HttpClient from '@/service/fetch'
 
-export const getData = () => {
-  return instance.get(`${auth_url}${GET_DATA}`);
-};
+let API = {};
 
-export const getToken = () => {
-  return instance.get(`${auth_url}${GET_TOKEN}`);
-};
+//获取用户单条信息
+API.getUser = (params) => {
+    return HttpClient.get(`/getUser`, {
+        data: params
+    })
+}
+
+//获取所有用户信息
+API.getUsers = () => {
+    return HttpClient.get(`/user`)
+}
+
+//删除普通用户 
+API.deleteUser = (params) => {
+    return HttpClient.delete(`/deleteUser`, {
+        data: params
+    })
+}
+
+//修改管理员账户信息
+API.updateUser = (params) => {
+    return HttpClient.put(`/updateUser`, {
+        data: params
+    })
+}
+
+export default API

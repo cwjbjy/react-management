@@ -4,7 +4,7 @@ import { getTime } from "@/utils/comFunc";
 import PropTypes from "prop-types";
 import "./register.scss";
 import { useEffect, useState } from "react";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import { useRequest } from "ahooks";
 import produce from "immer";
 import React, { useCallback } from "react";

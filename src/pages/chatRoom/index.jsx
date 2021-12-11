@@ -1,18 +1,16 @@
-import React from "react";
-import { useRef, useEffect,useMemo } from "react";
+import React ,{ useRef, useEffect, useMemo, useState, useCallback } from "react";
 import insService from "@/service/websocket";
 import PubSub from "pubsub-js";
 import { bus } from "@/constant/bus.js";
-import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { img_url } from "@/service/fetch/lib/baseUrl.js";
-import { useState } from "react";
 import { Button, message, Input, Card, Modal } from "antd";
 import styled from "styled-components";
 import showImage from "@/assets/images/chartRoom/chatShowV2.0.png";
 import rootImage from "@/assets/images/chartRoom/root.png";
 import ls from "local-storage";
 import "./index.scss";
+
+const img_url = process.env.REACT_APP_IMG_URL;
 
 const ChatRoom = () => {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -136,11 +134,7 @@ const ChatRoom = () => {
             </div>
           </div>
           <div className="chart-button">
-            <Input
-              placeholder="请输入"
-              ref={inputRef}
-              onPressEnter={send}
-            />
+            <Input placeholder="请输入" ref={inputRef} onPressEnter={send} />
             <Button type="primary" onClick={send}>
               发送
             </Button>

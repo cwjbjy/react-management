@@ -1,7 +1,8 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Table, Image, Button, Popconfirm } from "antd";
-import { img_url } from "@/service/fetch/lib/baseUrl";
 import React, { useCallback, useMemo } from "react";
+
+const img_url = process.env.REACT_APP_IMG_URL;
 
 const UserTable = ({ tableData, onModal, onDelete }) => {
   const onEdit = useCallback(

@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { Container, Header, Main, Form } from "@/components/layout/login.jsx";
 import { useEffect } from "react";
 import { useRequest, useLocalStorageState } from "ahooks";
-import { getToken } from "@/apis/user.js";
+import { getToken } from "@/apis/token.js";
 import cn from "classnames";
 import clearInfo from "@/utils/clearInfo.js";
 import produce from "immer";

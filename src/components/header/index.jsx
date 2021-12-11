@@ -4,13 +4,13 @@ import "./index.scss";
 import { removeCookie } from "@/utils/cookie";
 import { withRouter } from "react-router-dom";
 import ThemeContext from "../../layout/themeContext";
-import { useContext, useEffect, useMemo, useCallback } from "react";
-import React from "react";
-import { img_url } from "@/service/fetch/lib/baseUrl.js";
+import React , { useContext, useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRequest } from "ahooks";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import { SETFILENAME } from "@/store/file.js";
+
+const img_url = process.env.REACT_APP_IMG_URL
 
 const Header = withRouter((props) => {
   const { theme, changeTheme } = useContext(ThemeContext);
