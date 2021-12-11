@@ -30,8 +30,8 @@ const LoginForm = ({ setUser, userInfo }) => {
   const { run } = useRequest(API.login, {
     manual: true,
     throwOnError: true, //自己处理错误
-    onSuccess: (data, params) => {
-      saveCookie("token", data.value);
+    onSuccess: async (data, params) => {
+      await saveCookie("token", data.value);
       ls.set("menu", data.auth);
       setUser(
         produce((draft) => {
