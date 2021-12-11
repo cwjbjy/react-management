@@ -43,7 +43,7 @@ const getHash = () => {
         let old_hash = localStorage.getItem("vs");
         if (!old_hash) {
           // 如果本地没有，则存储版本信息
-          onRefresh(new_hash);
+          window.localStorage.setItem("vs", new_hash);
         } else if (new_hash && new_hash !== old_hash) {
           // 本地已有版本信息，但是和新版不同：版本更新，弹出提示
           openNotification(new_hash);
