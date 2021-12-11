@@ -6,11 +6,13 @@ import { Helmet } from "react-helmet";
 import ls from "local-storage";
 import ThemeContext from "./themeContext";
 import RouterView from "../routes/routerView";
-
+import useVersion from '../hooks/useVersion'
 import "./index.scss";
 import { BackTop } from "antd";
 
 const AppHome = () => {
+
+  useVersion()
 
   const overFlowRef = useRef();
 

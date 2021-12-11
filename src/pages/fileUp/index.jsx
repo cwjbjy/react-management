@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import "./index.scss";
-import { useMemo } from "react";
 import ls from "local-storage";
 import { useRequest } from "ahooks";
-import API from "@/service/fetch/index";
-import { img_url } from "@/service/fetch/lib/baseUrl.js";
+import API from "@/apis";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { SETFILENAME } from "@/store/file.js";
 
-function beforeUpload(file) {
+const img_url = process.env.REACT_APP_IMG_URL;
+
+const beforeUpload = (file) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");
@@ -22,7 +21,7 @@ function beforeUpload(file) {
     message.error("Image must smaller than 2MB!");
   }
   return isJpgOrPng && isLt2M;
-}
+};
 
 const FileUp = () => {
   const { fileName } = useSelector((state) => state.file);
@@ -38,28 +37,31 @@ const FileUp = () => {
     manual: true,
   });
 
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   useEffect(() => {
     if (data) {
       dispatch(SETFILENAME(data.Data[0].photo));
     }
   }, [data, dispatch]);
 
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      run({ user_name: userName });
-      setLoading(false);
-    }
-  };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
+  const handleChange = useCallback(
+    (info) => {
+      if (info.file.status === "uploading") {
+        setLoading(true);
+        return;
+      }
+      if (info.file.status === "done") {
+        run({ user_name: userName });
+        setLoading(false);
+      }
+    },
+    [run, userName]
   );
 
   return (

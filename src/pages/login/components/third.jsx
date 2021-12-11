@@ -3,6 +3,7 @@ import WB from "@/assets/images/login/wb.png";
 import WX from "@/assets/images/login/wx.png";
 import { message } from "antd";
 import "./third.scss";
+import React from 'react'
 
 const thirdLogin = () => {
   message.warning({
@@ -32,4 +33,4 @@ const LoginOther = () => {
   );
 };
 
-export default LoginOther;
+export default React.memo(LoginOther);

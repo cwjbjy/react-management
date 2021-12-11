@@ -1,29 +1,29 @@
 import { Form, Input, Button } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./form.scss";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import { saveCookie } from "@/utils/cookie.js";
 import { useRequest } from "ahooks";
-import ls from 'local-storage'
-import produce from 'immer'
+import ls from "local-storage";
+import produce from "immer";
+import React, { useCallback } from "react";
 
-const LoginForm = (props) => {
-  
-  const { setUser, history, userInfo } = props;
+const icon = {
+  color: "#c0c4cc",
+};
 
-  const icon = {
-    color: "#c0c4cc",
-  };
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
+};
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+const LoginForm = ({ setUser, userInfo }) => {
+  const history = useHistory();
 
-  const login = () => {
+  const login = useCallback(() => {
     history.push("/home/firstItem");
-  };
+  }, [history]);
 
   const [form] = Form.useForm();
 
@@ -33,11 +33,13 @@ const LoginForm = (props) => {
     onSuccess: (data, params) => {
       saveCookie("token", data.value);
       ls.set("menu", data.auth);
-      setUser(produce(draft=>{
-        draft.userName = params[0].get("userName")
-        draft.passWord =  params[0].get("passWord")
-        draft.flag = true
-      }))
+      setUser(
+        produce((draft) => {
+          draft.userName = params[0].get("userName");
+          draft.passWord = params[0].get("passWord");
+          draft.flag = true;
+        })
+      );
       login();
     },
     onError: (error) => {
@@ -115,4 +117,4 @@ LoginForm.propTypes = {
   setUser: PropTypes.func,
 };
 
-export default withRouter(LoginForm);
+export default React.memo(LoginForm);

@@ -1,12 +1,10 @@
 import instance from "./index";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/config/constant";
-import {REFRESH_ACTION} from "@/config/apiMap"
+import { ACCESS_TOKEN, REFRESH_TOKEN, PASS } from "@/config/constant";
 import { clearAuthAndRedirect } from "./clear";
-import {auth_url} from '@/config/urlMap.js'
-const time = Date.now();
+import {REFRESH_ACTION} from '@/config/apiMap.js'
 
 let subscribers = [];
-let pending = false;
+let pending = false; //同时请求多个过期链接，保证只请求一次获取短token
 
 export const addSubscriber = (request) => {
   subscribers.push(request);
@@ -21,25 +19,19 @@ export const refreshAccessToken = async () => {
   if (!pending) {
     try {
       pending = true;
-      const refreshToken = localStorage.getItem(REFRESH_TOKEN);
-      if (refreshToken) {
-          /* 重新获取token */
-        const {data} = await instance.get(
-          `${auth_url}${REFRESH_ACTION}`,
-          Object.assign(
-            {},
-            { params: { time }, headers: { authorization: refreshToken } }
-          )
+      const l_tk = localStorage.getItem(REFRESH_TOKEN);
+      if (l_tk) {
+        /* 重新获取短token */
+        const { accessToken } = await instance.get(
+          REFRESH_ACTION,
+          Object.assign({}, { headers: { [PASS]: l_tk } })
         );
-        localStorage.setItem(ACCESS_TOKEN, data.accessToken);
-        /* 如果长token也想更新，可打开 */
-        // localStorage.setItem(REFRESH_TOKEN, data.refreshToken);
+        localStorage.setItem(ACCESS_TOKEN, accessToken);
         retryRequest();
-        return { accessToken: data.accessToken, refreshToken: data.refreshToken };
       }
-      return {};
+      return;
     } catch (e) {
-    //   clearAuthAndRedirect();
+      clearAuthAndRedirect();
       return;
     } finally {
       pending = false;

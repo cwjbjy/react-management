@@ -2,7 +2,7 @@ import { Card, Modal, message } from "antd";
 import PassChange from "./components/passChange";
 import UserTable from "./components/userTable";
 import { useState } from "react";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from "local-storage";
@@ -22,11 +22,10 @@ const UserManage = () => {
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState("");
 
-  const onModal = (params) => {
-    let { isModalVisible, info } = params;
+  const onModal = useCallback(({ isModalVisible, info }) => {
     setModal(isModalVisible);
     setInfo(info);
-  };
+  }, []);
 
   const { data, run, loading } = useRequest(API.getUsers);
 
@@ -56,12 +55,15 @@ const UserManage = () => {
     },
   });
 
-  const onDelete = (value) => {
-    let { id } = value;
-    deleteUser.run({ id });
-  };
+  const onDelete = useCallback(
+    (value) => {
+      let { id } = value;
+      deleteUser.run({ id });
+    },
+    [deleteUser]
+  );
 
-  const handleOk = () => {
+  const handleOk = useCallback(() => {
     let { id, user_name } = info;
     const params = {
       id,
@@ -70,7 +72,7 @@ const UserManage = () => {
     };
     amend.run(params);
     setModal(false);
-  };
+  }, [amend, info, password]);
 
   const getPass = useCallback((val) => setPassword(val), []);
 

@@ -7,14 +7,15 @@ import Bar from "./components/bar";
 import BarLine from "./components/barLine";
 import ThemeContext from "../../layout/themeContext";
 import { useContext, useMemo, useState, useEffect } from "react";
-import API from "@/service/fetch/index";
+import API from "@/apis";
 import "./index.scss";
 import { useRequest } from "ahooks";
 import ls from "local-storage";
 import { useSelector } from "react-redux";
 import React from "react";
+import { getData } from "@/apis/token.js";
 
-function getData() {
+const getBarData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({
@@ -23,7 +24,7 @@ function getData() {
       });
     }, 0);
   });
-}
+};
 
 const HomePage = () => {
   const { fileName } = useSelector((state) => state.file);
@@ -38,9 +39,11 @@ const HomePage = () => {
     })
   );
 
+  useRequest(getData);
+
   const [barModel, setBarModel] = useState();
   useEffect(() => {
-    getData().then((res) => {
+    getBarData().then((res) => {
       setBarModel({ ...res });
     });
   }, []);
