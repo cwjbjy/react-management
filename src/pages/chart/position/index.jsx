@@ -249,27 +249,27 @@ const nodeDataArray = [
 const PositionChart = () => {
   const myDiagram = useRef();
   const dealShow = () => {
-    var $ = go.GraphObject.make; // for conciseness in defining templates
+    var $ = window.go.GraphObject.make; // for conciseness in defining templates
     // some constants that will be reused within templates
-    var mt8 = new go.Margin(8, 0, 0, 0);
-    var mr8 = new go.Margin(0, 8, 0, 0);
-    var ml8 = new go.Margin(0, 0, 0, 8);
+    var mt8 = new window.go.Margin(8, 0, 0, 0);
+    var mr8 = new window.go.Margin(0, 8, 0, 0);
+    var ml8 = new window.go.Margin(0, 0, 0, 8);
     myDiagram.current = $(
-      go.Diagram,
+      window.go.Diagram,
       "myDiagramDiv", // the DIV HTML element
       {
-        initialDocumentSpot: go.Spot.Top,
-        initialViewportSpot: go.Spot.Top,
+        initialDocumentSpot: window.go.Spot.Top,
+        initialViewportSpot: window.go.Spot.Top,
         isReadOnly: true,
         layout: $(
-          go.TreeLayout, // use a TreeLayout to position all of the nodes
+          window.go.TreeLayout, // use a TreeLayout to position all of the nodes
           {
             isOngoing: false, // 当面板展开/折叠时，不要继电器
-            treeStyle: go.TreeLayout.StyleLastParents,
+            treeStyle: window.go.TreeLayout.StyleLastParents,
             angle: 90,
             layerSpacing: 80,
             alternateAngle: 90,
-            alternateAlignment: go.TreeLayout.AlignmentBus,
+            alternateAlignment: window.go.TreeLayout.AlignmentBus,
           }
         ),
       }
@@ -284,69 +284,69 @@ const PositionChart = () => {
     }
     // define the Node template
     myDiagram.current.nodeTemplate = $(
-      go.Node,
+      window.go.Node,
       "Auto",
       {
         //节点模板样式设置
         isShadowed: true,
         shadowBlur: 1,
-        shadowOffset: new go.Point(0, 1),
+        shadowOffset: new window.go.Point(0, 1),
         shadowColor: "rgba(0, 0, 0, .14)",
         selectionAdornmentTemplate: $(
-          go.Adornment,
+          window.go.Adornment,
           "Auto",
           $(
-            go.Shape,
+            window.go.Shape,
             "RoundedRectangle",
             { fill: null, stroke: "#409eff", strokeWidth: 3 } //选中之后节点边框颜色
           ),
-          $(go.Placeholder)
+          $(window.go.Placeholder)
         ), // end Adornment
       },
       $(
-        go.Shape,
+        window.go.Shape,
         "RoundedRectangle",
         { fill: "#ffffff", strokeWidth: 0 },
         // 搜索时，被搜索到就变色
-        new go.Binding("fill", "isHighlighted", function (h) {
+        new window.go.Binding("fill", "isHighlighted", function (h) {
           return h ? "#409eff" : "#ffffff";
         }).ofObject()
       ),
       $(
-        go.Panel,
+        window.go.Panel,
         "Vertical",
         $(
-          go.Panel,
+          window.go.Panel,
           "Horizontal",
           { margin: 8 },
           // $(
-          //   go.Picture,
+          //   window.go.Picture,
           //   { margin: mr8, width: 50, height: 50 },
-          //   new go.Binding("source", "nation", theNationFlagConverter)
+          //   new window.go.Binding("source", "nation", theNationFlagConverter)
           // ),
           $(
-            go.Panel,
+            window.go.Panel,
             "Table", //table布局
             $(
-              go.TextBlock,
+              window.go.TextBlock,
               {
                 row: 0,
-                alignment: go.Spot.Left, //第一行的内容
+                alignment: window.go.Spot.Left, //第一行的内容
                 font: "16px Roboto, sans-serif",
                 stroke: "rgba(0, 0, 0, .87)",
-                maxSize: new go.Size(160, NaN),
+                maxSize: new window.go.Size(160, NaN),
               },
-              new go.Binding("text", "name")
+              new window.go.Binding("text", "name")
             )
             // $(
-            //   go.TextBlock,
+            //   window.go.TextBlock,
             //   textStyle("title"),
             //   {
             //     row: 1,
-            //     alignment: go.Spot.Left,
-            //     maxSize: new go.Size(160, NaN)
+            //     alignment: window.go.Spot.Left,
+            //     maxSize: new window.go.Size(160, NaN)
             //   },
-            //   new go.Binding("text", "title")
+            //   new window.go.Binding("text", "title")
             // ),
             // $("PanelExpanderButton", "INFO", {
             //   row: 0,
@@ -357,32 +357,32 @@ const PositionChart = () => {
           )
         ),
         $(
-          go.Shape,
+          window.go.Shape,
           "LineH",
           {
             stroke: "rgba(0, 0, 0, .60)",
             strokeWidth: 1,
             height: 1,
-            stretch: go.GraphObject.Horizontal,
+            stretch: window.go.GraphObject.Horizontal,
           },
-          new go.Binding("visible").ofObject("INFO") // only visible when info is expanded
+          new window.go.Binding("visible").ofObject("INFO") // only visible when info is expanded
         ),
         $(
-          go.Panel,
+          window.go.Panel,
           "Vertical",
           {
             name: "INFO", // identify to the PanelExpanderButton
-            stretch: go.GraphObject.Horizontal, // take up whole available width
+            stretch: window.go.GraphObject.Horizontal, // take up whole available width
             margin: 8,
-            defaultAlignment: go.Spot.Left, // thus no need to specify alignment on each element
+            defaultAlignment: window.go.Spot.Left, // thus no need to specify alignment on each element
           },
           $(
-            go.TextBlock,
+            window.go.TextBlock,
             textStyle("headOf"),
-            new go.Binding("text", "headOf", function (head) {
+            new window.go.Binding("text", "headOf", function (head) {
               return "" + head;
             }),
-            new go.Binding("margin", "headOf", function () {
+            new window.go.Binding("margin", "headOf", function () {
               return mt8;
             }) // some space above if there is also a headOf value
           )
@@ -392,26 +392,26 @@ const PositionChart = () => {
 
     // define the Link template, a simple orthogonal line
     myDiagram.current.linkTemplate = $(
-      go.Link,
-      { routing: go.Link.Orthogonal, corner: 15, selectable: false },
-      $(go.Shape, { strokeWidth: 3, stroke: "#424242" }),
-      $(go.Shape, { toArrow: "Standard", fill: "#424242", stroke: null }),
+      window.go.Link,
+      { routing: window.go.Link.Orthogonal, corner: 15, selectable: false },
+      $(window.go.Shape, { strokeWidth: 3, stroke: "#424242" }),
+      $(window.go.Shape, { toArrow: "Standard", fill: "#424242", stroke: null }),
       $(
-        go.TextBlock,
+        window.go.TextBlock,
         { stroke: "red", font: "20px" }, //线条上字体
-        new go.Binding("text", "linktext")
+        new window.go.Binding("text", "linktext")
       )
     ); 
 
-    myDiagram.current.model = $(go.TreeModel, {
+    myDiagram.current.model = $(window.go.TreeModel, {
       nodeParentKeyProperty: "boss", 
       nodeDataArray: nodeDataArray,
     });
 
     $(
-      go.Overview,
+      window.go.Overview,
       "myOverviewDiv", // the HTML DIV element for the Overview
-      { observed: myDiagram.current, contentAlignment: go.Spot.Center }
+      { observed: myDiagram.current, contentAlignment: window.go.Spot.Center }
     ); // tell it which Diagram to show and pan
   };
   const searchDiagram = () => {

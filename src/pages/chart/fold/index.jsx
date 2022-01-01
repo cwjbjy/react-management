@@ -92,143 +92,143 @@ const FoldChart = () => {
   }, []);
 
   const dealShow = () => {
-    var $ = go.GraphObject.make;
+    var $ = window.go.GraphObject.make;
 
-    var myDiagram = $(go.Diagram, "myDiagramDiv", {
+    var myDiagram = $(window.go.Diagram, "myDiagramDiv", {
       allowCopy: false,
-      layout: $(go.TreeLayout, {
+      layout: $(window.go.TreeLayout, {
         angle: 90,
-        arrangement: go.TreeLayout.ArrangementFixedRoots,
+        arrangement: window.go.TreeLayout.ArrangementFixedRoots,
       }),
       "undoManager.isEnabled": true,
     });
 
-    var bluegrad = $(go.Brush, "Linear", { 0: "#C4ECFF", 1: "#70D4FF" });
-    var greengrad = $(go.Brush, "Linear", { 0: "#B1E2A5", 1: "#7AE060" });
+    var bluegrad = $(window.go.Brush, "Linear", { 0: "#C4ECFF", 1: "#70D4FF" });
+    var greengrad = $(window.go.Brush, "Linear", { 0: "#B1E2A5", 1: "#7AE060" });
 
     var actionTemplate = $(
-      go.Panel,
+      window.go.Panel,
       "Horizontal",
       $(
-        go.Shape,
+        window.go.Shape,
         { width: 12, height: 12 },
-        new go.Binding("figure"),
-        new go.Binding("fill")
+        new window.go.Binding("figure"),
+        new window.go.Binding("fill")
       ),
       $(
-        go.TextBlock,
+        window.go.TextBlock,
         { font: "10pt Verdana, sans-serif" },
-        new go.Binding("text")
+        new window.go.Binding("text")
       )
     );
 
     myDiagram.nodeTemplate = $(
       // the default node template
-      go.Node,
+      window.go.Node,
       "Vertical",
       $(
-        go.Panel,
+        window.go.Panel,
         "Auto",
-        $(go.Shape, "Rectangle", { fill: bluegrad, stroke: null }),
+        $(window.go.Shape, "Rectangle", { fill: bluegrad, stroke: null }),
         $(
-          go.Panel,
+          window.go.Panel,
           "Vertical",
           { margin: 3 },
           // the title
           $(
-            go.TextBlock,
+            window.go.TextBlock,
             {
-              stretch: go.GraphObject.Horizontal,
+              stretch: window.go.GraphObject.Horizontal,
               font: "bold 12pt Verdana, sans-serif",
             },
-            new go.Binding("text", "question")
+            new window.go.Binding("text", "question")
           ),
           // the optional list of actions
           $(
-            go.Panel,
+            window.go.Panel,
             "Vertical",
-            { stretch: go.GraphObject.Horizontal, visible: false }, // not visible unless there is more than one action
-            new go.Binding("visible", "actions", function (acts) {
+            { stretch: window.go.GraphObject.Horizontal, visible: false }, // not visible unless there is more than one action
+            new window.go.Binding("visible", "actions", function (acts) {
               return Array.isArray(acts) && acts.length > 0;
             }),
             // headered by a label and a PanelExpanderButton inside a Table
             $(
-              go.Panel,
+              window.go.Panel,
               "Table",
-              { stretch: go.GraphObject.Horizontal },
-              $(go.TextBlock, "Choices", {
-                alignment: go.Spot.Left,
+              { stretch: window.go.GraphObject.Horizontal },
+              $(window.go.TextBlock, "Choices", {
+                alignment: window.go.Spot.Left,
                 font: "10pt Verdana, sans-serif",
               }),
               $(
                 "PanelExpanderButton",
                 "COLLAPSIBLE", // name of the object to make visible or invisible
-                { column: 1, alignment: go.Spot.Right }
+                { column: 1, alignment: window.go.Spot.Right }
               )
             ), // end Table panel
             // with the list data bound in the Vertical Panel
             $(
-              go.Panel,
+              window.go.Panel,
               "Vertical",
               {
                 name: "COLLAPSIBLE", // identify to the PanelExpanderButton
                 padding: 2,
-                stretch: go.GraphObject.Horizontal, // take up whole available width
+                stretch: window.go.GraphObject.Horizontal, // take up whole available width
                 background: "white", // to distinguish from the node's body
-                defaultAlignment: go.Spot.Left, // thus no need to specify alignment on each element
+                defaultAlignment: window.go.Spot.Left, // thus no need to specify alignment on each element
                 itemTemplate: actionTemplate, // the Panel created for each item in Panel.itemArray
               },
-              new go.Binding("itemArray", "actions") // bind Panel.itemArray to nodedata.actions
+              new window.go.Binding("itemArray", "actions") // bind Panel.itemArray to nodedata.actions
             ) // end action list Vertical Panel
           ) // end optional Vertical Panel
         ) // end outer Vertical Panel
       ), // end "BODY"  Auto Panel
-      $(go.Panel, { height: 17 }, $("TreeExpanderButton"))
+      $(window.go.Panel, { height: 17 }, $("TreeExpanderButton"))
     );
 
     myDiagram.nodeTemplateMap.add(
       "Terminal",
       $(
-        go.Node,
+        window.go.Node,
         "Spot",
-        $(go.Shape, "Circle", {
+        $(window.go.Shape, "Circle", {
           width: 55,
           height: 55,
           fill: greengrad,
           stroke: null,
         }),
         $(
-          go.TextBlock,
+          window.go.TextBlock,
           { font: "10pt Verdana, sans-serif" },
-          new go.Binding("text")
+          new window.go.Binding("text")
         )
       )
     );
 
     myDiagram.linkTemplate = $(
-      go.Link,
-      go.Link.Orthogonal,
+      window.go.Link,
+      window.go.Link.Orthogonal,
       { deletable: false, corner: 10 },
-      $(go.Shape, { strokeWidth: 2 }),
+      $(window.go.Shape, { strokeWidth: 2 }),
       $(
-        go.TextBlock,
-        go.Link.OrientUpright,
+        window.go.TextBlock,
+        window.go.Link.OrientUpright,
         {
           background: "white",
           visible: false, // unless the binding sets it to true for a non-empty string
           segmentIndex: -2,
-          segmentOrientation: go.Link.None,
+          segmentOrientation: window.go.Link.None,
         },
-        new go.Binding("text", "answer"),
+        new window.go.Binding("text", "answer"),
         // hide empty string;
         // if the "answer" property is undefined, visible is false due to above default setting
-        new go.Binding("visible", "answer", function (a) {
+        new window.go.Binding("visible", "answer", function (a) {
           return a ? true : false;
         })
       )
     );
 
-    myDiagram.model = $(go.GraphLinksModel, {
+    myDiagram.model = $(window.go.GraphLinksModel, {
       nodeDataArray: nodeDataArray,
       linkDataArray: linkDataArray,
     });

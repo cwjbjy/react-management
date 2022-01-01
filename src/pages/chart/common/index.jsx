@@ -8,9 +8,9 @@ const CommonChart = () => {
     dealShow();
   }, [])
   const dealShow = () => {
-    const $ = go.GraphObject.make;
-    var myDiagram = $(go.Diagram, mygoChart.current, {
-      initialContentAlignment: go.Spot.Center, // 顶格显示
+    const $ = window.go.GraphObject.make;
+    var myDiagram = $(window.go.Diagram, mygoChart.current, {
+      initialContentAlignment: window.go.Spot.Center, // 顶格显示
       "undoManager.isEnabled": true, // 支持 Ctrl-Z 和 Ctrl-Y 操作
       "toolManager.hoverDelay": 100, //tooltip提示显示延时
       "toolManager.toolTipDuration": 10000, //tooltip持续显示时间
@@ -20,13 +20,13 @@ const CommonChart = () => {
       allowDelete: false,
       allowCopy: false,
       allowClipboard: false,
-      "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom, //有鼠标滚轮事件放大和缩小，而不是向上和向下滚动
-      layout: $(go.TreeLayout, {
+      "toolManager.mouseWheelBehavior": window.go.ToolManager.WheelZoom, //有鼠标滚轮事件放大和缩小，而不是向上和向下滚动
+      layout: $(window.go.TreeLayout, {
         angle: 90, //为0时流程图会水平放置，90的时候会垂直放置，也就是一个倾斜角度的问题，单位是度°
         layerSpacing: 35,
         alternateAngle: 90,
         alternateLayerSpacing: 35,
-        alternateAlignment: go.TreeLayout.AlignmentBus,
+        alternateAlignment: window.go.TreeLayout.AlignmentBus,
         alternateNodeSpacing: 20,
       }),
     });
@@ -37,53 +37,53 @@ const CommonChart = () => {
       return "orange";
     }
     myDiagram.nodeTemplate = $(
-      go.Node,
+      window.go.Node,
       "Auto",
       {
         //节点模板样式设置
         isShadowed: true,
         shadowBlur: 1,
-        shadowOffset: new go.Point(0, 1),
+        shadowOffset: new window.go.Point(0, 1),
         shadowColor: "rgba(0, 0, 0, .14)",
         selectionAdornmentTemplate: $(
-          go.Adornment,
+          window.go.Adornment,
           "Auto",
           $(
-            go.Shape,
+            window.go.Shape,
             "RoundedRectangle",
             { fill: null, stroke: "#7986cb", strokeWidth: 3 } //选中之后节点边框颜色
           ),
-          $(go.Placeholder)
+          $(window.go.Placeholder)
         ),
       },
       $(
-        go.Shape,
+        window.go.Shape,
         "RoundedRectangle",
         { fill: "#90CAF9", strokeWidth: 0 },
-        new go.Binding("fill", "color", colorBrushConverter)
+        new window.go.Binding("fill", "color", colorBrushConverter)
       ),
       $(
         //Panel平板布局
-        go.Panel,
+        window.go.Panel,
         "Horizontal",
         { padding: 5 },
         $(
-          go.Panel,
+          window.go.Panel,
           "Vertical",
           $(
-            go.Picture,
+            window.go.Picture,
             { margin: 10, width: 50, height: 50 },
-            new go.Binding("source", "img") //这里的img命名要和下面对应
+            new window.go.Binding("source", "img") //这里的img命名要和下面对应
           )
         ),
         $(
-          go.Panel,
+          window.go.Panel,
           "Vertical",
           $(
-            go.TextBlock,
+            window.go.TextBlock,
             "Default Text",
             { margin: 12, stroke: "#fff", font: "bold 16px sans-serif" },
-            new go.Binding("text", "name") //这里的name命名要和下面对应
+            new window.go.Binding("text", "name") //这里的name命名要和下面对应
           )
         ),
         {
@@ -95,24 +95,24 @@ const CommonChart = () => {
       )
     );
     myDiagram.linkTemplate = $(
-      go.Link,
-      { routing: go.Link.Orthogonal, corner: 15 }, //分开线的样式设置
-      $(go.Shape, { strokeWidth: 2, stroke: "#66CCFF" }),
-      $(go.Shape, { toArrow: "Standard", fill: "#66CCFF", stroke: null }), //箭头
+      window.go.Link,
+      { routing: window.go.Link.Orthogonal, corner: 15 }, //分开线的样式设置
+      $(window.go.Shape, { strokeWidth: 2, stroke: "#66CCFF" }),
+      $(window.go.Shape, { toArrow: "Standard", fill: "#66CCFF", stroke: null }), //箭头
       $(
-        go.TextBlock,
+        window.go.TextBlock,
         { stroke: "red", font: "20px" },
-        new go.Binding("text", "linktext")
+        new window.go.Binding("text", "linktext")
       ),
       {
         toolTip: $(
-          go.Adornment,
+          window.go.Adornment,
           "Auto",
-          $(go.TextBlock, { margin: 4 }, new go.Binding("text", "name")) //悬浮在线条时出现的提示框
+          $(window.go.TextBlock, { margin: 4 }, new window.go.Binding("text", "name")) //悬浮在线条时出现的提示框
         ),
       }
     );
-    let myModel = $(go.TreeModel);
+    let myModel = $(window.go.TreeModel);
     myModel.nodeDataArray = [
       {
         key: "1",
