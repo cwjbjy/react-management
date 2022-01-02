@@ -3,7 +3,7 @@ const Login = loadable(() =>
   import(/* webpackChunkName: "Login" */ "@/pages/login/index.jsx")
 );
 const HomeLayout = loadable(() =>
-  import(/* webpackChunkName: "homeLayout" */ "@/layout/index.jsx")
+  import(/* webpackChunkName: "homeLayout" */ "@/layout/index")
 );
 
 const HomePage = loadable(() =>

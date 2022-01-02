@@ -1,7 +1,7 @@
 import React,{ useEffect, useRef,useCallback } from "react";
 import { themeColor } from "@/constant/theme";
 import useResize from '@/hooks/useResize'
-import {Props} from '@/types/echartsCompoent'
+import {Props} from '@/types/echartsTypes'
 
 
 const Bar:React.FC<Props> = ({ theme,model }) => {

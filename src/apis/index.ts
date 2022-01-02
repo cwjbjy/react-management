@@ -1,7 +1,7 @@
 const files = require.context('.', false, /\.js$/)
-const API = {}
+const API:any = {}
 
-files.keys().forEach(key => {
+files.keys().forEach((key:string) => {
   if (key === './index.js') return
   const item = files(key).default
   Object.assign(API,{...item})

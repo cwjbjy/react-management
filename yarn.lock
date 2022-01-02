@@ -2060,6 +2060,13 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/redux-logger@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.npmmirror.com/@types/redux-logger/download/@types/redux-logger-3.0.9.tgz#9193b3d51bb6ab98d25514ba7764e4f98a64d3ec"
+  integrity sha1-kZOz1Ru2q5jSVRS6d2Tk+Ypk0+w=
+  dependencies:
+    redux "^4.0.0"
+
 "@types/resolve@0.0.8":
   version "0.0.8"
   resolved "https://registry.nlark.com/@types/resolve/download/@types/resolve-0.0.8.tgz#f26074d238e02659e323ce1a13d041eee280e194"
@@ -2109,6 +2116,11 @@
   integrity sha1-XoienoHpQkXHW2RQYA4cXqKHiuo=
   dependencies:
     source-map "^0.6.1"
+
+"@types/webpack-env@^1.16.3":
+  version "1.16.3"
+  resolved "https://registry.npmmirror.com/@types/webpack-env/download/@types/webpack-env-1.16.3.tgz#b776327a73e561b71e7881d0cd6d34a1424db86a"
+  integrity sha1-t3YyenPlYbceeIHQzW00oUJNuGo=
 
 "@types/webpack-sources@*":
   version "2.1.1"

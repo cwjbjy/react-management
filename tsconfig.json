@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true, // 不输出文件,即编译后不会生成任何js文件
-    "jsx": "react" //在 .tsx 中支持 JSX ：React 或 Preserve
+    "jsx": "react-jsx"
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["./node_modules"]
