@@ -86,7 +86,6 @@ const linkDataArray = [
 ];
 
 const FoldChart = () => {
-  
   useEffect(() => {
     dealShow();
   }, []);
@@ -104,7 +103,10 @@ const FoldChart = () => {
     });
 
     var bluegrad = $(window.go.Brush, "Linear", { 0: "#C4ECFF", 1: "#70D4FF" });
-    var greengrad = $(window.go.Brush, "Linear", { 0: "#B1E2A5", 1: "#7AE060" });
+    var greengrad = $(window.go.Brush, "Linear", {
+      0: "#B1E2A5",
+      1: "#7AE060",
+    });
 
     var actionTemplate = $(
       window.go.Panel,
@@ -148,7 +150,7 @@ const FoldChart = () => {
             window.go.Panel,
             "Vertical",
             { stretch: window.go.GraphObject.Horizontal, visible: false }, // not visible unless there is more than one action
-            new window.go.Binding("visible", "actions", function (acts) {
+            new window.go.Binding("visible", "actions", function (acts: any) {
               return Array.isArray(acts) && acts.length > 0;
             }),
             // headered by a label and a PanelExpanderButton inside a Table
@@ -222,7 +224,7 @@ const FoldChart = () => {
         new window.go.Binding("text", "answer"),
         // hide empty string;
         // if the "answer" property is undefined, visible is false due to above default setting
-        new window.go.Binding("visible", "answer", function (a) {
+        new window.go.Binding("visible", "answer", function (a: any) {
           return a ? true : false;
         })
       )

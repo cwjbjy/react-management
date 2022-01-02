@@ -1,12 +1,12 @@
-import { useRef,useEffect } from "react";
+import { useRef, useEffect } from "react";
 import userImage from "@/assets/images/home/user.jpg";
 import "./index.scss";
 
 const CommonChart = () => {
-  const mygoChart = useRef();
+  const mygoChart = useRef(null);
   useEffect(() => {
     dealShow();
-  }, [])
+  }, []);
   const dealShow = () => {
     const $ = window.go.GraphObject.make;
     var myDiagram = $(window.go.Diagram, mygoChart.current, {
@@ -30,9 +30,9 @@ const CommonChart = () => {
         alternateNodeSpacing: 20,
       }),
     });
-    myDiagram.addDiagramListener("ObjectSingleClicked", function (e) {});
+    myDiagram.addDiagramListener("ObjectSingleClicked", function () {});
     //上颜色
-    function colorBrushConverter(color) {
+    function colorBrushConverter(color: string) {
       if (color) return color;
       return "orange";
     }
@@ -87,7 +87,7 @@ const CommonChart = () => {
           )
         ),
         {
-          doubleClick: function (e, node) {
+          doubleClick: function (e: any, node: any) {
             //在Panel块，双击获取当前节点的信息
             // console.log("111", node.part.data);
           },
@@ -98,7 +98,11 @@ const CommonChart = () => {
       window.go.Link,
       { routing: window.go.Link.Orthogonal, corner: 15 }, //分开线的样式设置
       $(window.go.Shape, { strokeWidth: 2, stroke: "#66CCFF" }),
-      $(window.go.Shape, { toArrow: "Standard", fill: "#66CCFF", stroke: null }), //箭头
+      $(window.go.Shape, {
+        toArrow: "Standard",
+        fill: "#66CCFF",
+        stroke: null,
+      }), //箭头
       $(
         window.go.TextBlock,
         { stroke: "red", font: "20px" },
@@ -108,7 +112,11 @@ const CommonChart = () => {
         toolTip: $(
           window.go.Adornment,
           "Auto",
-          $(window.go.TextBlock, { margin: 4 }, new window.go.Binding("text", "name")) //悬浮在线条时出现的提示框
+          $(
+            window.go.TextBlock,
+            { margin: 4 },
+            new window.go.Binding("text", "name")
+          ) //悬浮在线条时出现的提示框
         ),
       }
     );
@@ -187,4 +195,4 @@ const CommonChart = () => {
   return <div ref={mygoChart} className="mygoChart"></div>;
 };
 
-export default CommonChart
+export default CommonChart;

@@ -73,8 +73,7 @@ const nodeDataArray = [
     boss: 1,
     name: "密切接触者管理",
     nation: "Brazil",
-    title:
-      "Chairman of the Commission on the Limits of the Continental Shelf",
+    title: "Chairman of the Commission on the Limits of the Continental Shelf",
     headOf: "社会防控工作流程图",
   },
   {
@@ -247,13 +246,13 @@ const nodeDataArray = [
 ];
 
 const PositionChart = () => {
-  const myDiagram = useRef();
+  const myDiagram = useRef<any>(null);
   const dealShow = () => {
     var $ = window.go.GraphObject.make; // for conciseness in defining templates
     // some constants that will be reused within templates
     var mt8 = new window.go.Margin(8, 0, 0, 0);
-    var mr8 = new window.go.Margin(0, 8, 0, 0);
-    var ml8 = new window.go.Margin(0, 0, 0, 8);
+    // var mr8 = new window.go.Margin(0, 8, 0, 0);
+    // var ml8 = new window.go.Margin(0, 0, 0, 8);
     myDiagram.current = $(
       window.go.Diagram,
       "myDiagramDiv", // the DIV HTML element
@@ -274,7 +273,7 @@ const PositionChart = () => {
         ),
       }
     );
-    function textStyle(field) {
+    function textStyle() {
       return [
         {
           font: "12px Roboto, sans-serif",
@@ -308,7 +307,7 @@ const PositionChart = () => {
         "RoundedRectangle",
         { fill: "#ffffff", strokeWidth: 0 },
         // 搜索时，被搜索到就变色
-        new window.go.Binding("fill", "isHighlighted", function (h) {
+        new window.go.Binding("fill", "isHighlighted", function (h: boolean) {
           return h ? "#409eff" : "#ffffff";
         }).ofObject()
       ),
@@ -378,8 +377,8 @@ const PositionChart = () => {
           },
           $(
             window.go.TextBlock,
-            textStyle("headOf"),
-            new window.go.Binding("text", "headOf", function (head) {
+            textStyle(),
+            new window.go.Binding("text", "headOf", function (head: any) {
               return "" + head;
             }),
             new window.go.Binding("margin", "headOf", function () {
@@ -395,16 +394,20 @@ const PositionChart = () => {
       window.go.Link,
       { routing: window.go.Link.Orthogonal, corner: 15, selectable: false },
       $(window.go.Shape, { strokeWidth: 3, stroke: "#424242" }),
-      $(window.go.Shape, { toArrow: "Standard", fill: "#424242", stroke: null }),
+      $(window.go.Shape, {
+        toArrow: "Standard",
+        fill: "#424242",
+        stroke: null,
+      }),
       $(
         window.go.TextBlock,
         { stroke: "red", font: "20px" }, //线条上字体
         new window.go.Binding("text", "linktext")
       )
-    ); 
+    );
 
     myDiagram.current.model = $(window.go.TreeModel, {
-      nodeParentKeyProperty: "boss", 
+      nodeParentKeyProperty: "boss",
       nodeDataArray: nodeDataArray,
     });
 
@@ -415,7 +418,7 @@ const PositionChart = () => {
     ); // tell it which Diagram to show and pan
   };
   const searchDiagram = () => {
-    var input = document.getElementById("mySearch");
+    var input = document.getElementById("mySearch") as HTMLInputElement;
     if (!input) return;
     input.focus();
 
@@ -435,10 +438,10 @@ const PositionChart = () => {
   };
   useEffect(() => {
     dealShow();
-    let doc = document.querySelector("#myDiagramDiv").lastElementChild;
-    let str = doc.getAttribute("style");
-    str = str.replace("overflow: auto", "overflow: hidden");
-    doc.setAttribute("style", str);
+    let doc = document.querySelector("#myDiagramDiv")!.lastElementChild;
+    let str = doc!.getAttribute("style");
+    str = str!.replace("overflow: auto", "overflow: hidden");
+    doc!.setAttribute("style", str);
   }, []);
   return (
     <div id="sample">
