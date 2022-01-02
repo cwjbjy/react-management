@@ -10,7 +10,7 @@ import cn from "classnames";
 import clearInfo from "@/utils/clearInfo.js";
 import produce from "immer";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "@/config/constant.js";
-
+import { UserInfo } from "@/types/userTypes";
 const initState = {
   userName: "一叶扁舟",
   passWord: "123456zx",
@@ -18,11 +18,11 @@ const initState = {
 };
 
 const Login = () => {
-  const [userInfo, setUser] = useLocalStorageState("userInfo", initState);
+  const [userInfo, setUser] = useLocalStorageState<any>("userInfo", initState);
 
   const { run } = useRequest(getToken, {
     manual: true,
-    onSuccess: (res) => {
+    onSuccess: (res: any) => {
       //存储长token
       localStorage.setItem(REFRESH_TOKEN, res.refreshToken);
       //存储短token
@@ -36,8 +36,8 @@ const Login = () => {
   }, [run]);
 
   const onTab = () => {
-    setUser((prev) =>
-      produce(prev, (draft) => {
+    setUser((prev: UserInfo) =>
+      produce(prev, (draft: UserInfo) => {
         draft.flag = !prev.flag;
       })
     );

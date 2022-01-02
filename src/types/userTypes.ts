@@ -1,5 +1,5 @@
 export interface UserInfo {
-  flag: boolean;
+  flag?: boolean;
   passWord: string;
   userName: string;
 }
