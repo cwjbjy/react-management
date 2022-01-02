@@ -1,4 +1,4 @@
-interface ModelData {
+export interface ModelData {
   xAxis: string | number[];
   series: number[];
 }
