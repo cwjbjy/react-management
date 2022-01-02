@@ -3,15 +3,16 @@ import { Upload, message } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import "./index.scss";
-import ls from "local-storage";
+import { get } from "local-storage";
 import { useRequest } from "ahooks";
 import API from "@/apis";
 import { useSelector, useDispatch } from "react-redux";
 import { SETFILENAME } from "@/store/file.js";
+import { RootState } from "@/store/store";
 
 const img_url = process.env.REACT_APP_IMG_URL;
 
-const beforeUpload = (file) => {
+const beforeUpload = (file: any) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");
@@ -24,7 +25,7 @@ const beforeUpload = (file) => {
 };
 
 const FileUp = () => {
-  const { fileName } = useSelector((state) => state.file);
+  const { fileName } = useSelector((state: RootState) => state.file);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const imgAction = useMemo(() => {
@@ -32,7 +33,7 @@ const FileUp = () => {
       ? "http://127.0.0.1:9000/api/uploadImage"
       : "https://wen.cwjbjy.online/api/uploadImage";
   }, []);
-  const userName = useMemo(() => ls.get("userInfo").userName, []);
+  const userName = useMemo(() => get<UserInfo>("userInfo").userName, []);
   const { data, run } = useRequest(API.getImage, {
     manual: true,
   });

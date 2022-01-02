@@ -8,17 +8,16 @@ import API from "@/apis";
 import { useRequest } from "ahooks";
 import produce from "immer";
 import React, { useCallback } from "react";
-import {UserInfo} from '@/types/userTypes'
 
-interface Props{
-  setUser:any
+interface Props {
+  setUser: any;
 }
 
 const icon = {
   color: "#c0c4cc",
 };
 
-const RegisterForm:React.FC<Props> = ({ setUser }) => {
+const RegisterForm: React.FC<Props> = ({ setUser }) => {
   const [verifyCode, set_verifyCode] = useState<any>(null);
 
   const { run } = useRequest(API.register, {
@@ -29,14 +28,14 @@ const RegisterForm:React.FC<Props> = ({ setUser }) => {
         className: "custom-message",
       });
       setUser(
-        produce((draft:UserInfo) => {
+        produce((draft: UserInfo) => {
           draft.userName = params[0].userName;
           draft.passWord = params[0].passWord;
           draft.flag = true;
         })
       );
     },
-    onError: (error:any) => {
+    onError: (error: any) => {
       if (error.status === 403) {
         message.error({
           content: "用户名已存在，请重新选择用户名",
@@ -50,30 +49,29 @@ const RegisterForm:React.FC<Props> = ({ setUser }) => {
     set_verifyCode(new window.GVerify("v_container"));
   }, []);
 
-  const onFinish = useCallback((params) => {
-    if (params.authCode && verifyCode.validate(params.authCode)) {
-      const user = {
-        userName: params.reg_name,
-        passWord: params.rge_pass,
-        authority: 2,
-        createTime: getTime(),
-        photo: "userlogo.png",
-      };
-      run(user);
-    } else {
-      message.error({
-        content: "验证码错误",
-        className: "custom-message",
-      });
-    }
-  }, [run,verifyCode]);
+  const onFinish = useCallback(
+    (params) => {
+      if (params.authCode && verifyCode.validate(params.authCode)) {
+        const user = {
+          userName: params.reg_name,
+          passWord: params.rge_pass,
+          authority: 2,
+          createTime: getTime(),
+          photo: "userlogo.png",
+        };
+        run(user);
+      } else {
+        message.error({
+          content: "验证码错误",
+          className: "custom-message",
+        });
+      }
+    },
+    [run, verifyCode]
+  );
 
   return (
-    <Form
-      name="basic"
-      size="large"
-      onFinish={onFinish}
-    >
+    <Form name="basic" size="large" onFinish={onFinish}>
       <Form.Item
         name="reg_name"
         rules={[

@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import React from "react";
 import { getData } from "@/apis/token.js";
 import { RootState } from '@/store/store'
-import { UserInfo } from "@/types/userTypes";
+
 
 const getBarData = () => {
   return new Promise((resolve) => {

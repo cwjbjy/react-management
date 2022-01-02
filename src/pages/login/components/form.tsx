@@ -5,21 +5,20 @@ import "./form.scss";
 import API from "@/apis";
 import { saveCookie } from "@/utils/cookie.js";
 import { useRequest } from "ahooks";
-import {set} from "local-storage";
+import { set } from "local-storage";
 import produce from "immer";
 import React, { useCallback, Dispatch } from "react";
-import {UserInfo} from '@/types/userTypes'
 
 interface Props {
   setUser: Dispatch<React.SetStateAction<any>>;
-  userInfo:UserInfo
+  userInfo: UserInfo;
 }
 
 const icon = {
   color: "#c0c4cc",
 };
 
-const LoginForm:React.FC<Props> = ({ setUser, userInfo }) => {
+const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
   const history = useHistory();
 
   const login = useCallback(() => {
@@ -35,7 +34,7 @@ const LoginForm:React.FC<Props> = ({ setUser, userInfo }) => {
       await saveCookie("token", data.value);
       set("menu", data.auth);
       setUser(
-        produce((draft:UserInfo) => {
+        produce((draft: UserInfo) => {
           draft.userName = params[0].get("userName");
           draft.passWord = params[0].get("passWord");
           draft.flag = true;
@@ -43,7 +42,7 @@ const LoginForm:React.FC<Props> = ({ setUser, userInfo }) => {
       );
       login();
     },
-    onError: (error:any) => {
+    onError: (error: any) => {
       if (error.status === 400) {
         form.setFields([
           {
@@ -62,7 +61,7 @@ const LoginForm:React.FC<Props> = ({ setUser, userInfo }) => {
     },
   });
 
-  const onFinish = (params:UserInfo) => {
+  const onFinish = (params: UserInfo) => {
     let formData = new FormData();
     formData.append("userName", params.userName);
     formData.append("passWord", params.passWord);

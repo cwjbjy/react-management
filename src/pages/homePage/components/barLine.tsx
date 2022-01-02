@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import { themeColor } from "@/constant/theme";
 import useResize from "@/hooks/useResize";
-import { Props } from "@/types/echartsTypes";
 
-const BarLine: React.FC<Props> = ({ theme }) => {
+const BarLine: React.FC<echartsProps> = ({ theme }) => {
   const echart = useRef(null);
 
   const initial = useCallback(() => {

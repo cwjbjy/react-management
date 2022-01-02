@@ -10,7 +10,7 @@ import cn from "classnames";
 import clearInfo from "@/utils/clearInfo.js";
 import produce from "immer";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "@/config/constant.js";
-import { UserInfo } from "@/types/userTypes";
+
 const initState = {
   userName: "一叶扁舟",
   passWord: "123456zx",

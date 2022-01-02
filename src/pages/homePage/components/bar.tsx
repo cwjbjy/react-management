@@ -1,13 +1,10 @@
-import React,{ useEffect, useRef,useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { themeColor } from "@/constant/theme";
-import useResize from '@/hooks/useResize'
-import {Props} from '@/types/echartsTypes'
+import useResize from "@/hooks/useResize";
 
-
-const Bar:React.FC<Props> = ({ theme,model }) => {
-
+const Bar: React.FC<echartsProps> = ({ theme, model }) => {
   const echart = useRef(null);
-  
+
   const initial = useCallback(() => {
     let myChart;
     myChart = window.echarts.init(echart.current);
@@ -50,13 +47,13 @@ const Bar:React.FC<Props> = ({ theme,model }) => {
         },
       ],
     });
-  },[theme,model]);
+  }, [theme, model]);
 
-  useResize(echart)
+  useResize(echart);
 
   useEffect(() => {
     model && initial();
-  }, [model,initial]);
+  }, [model, initial]);
 
   return <div ref={echart} className="myChart" style={{ height: 300 }}></div>;
 };

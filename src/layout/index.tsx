@@ -9,7 +9,7 @@ import RouterView from "../routes/routerView";
 import "./index.scss";
 import { BackTop } from "antd";
 import Global from "../global/index";
-import { UserInfo } from "@/types/userTypes";
+
 
 const AppHome = () => {
   const overFlowRef = useRef(null);
