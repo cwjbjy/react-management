@@ -1,8 +1,14 @@
 import { bus } from "@/constant/bus.js";
-import PubSub from 'pubsub-js'
-
-const ws = process.env.REACT_APP_WS
+import PubSub from "pubsub-js";
+import { User } from "./types";
+const ws = process.env.REACT_APP_WS;
 export default class WebsocketClass {
+  public client: any;
+  public topic: string;
+  public resMessageQueue: any[];
+  public reqMessageQueue: any[];
+  public closeCallBack: any;
+  public heartCheck: any;
   constructor({ topic = "", closeCallBack = null } = {}) {
     this.client = null; //客户端WebSocket实例
     this.topic = `${ws}${topic}`;
@@ -44,7 +50,7 @@ export default class WebsocketClass {
   /*
    *连接
    */
-  connect(params) {
+  connect(params?: User) {
     let that = this; //当前WebsocketClass类
     this.client = new WebSocket(this.topic);
     return new Promise((resolve, reject) => {
@@ -54,20 +60,20 @@ export default class WebsocketClass {
           if (JSON.stringify(params) !== "{}") {
             that.sendMessage({ msg: params });
           }
-          resolve();
+          resolve(null);
         }
       };
       this.client.onclose = function () {
         console.log("web channel closed");
-        if(that.closeCallBack !== null){
-            that.closeCallBack(); //this指向当前onclose函数，通过that调用WebsocketClass类
+        if (that.closeCallBack !== null) {
+          that.closeCallBack(); //this指向当前onclose函数，通过that调用WebsocketClass类
         }
       };
-      this.client.onerror = function (error) {
+      this.client.onerror = function (error: any) {
         console.log("error", error);
         that._heartBeat();
       };
-      this.client.onmessage = function (e) {
+      this.client.onmessage = function (e: any) {
         let data = JSON.parse(e.data);
         //如果是心跳，组件则不通信
         if (data.name === "heart") {
@@ -82,7 +88,7 @@ export default class WebsocketClass {
   /**
    * 发送消息
    */
-  sendMessage({ msg = "" } = {}) {
+  sendMessage({ msg = {} }) {
     if (this.client.readyState === this.client.OPEN) {
       this.client.send(JSON.stringify(msg));
     } else {
@@ -92,11 +98,11 @@ export default class WebsocketClass {
   /**
    * 断开连接
    */
-  close(params) {
+  close(params: User) {
     return new Promise((resolve, reject) => {
       this.sendMessage({ msg: params });
       this.client.close();
-      resolve();
+      resolve(null);
     });
   }
 }

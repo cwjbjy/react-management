@@ -8,7 +8,7 @@ import { useRequest } from "ahooks";
 import API from "@/apis";
 import { useSelector, useDispatch } from "react-redux";
 import { SETFILENAME } from "@/store/file.js";
-import { RootState } from "@/store/store";
+import { RootState } from "@/store/storeTypes";
 
 const img_url = process.env.REACT_APP_IMG_URL;
 

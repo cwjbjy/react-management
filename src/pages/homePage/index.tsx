@@ -10,12 +10,11 @@ import { useContext, useMemo, useState, useEffect } from "react";
 import API from "@/apis";
 import "./index.scss";
 import { useRequest } from "ahooks";
-import {get} from "local-storage";
+import { get } from "local-storage";
 import { useSelector } from "react-redux";
 import React from "react";
 import { getData } from "@/apis/token.js";
-import { RootState } from '@/store/store'
-
+import { RootState } from "@/store/storeTypes";
 
 const getBarData = () => {
   return new Promise((resolve) => {
@@ -29,7 +28,7 @@ const getBarData = () => {
 };
 
 const HomePage = () => {
-  const { fileName } = useSelector((state:RootState) => state.file);
+  const { fileName } = useSelector((state: RootState) => state.file);
 
   const { theme } = useContext(ThemeContext);
 
@@ -45,7 +44,7 @@ const HomePage = () => {
 
   const [barModel, setBarModel] = useState();
   useEffect(() => {
-    getBarData().then((res:any) => {
+    getBarData().then((res: any) => {
       setBarModel({ ...res });
     });
   }, []);
