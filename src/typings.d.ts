@@ -25,3 +25,7 @@ declare interface echartsProps {
   theme: string;
   model?: ModelData;
 }
+
+interface ObjectItem {
+  [key: string]: any;
+}
