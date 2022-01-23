@@ -1,60 +1,60 @@
 import loadable from "@/utils/loadable";
 const Login = loadable(() =>
-  import(/* webpackChunkName: "Login" */ "@/pages/login/index.jsx")
+  import(/* webpackChunkName: "Login" */ "@/pages/login/index")
 );
 const HomeLayout = loadable(() =>
-  import(/* webpackChunkName: "homeLayout" */ "@/layout/index.jsx")
+  import(/* webpackChunkName: "homeLayout" */ "@/layout/index")
 );
 
 const HomePage = loadable(() =>
-  import(/* webpackChunkName: "homePage" */ "@/pages/homePage/index.jsx")
+  import(/* webpackChunkName: "homePage" */ "@/pages/homePage/index")
 );
 const FleetLine = loadable(() =>
-  import(/* webpackChunkName: "fleetLine" */ "@/pages/fleetLine/index.jsx")
+  import(/* webpackChunkName: "fleetLine" */ "@/pages/fleetLine/index")
 );
 const FileUp = loadable(() =>
-  import(/* webpackChunkName: "fileUp" */ "@/pages/fileUp/index.jsx")
+  import(/* webpackChunkName: "fileUp" */ "@/pages/fileUp/index")
 );
 
 const PdfPreview = loadable(() =>
-  import(/* webpackChunkName: "PdfPreview" */ "@/pages/pdfPreview/index.jsx")
+  import(/* webpackChunkName: "PdfPreview" */ "@/pages/pdfPreview/index")
 );
 const BaseEchart = loadable(() =>
-  import(/* webpackChunkName: "baseEchart" */ "@/pages/baseEchart/index.jsx")
+  import(/* webpackChunkName: "baseEchart" */ "@/pages/baseEchart/index")
 );
 const BaseTable = loadable(() =>
-  import(/* webpackChunkName: "baseTable" */ "@/pages/baseTable/index.jsx")
+  import(/* webpackChunkName: "baseTable" */ "@/pages/baseTable/index")
 );
 const DragList = loadable(() =>
-  import(/* webpackChunkName: "DragList" */ "@/pages/drag/list/index.jsx")
+  import(/* webpackChunkName: "DragList" */ "@/pages/drag/list/index")
 );
 const DragDialog = loadable(() =>
-  import(/* webpackChunkName: "DragDialog" */ "@/pages/drag/dialog/index.jsx")
+  import(/* webpackChunkName: "DragDialog" */ "@/pages/drag/dialog/index")
 );
 const I18n = loadable(() =>
-  import(/* webpackChunkName: "I18n" */ "@/pages/I18n/index.jsx")
+  import(/* webpackChunkName: "I18n" */ "@/pages/I18n/index")
 );
 const CommonChart = loadable(() =>
   import(
-    /* webpackChunkName: "chart_common" */ "@/pages/chart/common/index.jsx"
+    /* webpackChunkName: "chart_common" */ "@/pages/chart/common/index"
   )
 );
 const PositionChart = loadable(() =>
   import(
-    /* webpackChunkName: "chart_position" */ "@/pages/chart/position/index.jsx"
+    /* webpackChunkName: "chart_position" */ "@/pages/chart/position/index"
   )
 );
 const FoldChart = loadable(() =>
-  import(/* webpackChunkName: "chart_fold" */ "@/pages/chart/fold/index.jsx")
+  import(/* webpackChunkName: "chart_fold" */ "@/pages/chart/fold/index")
 );
 const ChatRoom = loadable(() =>
-  import(/* webpackChunkName: "chatRoom" */ "@/pages/chatRoom/index.jsx")
+  import(/* webpackChunkName: "chatRoom" */ "@/pages/chatRoom/index")
 );
 const Magnifying = loadable(() =>
-  import(/* webpackChunkName: "magnifying" */ "@/pages/magnifying/index.jsx")
+  import(/* webpackChunkName: "magnifying" */ "@/pages/magnifying/index")
 );
 const UserManage = loadable(() =>
-  import(/* webpackChunkName: "userManage" */ "@/pages/userManage/index.jsx")
+  import(/* webpackChunkName: "userManage" */ "@/pages/userManage/index")
 );
 
 const routeConfig = [

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { //配置路径，防止使用别名代码报错
+        "@/*": ["./src/*"],
+        "less/*": ["./src/assets/styles/less/*"],
+        "@moduleIcon/*": ["./src/assets/images/moduleIcon/*"],
+        "@tabIcon/*": ["./src/assets/images/tabIcon/*"],
+        "@bc/*": ["./src/components/business/*"]
+      }
+    }
+  }
