@@ -1,0 +1,10 @@
+{
+  "endOfLine": "lf",
+  "eslintIntegration": true,
+  "printWidth": 120,
+  "semi": true,
+  "singleQuote": true,
+  "stylelintIntegration": true,
+  "tabWidth": 2,
+  "trailingComma": "all"
+}
