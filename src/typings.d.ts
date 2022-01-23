@@ -1,6 +1,6 @@
-declare module "*.css";
-declare module "*.png";
-declare module "*.jpg";
+declare module '*.css';
+declare module '*.png';
+declare module '*.jpg';
 
 declare interface Window {
   echarts: any;
@@ -8,7 +8,13 @@ declare interface Window {
   go: any;
 }
 
-declare module "react-i18next";
+declare module 'react-i18next';
+
+enum ThemeColor {
+  GRAY = 'theme-gray',
+  BLUE = 'theme-blue',
+  BLACK = 'theme-black',
+}
 
 declare interface UserInfo {
   flag?: boolean;
@@ -22,7 +28,7 @@ interface ModelData {
 }
 
 declare interface echartsProps {
-  theme: string;
+  theme: ThemeColor;
   model?: ModelData;
 }
 
