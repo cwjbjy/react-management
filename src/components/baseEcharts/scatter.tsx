@@ -5,7 +5,7 @@ import useResize from '@/hooks/useResize';
 
 const data = [
   [
-    [28604, 77, 17096869, 'Australia', 1990],
+    [28605, 77, 17096869, 'Australia', 1990],
     [31163, 77.4, 27662440, 'Canada', 1990],
     [1516, 68, 1154605773, 'China', 1990],
     [13670, 74.7, 10582082, 'Cuba', 1990],
