@@ -1,54 +1,56 @@
-.header{
-    display: flex;
-    height: 70px;
-    @include themify($themes) {
-      background-color: themed("header-background");
-      color: themed("font-color");
+.header {
+  display: flex;
+  height: 70px;
+  @include themify($themes) {
+    background-color: themed('header-background');
+    color: themed('font-color');
+  }
+  color: $color;
+  cursor: $c_pointer;
+  &_left {
+    width: 50%;
+    line-height: 70px;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-indent: 10px;
+    display: inline-flex;
+  }
+  &_right {
+    width: 50%;
+    @extend %right_center;
+    .iconfont {
+      font-size: 30px;
+      @include themify($themes) {
+        color: themed('icon-font');
+      }
     }
-    color:$color;
-    cursor: $c_pointer;
-    &_left {
-        width: 50%;
-        line-height: 70px;
-        font-size: 24px;
-        letter-spacing: 2px;
-        text-indent: 10px;
-        display: inline-flex;
+    .user-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      padding: 5px;
+      object-fit: cover;
+    }
+    .user-drop {
+      padding: 5px;
+    }
+    .userImage {
+      display: inline-flex;
+      > span {
+        line-height: 50px;
       }
-      &_right {
-        width: 50%;
-        @extend %right_center;
-        .iconfont {
-          font-size: 30px;
-          @include themify($themes) {
-            color: themed("icon-font");
-          }
-        }
-        .user-img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          padding: 5px;
-        }
-        .user-drop {
-          padding: 5px;
-        }
-        .userImage {
-          display: inline-flex;
-          > span {
-            line-height: 50px;
-          }
-        }
-      }
+    }
+  }
 }
 
-.ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title{
-    text-align: center;
-    &:hover{
-      color:#66b1ff
-    }
+.ant-dropdown-menu-item,
+.ant-dropdown-menu-submenu-title {
+  text-align: center;
+  &:hover {
+    color: #66b1ff;
+  }
 }
 
-.themeActive{
+.themeActive {
   background-color: #ced6e0;
 }
