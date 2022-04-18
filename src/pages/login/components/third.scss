@@ -22,4 +22,10 @@
   }
   .img_list{
     @extend %space_around;
+    .icon {
+      img {
+        width: 64px;
+        height: 64px;
+      }
+    }
   }
