@@ -1,25 +1,25 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
-import { Upload, message } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Card } from "antd";
-import "./index.scss";
-import { get } from "local-storage";
-import { useRequest } from "ahooks";
-import API from "@/apis";
-import { useSelector, useDispatch } from "react-redux";
-import { SETFILENAME } from "@/store/file.js";
-import { RootState } from "@/store/storeTypes";
+import React, { useState, useMemo, useCallback } from 'react';
+import { Upload, message } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
+import './index.scss';
+import { get } from 'local-storage';
+import { useRequest } from 'ahooks';
+import API from '@/apis';
+import { useSelector, useDispatch } from 'react-redux';
+import { SETFILENAME } from '@/store/file.js';
+import { RootState } from '@/store/storeTypes';
 
 const img_url = process.env.REACT_APP_IMG_URL;
 
 const beforeUpload = (file: any) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
+    message.error('You can only upload JPG/PNG file!');
   }
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
+    message.error('Image must smaller than 2MB!');
   }
   return isJpgOrPng && isLt2M;
 };
@@ -29,13 +29,16 @@ const FileUp = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const imgAction = useMemo(() => {
-    return process.env.NODE_ENV === "development"
-      ? "http://127.0.0.1:9000/api/uploadImage"
-      : "https://wen.cwjbjy.online/api/uploadImage";
+    return process.env.NODE_ENV === 'development'
+      ? 'http://127.0.0.1:9000/api/uploadImage'
+      : 'https://wen.cwjbjy.online/api/uploadImage';
   }, []);
-  const userName = useMemo(() => get<UserInfo>("userInfo").userName, []);
-  const { data, run } = useRequest(API.getImage, {
+  const userName = useMemo(() => get<UserInfo>('userInfo').userName, []);
+  const { run } = useRequest(API.getImage, {
     manual: true,
+    onSuccess: (res: any) => {
+      dispatch(SETFILENAME(res.Data[0].photo));
+    },
   });
 
   const uploadButton = (
@@ -45,24 +48,18 @@ const FileUp = () => {
     </div>
   );
 
-  useEffect(() => {
-    if (data) {
-      dispatch(SETFILENAME(data.Data[0].photo));
-    }
-  }, [data, dispatch]);
-
   const handleChange = useCallback(
     (info) => {
-      if (info.file.status === "uploading") {
+      if (info.file.status === 'uploading') {
         setLoading(true);
         return;
       }
-      if (info.file.status === "done") {
+      if (info.file.status === 'done') {
         run({ user_name: userName });
         setLoading(false);
       }
     },
-    [run, userName]
+    [run, userName],
   );
 
   return (
@@ -81,15 +78,7 @@ const FileUp = () => {
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
-          {fileName ? (
-            <img
-              src={`${img_url}${fileName}`}
-              alt="avatar"
-              style={{ width: "100%" }}
-            />
-          ) : (
-            uploadButton
-          )}
+          {fileName ? <img src={`${img_url}${fileName}`} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
         <p className="ant-upload-hint">只能上传jpg/png文件，且不超过2MB</p>
       </Card>

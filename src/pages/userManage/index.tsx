@@ -1,12 +1,12 @@
-import { Card, Modal, message } from "antd";
-import PassChange from "./components/passChange";
-import UserTable from "./components/userTable";
-import { useState } from "react";
-import API from "@/apis";
-import "./index.scss";
-import { useRequest } from "ahooks";
-import { set } from "local-storage";
-import { useCallback } from "react";
+import { Card, Modal, message, Spin } from 'antd';
+import PassChange from './components/passChange';
+import UserTable from './components/userTable';
+import { useState } from 'react';
+import API from '@/apis';
+import './index.scss';
+import { useRequest } from 'ahooks';
+import { set } from 'local-storage';
+import { useCallback } from 'react';
 
 interface Info {
   id: string;
@@ -25,23 +25,25 @@ const setData = (data: any) => {
 const UserManage = () => {
   const [info, setInfo] = useState<Info>({} as Info);
   const [isModalVisible, setModal] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const onModal = useCallback(({ isModalVisible, info }) => {
     setModal(isModalVisible);
     setInfo(info);
   }, []);
 
-  const { data, run, loading } = useRequest(API.getUsers);
+  const { data, run, loading } = useRequest(API.getUsers, {
+    onSuccess: (res: any) => {},
+  });
 
   const amend = useRequest(API.updateUser, {
     manual: true,
-    onSuccess: (data, params) => {
+    onSuccess: (data: any, params) => {
       if (data.code === 200) {
         message.success({
-          content: "密码修改成功",
+          content: '密码修改成功',
         });
-        set("userInfo", {
+        set('userInfo', {
           userName: params[0].user_name,
           passWord: params[0].password,
           flag: true,
@@ -54,7 +56,7 @@ const UserManage = () => {
     manual: true,
     onSuccess: () => {
       message.success({
-        content: "删除成功",
+        content: '删除成功',
       });
       run();
     },
@@ -65,7 +67,7 @@ const UserManage = () => {
       let { id } = value;
       deleteUser.run({ id });
     },
-    [deleteUser]
+    [deleteUser],
   );
 
   const handleOk = useCallback(() => {
@@ -83,22 +85,15 @@ const UserManage = () => {
 
   return (
     <section>
-      {!loading && (
+      {loading ? (
+        <Spin />
+      ) : (
         <>
           <Card hoverable>
             <strong>管理员可修改密码，普通用户可删除</strong>
-            <UserTable
-              tableData={data && setData(data.data)}
-              onModal={onModal}
-              onDelete={onDelete}
-            />
+            <UserTable tableData={data && setData(data.data)} onModal={onModal} onDelete={onDelete} />
           </Card>
-          <Modal
-            title="修改密码"
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={() => setModal(false)}
-          >
+          <Modal title="修改密码" visible={isModalVisible} onOk={handleOk} onCancel={() => setModal(false)}>
             <PassChange getPass={getPass} />
           </Modal>
         </>

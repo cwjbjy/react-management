@@ -2,7 +2,7 @@ import Header from '../components/header/index';
 import Menus from '../components/menus/index';
 import { menus } from '../components/menus/config';
 import { useState, useCallback, useMemo, useRef } from 'react';
-import { Helmet } from 'react-helmet';
+import { useTitle } from 'ahooks';
 import { get } from 'local-storage';
 import ThemeContext from './themeContext';
 import RouterView from '../routes/routerView';
@@ -17,6 +17,7 @@ enum ThemeColor {
 }
 
 const AppHome = () => {
+  useTitle('react管理系统');
   const overFlowRef = useRef(null);
 
   const [theme, setTheme] = useState(ThemeColor.GRAY);
@@ -34,9 +35,6 @@ const AppHome = () => {
 
   return (
     <>
-      <Helmet>
-        <title>react管理系统</title>
-      </Helmet>
       <BackTop visibilityHeight={100} target={() => overFlowRef.current!} />
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div className={theme}>
