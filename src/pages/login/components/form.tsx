@@ -1,13 +1,13 @@
+import React, { Dispatch } from 'react';
 import { Form, Input, Button } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import './form.scss';
-import API from '@/apis';
-import { saveCookie } from '@/utils/cookie.js';
-import { useRequest, useKeyPress } from 'ahooks';
 import { set } from 'local-storage';
+import { useRequest, useKeyPress } from 'ahooks';
 import produce from 'immer';
-import React, { Dispatch } from 'react';
+import styled from 'styled-components';
+import { saveCookie } from '@/utils/cookie.js';
+import API from '@/apis';
 
 interface Props {
   setUser: Dispatch<React.SetStateAction<any>>;
@@ -25,7 +25,7 @@ const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
 
   const { run, loading } = useRequest(API.login, {
     manual: true,
-    onSuccess: async (data: any, params) => {
+    onSuccess: async (data: Record<string, any>, params) => {
       await saveCookie('token', data.value);
       set('menu', data.auth);
       setUser(
@@ -37,7 +37,7 @@ const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
       );
       history.push('/home/firstItem');
     },
-    onError: (error: any) => {
+    onError: (error: Record<string, any>) => {
       if (error.status === 400) {
         form.setFields([
           {
@@ -94,12 +94,16 @@ const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="formButton" loading={loading}>
+        <FormButton type="primary" htmlType="submit" loading={loading}>
           登录
-        </Button>
+        </FormButton>
       </Form.Item>
     </Form>
   );
 };
 
 export default React.memo(LoginForm);
+
+export const FormButton = styled(Button)`
+  width: 100%;
+`;

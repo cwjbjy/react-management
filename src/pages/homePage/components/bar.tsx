@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { themeColor } from "@/constant/theme";
-import useResize from "@/hooks/useResize";
+import React, { useEffect, useRef, useCallback } from 'react';
+import useResize from '@/hooks/useResize';
+import { themeColor } from '@/constant/theme';
 
 const Bar: React.FC<echartsProps> = ({ theme, model }) => {
   const echart = useRef(null);
@@ -10,21 +10,21 @@ const Bar: React.FC<echartsProps> = ({ theme, model }) => {
     myChart = window.echarts.init(echart.current);
     myChart.clear();
     myChart.setOption({
-      color: ["#2d8cf0"],
+      color: ['#2d8cf0'],
       title: {
-        text: "销售图表",
+        text: '销售图表',
         textStyle: {
           color: themeColor[theme].font,
         },
       },
       tooltip: {
-        trigger: "axis",
+        trigger: 'axis',
         axisPointer: {
-          type: "shadow",
+          type: 'shadow',
         },
       },
       grid: {
-        bottom: "8%",
+        bottom: '8%',
       },
       xAxis: {
         data: model?.xAxis || [],
@@ -41,8 +41,8 @@ const Bar: React.FC<echartsProps> = ({ theme, model }) => {
       },
       series: [
         {
-          name: "销量",
-          type: "bar",
+          name: '销量',
+          type: 'bar',
           data: model?.series || [],
         },
       ],

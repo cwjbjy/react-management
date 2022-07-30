@@ -1,13 +1,12 @@
-import { Form, Input, Button, message } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { getTime } from '@/utils/comFunc';
-import PropTypes from 'prop-types';
-import './register.scss';
-import { useEffect, useState } from 'react';
-import API from '@/apis';
 import { useRequest } from 'ahooks';
 import produce from 'immer';
-import React, { useCallback } from 'react';
+import { FormButton } from './form';
+import { getTime } from '@/utils/comFunc';
+import API from '@/apis';
+import './register.scss';
 
 interface Props {
   setUser: any;
@@ -124,23 +123,19 @@ const RegisterForm: React.FC<Props> = ({ setUser }) => {
       </Form.Item>
 
       <Form.Item name="authCode">
-        <div className="verification_class">
+        <div style={{ display: 'flex' }}>
           <Input placeholder="验证码区分大小写" />
           <div id="v_container" style={{ width: 200, height: 40, marginLeft: 10 }}></div>
         </div>
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="formButton">
+        <FormButton type="primary" htmlType="submit">
           注册
-        </Button>
+        </FormButton>
       </Form.Item>
     </Form>
   );
-};
-
-RegisterForm.propTypes = {
-  setUser: PropTypes.func,
 };
 
 export default React.memo(RegisterForm);

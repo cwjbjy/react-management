@@ -23,7 +23,7 @@ declare interface UserInfo {
 }
 
 interface ModelData {
-  xAxis: string | number[];
+  xAxis: string[];
   series: number[];
 }
 

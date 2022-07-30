@@ -1,31 +1,31 @@
-import { useEffect, useRef, useCallback } from "react";
-import { geoCoordMap, apiData } from "../../../constant/map";
-import { ApiData, GeoCoordMap } from "@/constant/types";
+import { useEffect, useRef, useCallback } from 'react';
+import { geoCoordMap, apiData } from '../../../constant/map';
+import { ApiData, GeoCoordMap } from '@/constant/types';
 
 const buildLines = function (data: ApiData[], geoCoordMap: GeoCoordMap) {
   var planePath =
-    "path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z";
-  let arr: any = [];
+    'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+  let arr: any[] = [];
   var color = [
-    "#eccc68",
-    "#ff7f50",
-    "#ff6b81",
-    "#ffa502",
-    "#ff6348",
-    "#ff4757",
-    "#7bed9f",
-    "#70a1ff",
-    "#5352ed",
-    "#2ed573",
-    "#1e90ff",
-    "#3742fa",
+    '#eccc68',
+    '#ff7f50',
+    '#ff6b81',
+    '#ffa502',
+    '#ff6348',
+    '#ff4757',
+    '#7bed9f',
+    '#70a1ff',
+    '#5352ed',
+    '#2ed573',
+    '#1e90ff',
+    '#3742fa',
   ]; //航线的颜色
   data.forEach((item, index) => {
     arr.push({
       name: item.airName,
-      type: "lines",
+      type: 'lines',
       zlevel: index + 3,
-      symbol: ["none", "arrow"],
+      symbol: ['none', 'arrow'],
       symbolSize: 10,
       label: {
         show: false,
@@ -88,54 +88,54 @@ const FleetModel = () => {
     myChart.clear();
     myChart.setOption({
       title: {
-        text: "模拟航线",
-        subtext: "数据纯属虚构",
-        left: "center",
-        top: "20px",
+        text: '模拟航线',
+        subtext: '数据纯属虚构',
+        left: 'center',
+        top: '20px',
         textStyle: {
-          color: "#fff",
+          color: '#fff',
           fontSize: 24,
         },
       },
       geo: {
-        map: "china",
-        layoutSize: "128%",
+        map: 'china',
+        layoutSize: '128%',
         // layoutCenter:["39%","50%"],
         zoom: 1,
         label: {
           emphasis: {
             show: false,
-            color: "#fff",
+            color: '#fff',
           },
         },
         roam: true, //平移缩放
         itemStyle: {
           normal: {
-            areaColor: "#0045A0",
-            borderColor: "#00DFFF",
+            areaColor: '#0045A0',
+            borderColor: '#00DFFF',
             borderWidth: 2,
           },
           emphasis: {
-            areaColor: "#4499d0",
+            areaColor: '#4499d0',
           },
         },
       },
       series: [
         {
-          name: "散点",
-          type: "scatter",
-          coordinateSystem: "geo",
+          name: '散点',
+          type: 'scatter',
+          coordinateSystem: 'geo',
           zlevel: 1,
           label: {
             normal: {
               show: true,
-              position: "right",
-              formatter: "{b}",
+              position: 'right',
+              formatter: '{b}',
             },
           },
           itemStyle: {
             normal: {
-              color: "#fff",
+              color: '#fff',
             },
           },
           //coordinateSystem:"geo"只会取数组的前两位当做点坐标数据
@@ -146,32 +146,32 @@ const FleetModel = () => {
           },
         },
         {
-          name: "涟漪",
-          type: "effectScatter",
-          coordinateSystem: "geo",
+          name: '涟漪',
+          type: 'effectScatter',
+          coordinateSystem: 'geo',
           zlevel: 2,
           rippleEffect: {
-            brushType: "stroke",
+            brushType: 'stroke',
           },
           label: {
             normal: {
               show: false,
-              position: "left",
-              formatter: "{b}",
+              position: 'left',
+              formatter: '{b}',
             },
           },
           itemStyle: {
             normal: {
-              color: "rgba(102,204,255,0.9)",
+              color: 'rgba(102,204,255,0.9)',
               shadowBlur: 10,
-              shadowColor: "#0ff7ee",
+              shadowColor: '#0ff7ee',
             },
             emphasis: {
-              areaColor: "#2B91B7",
+              areaColor: '#2B91B7',
             },
           },
           hoverAnimation: true,
-          showEffectOn: "render", //绘制完成后显示特效
+          showEffectOn: 'render', //绘制完成后显示特效
           data: convertData(apiData),
           symbolSize: function (value: any) {
             return value[2] / 10;

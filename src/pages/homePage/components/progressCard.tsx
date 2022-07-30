@@ -1,16 +1,16 @@
-import { Card, Progress } from "antd";
-import "./progressCard.scss";
-import React from "react";
+import React from 'react';
+import { Card, Progress } from 'antd';
+import './progressCard.scss';
 
 const format = (percent: number | undefined) => {
   if (percent! >= 90) {
-    return "精通";
+    return '精通';
   } else if (percent! >= 80) {
-    return "熟练";
+    return '熟练';
   } else if (percent! >= 70) {
-    return "一般";
+    return '一般';
   } else {
-    return "了解";
+    return '了解';
   }
 };
 

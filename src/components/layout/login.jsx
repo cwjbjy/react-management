@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { center } from "./flex";
+import styled from 'styled-components';
+import { center } from './flex';
 
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
-  background: rgba(25, 202, 173, 1)
+  background: rgba(25, 202, 173, 1);
 `;
 
 // background-color: ${props=>props.theme.background};
@@ -53,7 +53,7 @@ export const Form = styled.div`
     }
     .title_active {
       color: #0078dc;
-      border-bottom: 2px solid $border;
+      border-bottom: 2px solid #0078dc;
     }
   }
 `;

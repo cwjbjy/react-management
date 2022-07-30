@@ -1,14 +1,14 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Upload, message } from 'antd';
+import { Upload, message, Card } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card } from 'antd';
-import './index.scss';
 import { get } from 'local-storage';
 import { useRequest } from 'ahooks';
-import API from '@/apis';
 import { useSelector, useDispatch } from 'react-redux';
 import { SETFILENAME } from '@/store/file.js';
 import { RootState } from '@/store/storeTypes';
+import { USER_INFO } from '@/config/constant.js';
+import API from '@/apis';
+import './index.scss';
 
 const img_url = process.env.REACT_APP_IMG_URL;
 
@@ -33,7 +33,7 @@ const FileUp = () => {
       ? 'http://127.0.0.1:9000/api/uploadImage'
       : 'https://wen.cwjbjy.online/api/uploadImage';
   }, []);
-  const userName = useMemo(() => get<UserInfo>('userInfo').userName, []);
+  const userName = useMemo(() => get<UserInfo>(USER_INFO).userName, []);
   const { run } = useRequest(API.getImage, {
     manual: true,
     onSuccess: (res: any) => {

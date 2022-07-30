@@ -1,18 +1,17 @@
-import QQ from "@/assets/images/login/QQ.png";
-import WB from "@/assets/images/login/wb.png";
-import WX from "@/assets/images/login/wx.png";
-import { message } from "antd";
-import "./third.scss";
-import React from 'react'
-
-const thirdLogin = () => {
-  message.warning({
-    content: "功能未开发，请使用用户注册",
-    className: "custom-message",
-  });
-};
+import React, { useCallback } from 'react';
+import { message } from 'antd';
+import QQ from '@/assets/images/login/QQ.png';
+import WB from '@/assets/images/login/wb.png';
+import WX from '@/assets/images/login/wx.png';
+import './third.scss';
 
 const LoginOther = () => {
+  const thirdLogin = useCallback(() => {
+    message.warning({
+      content: '功能未开发，请使用用户注册',
+      className: 'custom-message',
+    });
+  }, []);
   return (
     <>
       <div className="other-acc">

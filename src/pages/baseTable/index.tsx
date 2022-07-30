@@ -1,16 +1,6 @@
-import React, { useState } from "react";
-import {
-  Table,
-  Input,
-  InputNumber,
-  Popconfirm,
-  Form,
-  Typography,
-  Button,
-  Card,
-} from "antd";
-
-import "./index.scss";
+import React, { useState } from 'react';
+import { Table, Input, InputNumber, Popconfirm, Form, Typography, Button, Card } from 'antd';
+import './index.scss';
 interface Item {
   key: string;
   name: string;
@@ -22,7 +12,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
   title: any;
-  inputType: "number" | "text";
+  inputType: 'number' | 'text';
   record: Item;
   index: number;
   children: React.ReactNode;
@@ -49,7 +39,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -77,17 +67,17 @@ const EditableCell: React.FC<EditableCellProps> = ({
 const EditableTable = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
-  const [editingKey, setEditingKey] = useState("");
+  const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record: Item) => record.key === editingKey;
 
   const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ name: "", age: "", address: "", ...record });
+    form.setFieldsValue({ name: '', age: '', address: '', ...record });
     setEditingKey(record.key);
   };
 
   const cancel = () => {
-    setEditingKey("");
+    setEditingKey('');
   };
 
   const save = async (key: React.Key) => {
@@ -100,39 +90,39 @@ const EditableTable = () => {
         const item = newData[index];
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
-        setEditingKey("");
+        setEditingKey('');
       } else {
         newData.push(row);
         setData(newData);
-        setEditingKey("");
+        setEditingKey('');
       }
     } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
+      console.log('Validate Failed:', errInfo);
     }
   };
 
   const columns = [
     {
-      title: "name",
-      dataIndex: "name",
-      width: "25%",
+      title: 'name',
+      dataIndex: 'name',
+      width: '25%',
       editable: true,
     },
     {
-      title: "age",
-      dataIndex: "age",
-      width: "15%",
+      title: 'age',
+      dataIndex: 'age',
+      width: '15%',
       editable: true,
     },
     {
-      title: "address",
-      dataIndex: "address",
-      width: "40%",
+      title: 'address',
+      dataIndex: 'address',
+      width: '40%',
       editable: true,
     },
     {
-      title: "operation",
-      dataIndex: "operation",
+      title: 'operation',
+      dataIndex: 'operation',
       render: (_: any, record: Item) => {
         const editable = isEditing(record);
         return editable ? (
@@ -154,10 +144,7 @@ const EditableTable = () => {
             </Popconfirm>
           </span>
         ) : (
-          <Typography.Link
-            disabled={editingKey !== ""}
-            onClick={() => edit(record)}
-          >
+          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
             Edit
           </Typography.Link>
         );
@@ -173,7 +160,7 @@ const EditableTable = () => {
       ...col,
       onCell: (record: Item) => ({
         record,
-        inputType: col.dataIndex === "age" ? "number" : "text",
+        inputType: col.dataIndex === 'age' ? 'number' : 'text',
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
@@ -182,11 +169,7 @@ const EditableTable = () => {
   });
   return (
     <section>
-      <Card
-        hoverable
-        className="baseTable"
-        title={<strong>表格可编辑行，可分页以及可选择当前页数据量</strong>}
-      >
+      <Card hoverable className="baseTable" title={<strong>表格可编辑行，可分页以及可选择当前页数据量</strong>}>
         <Form form={form} component={false}>
           <Table
             components={{

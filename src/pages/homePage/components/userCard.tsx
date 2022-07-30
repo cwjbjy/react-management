@@ -1,32 +1,22 @@
-import { Card } from "antd";
-import { Row, Col } from "antd";
-import { register } from "@/filter";
-import "./userCard.scss";
-import React from "react";
-
+import React from 'react';
+import { Card, Row, Col } from 'antd';
+import { register } from '@/filter';
+import './userCard.scss';
 interface Props {
   userName: string;
   registerTime: string;
-  fileName:string
+  fileName: string;
 }
 
 const img_url = process.env.REACT_APP_IMG_URL;
 
-const UserCard:React.FC<Props> = ({ userName, registerTime, fileName }) => {
-  let role = userName === "一叶扁舟" ? "管理员" : "普通用户";
+const UserCard: React.FC<Props> = ({ userName, registerTime, fileName }) => {
+  let role = userName === '一叶扁舟' ? '管理员' : '普通用户';
 
   return (
     <Card hoverable className="user">
       <Row className="user-top">
-        <Col span="12">
-          {fileName && (
-            <img
-              src={`${img_url}${fileName}`}
-              className="user-img"
-              alt="加载失败"
-            />
-          )}
-        </Col>
+        <Col span="12">{fileName && <img src={`${img_url}${fileName}`} className="user-img" alt="加载失败" />}</Col>
         <Col span="12" className="user-area">
           <div className="user-name">{userName}</div>
         </Col>
@@ -46,9 +36,9 @@ const UserCard:React.FC<Props> = ({ userName, registerTime, fileName }) => {
 };
 
 UserCard.defaultProps = {
-  userName: "一叶扁舟",
-  registerTime: "2021-03-21",
-  fileName: "",
+  userName: '一叶扁舟',
+  registerTime: '2021-03-21',
+  fileName: '',
 };
 
 export default React.memo(UserCard);

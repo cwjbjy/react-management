@@ -1,21 +1,22 @@
+import { useCallback, useState } from 'react';
+import { useRequest } from 'ahooks';
+import { set } from 'local-storage';
 import { Card, Modal, message, Spin } from 'antd';
 import PassChange from './components/passChange';
 import UserTable from './components/userTable';
-import { useState } from 'react';
 import API from '@/apis';
+import { USER_INFO } from '@/config/constant.js';
+import { Item } from './components/userTable';
 import './index.scss';
-import { useRequest } from 'ahooks';
-import { set } from 'local-storage';
-import { useCallback } from 'react';
 
 interface Info {
   id: string;
   user_name: string;
 }
 
-const setData = (data: any) => {
-  let newArr: any = [];
-  data.forEach((item: any, index: number) => {
+const setData = (data: Item[]) => {
+  let newArr: Item[] = [];
+  data.forEach((item: Item, index: number) => {
     let newItem = Object.assign({}, item, { key: index });
     newArr.push(newItem);
   });
@@ -26,24 +27,27 @@ const UserManage = () => {
   const [info, setInfo] = useState<Info>({} as Info);
   const [isModalVisible, setModal] = useState(false);
   const [password, setPassword] = useState('');
+  const [tableData, setTableData] = useState<Item[]>([]);
 
   const onModal = useCallback(({ isModalVisible, info }) => {
     setModal(isModalVisible);
     setInfo(info);
   }, []);
 
-  const { data, run, loading } = useRequest(API.getUsers, {
-    onSuccess: (res: any) => {},
+  const { run, loading } = useRequest(API.getUsers, {
+    onSuccess: (res: { code: number; data: Item[] }) => {
+      setTableData(setData(res.data));
+    },
   });
 
   const amend = useRequest(API.updateUser, {
     manual: true,
-    onSuccess: (data: any, params) => {
+    onSuccess: (data: { code: number }, params) => {
       if (data.code === 200) {
         message.success({
           content: '密码修改成功',
         });
-        set('userInfo', {
+        set(USER_INFO, {
           userName: params[0].user_name,
           passWord: params[0].password,
           flag: true,
@@ -91,7 +95,7 @@ const UserManage = () => {
         <>
           <Card hoverable>
             <strong>管理员可修改密码，普通用户可删除</strong>
-            <UserTable tableData={data && setData(data.data)} onModal={onModal} onDelete={onDelete} />
+            <UserTable tableData={tableData} onModal={onModal} onDelete={onDelete} />
           </Card>
           <Modal title="修改密码" visible={isModalVisible} onOk={handleOk} onCancel={() => setModal(false)}>
             <PassChange getPass={getPass} />

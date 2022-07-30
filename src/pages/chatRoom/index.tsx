@@ -1,22 +1,15 @@
-import React, {
-  useRef,
-  useEffect,
-  useMemo,
-  useState,
-  useCallback,
-} from "react";
-import insService from "@/service/websocket";
-import PubSub from "pubsub-js";
-import { bus } from "@/constant/bus.js";
-import { useSelector } from "react-redux";
-import { Button, message, Input, Card, Modal } from "antd";
-import styled from "styled-components";
-import showImage from "@/assets/images/chartRoom/chatShowV2.0.png";
-import rootImage from "@/assets/images/chartRoom/root.png";
-import * as ls from "local-storage";
-import "./index.scss";
-import { RootState } from "@/store/storeTypes";
-
+import React, { useRef, useEffect, useMemo, useState, useCallback } from 'react';
+import { Button, message, Input, Card, Modal } from 'antd';
+import PubSub from 'pubsub-js';
+import styled from 'styled-components';
+import * as ls from 'local-storage';
+import { useSelector } from 'react-redux';
+import insService from '@/service/websocket';
+import showImage from '@/assets/images/chartRoom/chatShowV2.0.png';
+import rootImage from '@/assets/images/chartRoom/root.png';
+import { RootState } from '@/store/storeTypes';
+import { bus } from '@/constant/bus.js';
+import './index.scss';
 interface Item {
   name: string;
   image: string;
@@ -30,7 +23,7 @@ const ChatRoom: React.FC<RootState> = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalImage, setIsModalImage] = useState(false);
   const inputRef = useRef<any>(null);
-  const userName = useMemo(() => ls.get<UserInfo>("userInfo").userName, []);
+  const userName = useMemo(() => ls.get<UserInfo>('userInfo').userName, []);
   const { fileName } = useSelector((state: RootState) => state.file);
   const [connectFlag, setConnectFlag] = useState(false);
   const [closeFlag, setCloseFlag] = useState(true);
@@ -58,7 +51,7 @@ const ChatRoom: React.FC<RootState> = () => {
 
   const connect = useCallback(() => {
     let user = {
-      type: "setName",
+      type: 'setName',
       name: userName,
       image: `${img_url}${fileName}`,
     };
@@ -72,7 +65,7 @@ const ChatRoom: React.FC<RootState> = () => {
 
   const close = useCallback(() => {
     insService.close({
-      type: "close",
+      type: 'close',
     });
     setConnectFlag(false);
     setCloseFlag(true);
@@ -80,15 +73,15 @@ const ChatRoom: React.FC<RootState> = () => {
 
   const send = useCallback(() => {
     if (!connectFlag) {
-      message.error("请先连接");
+      message.error('请先连接');
       return;
     }
-    if (inputRef.current!.state.value === "") return;
+    if (inputRef.current!.state.value === '') return;
     insService.sendMessage({
-      type: "chat",
+      type: 'chat',
       text: inputRef.current.state.value,
     });
-    inputRef.current.state.value = "";
+    inputRef.current.state.value = '';
   }, [connectFlag]);
 
   return (
@@ -114,25 +107,12 @@ const ChatRoom: React.FC<RootState> = () => {
             <div>
               {messageHistory.length > 0 &&
                 messageHistory.map((item: Item, index) => (
-                  <dl
-                    key={index}
-                    className={
-                      item.name === userName ? "info-right" : "info-left"
-                    }
-                  >
+                  <dl key={index} className={item.name === userName ? 'info-right' : 'info-left'}>
                     <dt>
                       {item.image ? (
-                        <img
-                          src={item.image}
-                          className="headPortrait"
-                          alt="图片加载失败"
-                        />
+                        <img src={item.image} className="headPortrait" alt="图片加载失败" />
                       ) : (
-                        <img
-                          src={rootImage}
-                          className="headPortrait"
-                          alt="加载失败"
-                        />
+                        <img src={rootImage} className="headPortrait" alt="加载失败" />
                       )}
                     </dt>
                     <dd>
@@ -153,16 +133,9 @@ const ChatRoom: React.FC<RootState> = () => {
           </div>
         </div>
       </Card>
-      <Modal
-        title="使用说明"
-        visible={isModalVisible}
-        footer={null}
-        onCancel={() => setIsModalVisible(false)}
-      >
+      <Modal title="使用说明" visible={isModalVisible} footer={null} onCancel={() => setIsModalVisible(false)}>
         <div>1.点击连接；</div>
-        <div>
-          2.使用另一个浏览器，登录另一个账户，点击连接；或者使用另一台电脑登录另一个账户
-        </div>
+        <div>2.使用另一个浏览器，登录另一个账户，点击连接；或者使用另一台电脑登录另一个账户</div>
         <div>3.输入消息，点击发送或者回车发送；</div>
       </Modal>
       <Modal

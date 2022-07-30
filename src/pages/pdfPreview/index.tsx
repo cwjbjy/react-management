@@ -1,9 +1,8 @@
-import { Card, Button, Modal } from "antd";
-import React,{ useState } from "react";
-import "./index.scss";
+import React, { useState } from 'react';
+import { Card, Button, Modal } from 'antd';
+import './index.scss';
 
 const PdfPreview = () => {
-  
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
@@ -11,11 +10,7 @@ const PdfPreview = () => {
       <Card hoverable>
         <strong>点击按钮，进行pdf预览，具有放大、缩小、下载、打印功能</strong>
         <div className="frontArea">
-          <Button
-            type="primary"
-            size="large"
-            onClick={() => setIsModalVisible(true)}
-          >
+          <Button type="primary" size="large" onClick={() => setIsModalVisible(true)}>
             点我弹框
           </Button>
         </div>
@@ -27,12 +22,7 @@ const PdfPreview = () => {
           footer={null}
           onCancel={() => setIsModalVisible(false)}
         >
-          <iframe
-            src="/static/cwj.pdf"
-            frameBorder="0"
-            className="pdf"
-            title="pdf"
-          ></iframe>
+          <iframe src="/static/cwj.pdf" frameBorder="0" className="pdf" title="pdf"></iframe>
         </Modal>
       </Card>
     </section>

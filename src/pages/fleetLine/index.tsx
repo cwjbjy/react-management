@@ -1,6 +1,6 @@
-import FleetModel from "./components/china";
-import "./index.scss";
-import React from 'react'
+import React from 'react';
+import FleetModel from './components/china';
+import './index.scss';
 
 const FleetLine = () => {
   return (

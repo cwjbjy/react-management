@@ -8,7 +8,7 @@ class DragBox {
     return this;
   }
   DragStart() {
-    this.el.onmousedown = (evt: any) => {
+    this.el.onmousedown = (evt: React.DragEvent<HTMLDivElement>) => {
       var e = evt || window.event;
       var disX = e.pageX - this.el.offsetLeft;
       var disY = e.pageY - this.el.offsetTop;
@@ -19,8 +19,8 @@ class DragBox {
   DragIng(x: number, y: number) {
     document.onmousemove = (evt) => {
       var e = evt || window.event;
-      this.el.style.left = e.pageX - x + "px";
-      this.el.style.top = e.pageY - y + "px";
+      this.el.style.left = e.pageX - x + 'px';
+      this.el.style.top = e.pageY - y + 'px';
     };
   }
   DragEnd() {
