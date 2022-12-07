@@ -1,6 +1,7 @@
-import file from "./file";
-import logger from "redux-logger";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
+
+import file from './file';
 
 const store = configureStore({
   reducer: {

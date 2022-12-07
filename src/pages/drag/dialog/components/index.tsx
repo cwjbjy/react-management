@@ -1,9 +1,10 @@
-import { useEffect } from "react";
-import Drag from "./drag";
+import { useEffect } from 'react';
+
+import Drag from './drag';
 
 const Toast = () => {
   useEffect(() => {
-    Drag.init("ant-modal-content").DragStart();
+    Drag.init('ant-modal-content').DragStart();
   }, []);
 
   return <div>我是一个可以拖拽的模式框！</div>;

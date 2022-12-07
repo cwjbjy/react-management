@@ -1,8 +1,9 @@
-import { Component } from 'react';
 import { Card } from 'antd';
+import { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import initialData from './components/todoData';
+
 import Column from './components/column';
+import initialData from './components/todoData';
 import './index.scss';
 
 export default class ReactBeautifulTodo extends Component {

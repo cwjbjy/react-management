@@ -1,7 +1,8 @@
-import instance from "./index";
-import { ACCESS_TOKEN, REFRESH_TOKEN, PASS } from "@/config/constant";
-import { clearAuthAndRedirect } from "./clear";
-import {REFRESH_ACTION} from '@/config/apiMap.js'
+import { clearAuthAndRedirect } from './clear';
+import instance from './index';
+
+import { REFRESH_ACTION } from '@/config/apiMap.js';
+import { ACCESS_TOKEN, REFRESH_TOKEN, PASS } from '@/config/constant';
 
 let subscribers = [];
 let pending = false; //同时请求多个过期链接，保证只请求一次获取短token
@@ -22,10 +23,7 @@ export const refreshAccessToken = async () => {
       const l_tk = localStorage.getItem(REFRESH_TOKEN);
       if (l_tk) {
         /* 重新获取短token */
-        const { accessToken } = await instance.get(
-          REFRESH_ACTION,
-          Object.assign({}, { headers: { [PASS]: l_tk } })
-        );
+        const { accessToken } = await instance.get(REFRESH_ACTION, Object.assign({}, { headers: { [PASS]: l_tk } }));
         localStorage.setItem(ACCESS_TOKEN, accessToken);
         retryRequest();
       }

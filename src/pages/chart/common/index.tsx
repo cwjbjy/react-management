@@ -1,5 +1,6 @@
-import { useRef, useEffect, useCallback } from 'react';
 import { useExternal } from 'ahooks';
+import { useRef, useEffect, useCallback } from 'react';
+
 import userImage from '@/assets/images/home/user.jpg';
 import './index.scss';
 

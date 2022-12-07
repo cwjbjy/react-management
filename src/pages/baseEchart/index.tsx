@@ -1,11 +1,12 @@
-import { useContext } from 'react';
 import { Row, Col, Card } from 'antd';
+import { useContext } from 'react';
+
 import Bar from '../../components/baseEcharts/bar';
-import Pie from '../../components/baseEcharts/pie';
-import Scatter from '../../components/baseEcharts/scatter';
-import Scale from '../../components/baseEcharts/scale';
-import Line from '../../components/baseEcharts/line';
 import Cylinder from '../../components/baseEcharts/cylinder';
+import Line from '../../components/baseEcharts/line';
+import Pie from '../../components/baseEcharts/pie';
+import Scale from '../../components/baseEcharts/scale';
+import Scatter from '../../components/baseEcharts/scatter';
 import ThemeContext from '../../layout/themeContext';
 import './index.scss';
 

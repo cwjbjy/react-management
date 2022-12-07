@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import Task from './task'
-import { Droppable } from 'react-beautiful-dnd'
+import React, { Component } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 
+import Task from './task';
 
 export default class Column extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class Column extends Component {
         <div className="title">{this.props.column.title}</div>
         <Droppable droppableId={this.props.column.id} type="TASK">
           {(provided, snapshot) => (
-            <div 
+            <div
               className="taskList"
               ref={provided.innerRef}
               {...provided.droppableProps}
@@ -24,6 +24,6 @@ export default class Column extends Component {
           )}
         </Droppable>
       </div>
-    )
+    );
   }
 }

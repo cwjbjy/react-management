@@ -1,19 +1,21 @@
-import React, { useContext, useMemo, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { get } from 'local-storage';
-import { useSelector } from 'react-redux';
 import { Row, Col, Card, Space } from 'antd';
-import UserCard from './components/userCard';
-import ProgressCard from './components/progressCard';
-import Message from './components/message';
-import Schedule from './components/schedule';
+import { get } from 'local-storage';
+import React, { useContext, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import ThemeContext from '../../layout/themeContext';
 import Bar from './components/bar';
 import BarLine from './components/barLine';
-import ThemeContext from '../../layout/themeContext';
+import Message from './components/message';
+import ProgressCard from './components/progressCard';
+import Schedule from './components/schedule';
+import UserCard from './components/userCard';
+
+import API from '@/apis';
 import { getData } from '@/apis/token.js';
 import { USER_INFO } from '@/config/constant.js';
 import { RootState } from '@/store/storeTypes';
-import API from '@/apis';
 import './index.scss';
 
 const barModel = {

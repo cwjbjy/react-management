@@ -1,5 +1,6 @@
-import React from 'react';
 import { Card, Row, Col } from 'antd';
+import React from 'react';
+
 import { register } from '@/filter';
 import './userCard.scss';
 interface Props {

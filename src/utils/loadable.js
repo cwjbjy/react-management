@@ -1,11 +1,12 @@
-import Loadable from 'react-loadable'
-import {FullScreenLoading} from '@/components/layout/loading.jsx'
+import Loadable from 'react-loadable';
 
-const loadable = (loader)=>{
-    return Loadable({
-        loader,
-        loading:FullScreenLoading
-    })
-}
+import { FullScreenLoading } from '@/components/layout/loading.jsx';
 
-export default loadable
+const loadable = (loader) => {
+  return Loadable({
+    loader,
+    loading: FullScreenLoading,
+  });
+};
+
+export default loadable;

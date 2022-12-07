@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { Modal, Card, Button } from 'antd';
+import React, { useState } from 'react';
+
 import Toast from './components/index';
 import './index.scss';
 

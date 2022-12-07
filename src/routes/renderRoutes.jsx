@@ -1,9 +1,10 @@
-import { Redirect, Route, Switch } from "react-router-dom";
-import PrivateRoute from "./privareRoute";
-import RouteContext from "./context";
+import { Redirect, Route, Switch } from 'react-router-dom';
+
+import RouteContext from './context';
+import PrivateRoute from './privareRoute';
 
 const getRoute = (requireAuth) => {
-  if (requireAuth || typeof requireAuth === "undefined") {
+  if (requireAuth || typeof requireAuth === 'undefined') {
     return PrivateRoute;
   }
   return Route;
@@ -23,9 +24,7 @@ const renderRoutes = (routes) => {
               return (
                 <>
                   {route.redirect && <Redirect to={route.redirect} />}
-                  <RouteContext.Provider
-                    value={!route.routes ? [] : route.routes}
-                  >
+                  <RouteContext.Provider value={!route.routes ? [] : route.routes}>
                     {route.component ? <route.component {...props} /> : null}
                   </RouteContext.Provider>
                 </>

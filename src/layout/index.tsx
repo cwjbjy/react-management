@@ -1,14 +1,16 @@
-import Header from '../components/header/index';
-import Menus from '../components/menus/index';
-import { menus } from '../components/menus/config';
-import { useState, useCallback, useMemo, useRef } from 'react';
 import { useTitle } from 'ahooks';
-import { get } from 'local-storage';
-import ThemeContext from './themeContext';
-import RouterView from '../routes/routerView';
-import './index.scss';
 import { BackTop } from 'antd';
+import { get } from 'local-storage';
+import { useState, useCallback, useMemo, useRef } from 'react';
+
+import Header from '../components/header/index';
+import { menus } from '../components/menus/config';
+import Menus from '../components/menus/index';
 import Global from '../global/index';
+import RouterView from '../routes/routerView';
+import ThemeContext from './themeContext';
+
+import './index.scss';
 
 enum ThemeColor {
   GRAY = 'theme-gray',

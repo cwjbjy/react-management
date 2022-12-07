@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
+import { Form, Input, message } from 'antd';
 import produce from 'immer';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { FormButton } from './form';
-import { getTime } from '@/utils/comFunc';
+
 import API from '@/apis';
+import { getTime } from '@/utils/comFunc';
 import './register.scss';
 
 interface Props {

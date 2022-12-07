@@ -1,5 +1,4 @@
-import React from 'react';
-import { Dispatch } from 'react';
+import React, { Dispatch } from 'react';
 
 interface ThemeContextType {
   theme: ThemeColor;

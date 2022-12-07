@@ -1,6 +1,8 @@
-import { bus } from "@/constant/bus.js";
-import PubSub from "pubsub-js";
-import { User } from "./types";
+import PubSub from 'pubsub-js';
+
+import { User } from './types';
+
+import { bus } from '@/constant/bus.js';
 const ws = process.env.REACT_APP_WS;
 export default class WebsocketClass {
   public client: any;
@@ -9,7 +11,7 @@ export default class WebsocketClass {
   public reqMessageQueue: any[];
   public closeCallBack: any;
   public heartCheck: any;
-  constructor({ topic = "", closeCallBack = null } = {}) {
+  constructor({ topic = '', closeCallBack = null } = {}) {
     this.client = null; //客户端WebSocket实例
     this.topic = `${ws}${topic}`;
     this.resMessageQueue = []; //获取消息队列
@@ -26,8 +28,8 @@ export default class WebsocketClass {
       bounce() {
         this.timeOutObj = setTimeout(() => {
           let heart = {
-            type: "heart",
-            text: "putong",
+            type: 'heart',
+            text: 'putong',
           };
           that.sendMessage({ msg: heart });
         }, 30000);
@@ -40,9 +42,9 @@ export default class WebsocketClass {
   _heartBeat() {
     let that = this;
     setTimeout(() => {
-      console.log("唤醒心跳");
+      console.log('唤醒心跳');
       that.connect().then(() => {
-        console.log("心跳已唤醒");
+        console.log('心跳已唤醒');
       });
     }, 1000);
   }
@@ -57,26 +59,26 @@ export default class WebsocketClass {
       this.client.onopen = function () {
         if (this.readyState === this.OPEN) {
           that.heartCheck.bounce();
-          if (JSON.stringify(params) !== "{}") {
+          if (JSON.stringify(params) !== '{}') {
             that.sendMessage({ msg: params });
           }
           resolve(null);
         }
       };
       this.client.onclose = function () {
-        console.log("web channel closed");
+        console.log('web channel closed');
         if (that.closeCallBack !== null) {
           that.closeCallBack(); //this指向当前onclose函数，通过that调用WebsocketClass类
         }
       };
       this.client.onerror = function (error: any) {
-        console.log("error", error);
+        console.log('error', error);
         that._heartBeat();
       };
       this.client.onmessage = function (e: any) {
         let data = JSON.parse(e.data);
         //如果是心跳，组件则不通信
-        if (data.name === "heart") {
+        if (data.name === 'heart') {
           console.log(data.text);
         } else {
           PubSub.publish(bus.updateWs, data);
@@ -92,7 +94,7 @@ export default class WebsocketClass {
     if (this.client.readyState === this.client.OPEN) {
       this.client.send(JSON.stringify(msg));
     } else {
-      console.log("连接异常");
+      console.log('连接异常');
     }
   }
   /**

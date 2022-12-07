@@ -1,13 +1,14 @@
-import React, { Dispatch } from 'react';
-import { Form, Input, Button } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-import { set } from 'local-storage';
 import { useRequest, useKeyPress } from 'ahooks';
+import { Form, Input, Button } from 'antd';
 import produce from 'immer';
+import { set } from 'local-storage';
+import React, { Dispatch } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { saveCookie } from '@/utils/cookie.js';
+
 import API from '@/apis';
+import { saveCookie } from '@/utils/cookie.js';
 
 interface Props {
   setUser: Dispatch<React.SetStateAction<any>>;

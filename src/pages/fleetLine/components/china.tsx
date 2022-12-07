@@ -1,5 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
+
 import { geoCoordMap, apiData } from '../../../constant/map';
+
 import { ApiData, GeoCoordMap } from '@/constant/types';
 
 const buildLines = function (data: ApiData[], geoCoordMap: GeoCoordMap) {

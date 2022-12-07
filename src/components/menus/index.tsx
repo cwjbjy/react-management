@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
-import { Menu } from "antd";
-import React, { useEffect, useState } from "react";
-import { MenusTypes } from "./config";
-import "./index.scss";
+import { Menu } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+import { MenusTypes } from './config';
+import './index.scss';
 
 interface Props {
   menus: MenusTypes[];
@@ -10,22 +11,22 @@ interface Props {
 
 const { SubMenu } = Menu;
 
-const rootSubmenuKeys = ["drag", "flowChart"];
+const rootSubmenuKeys = ['drag', 'flowChart'];
 
 const Menus: React.FC<Props> = ({ menus }) => {
   const location = useLocation();
 
-  const [selectedKey, setselectedKeys] = useState([""]);
+  const [selectedKey, setselectedKeys] = useState(['']);
 
   useEffect(() => {
-    let index = location.pathname.lastIndexOf("/");
+    let index = location.pathname.lastIndexOf('/');
     let key = location.pathname.substr(index + 1);
     setselectedKeys([key]);
   }, [location]);
 
   const [openKeys, setOpenKeys] = useState<any[]>([]);
 
-  const onOpenChange = (keys:any[]) => {
+  const onOpenChange = (keys: any[]) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
       setOpenKeys(keys);
@@ -56,7 +57,7 @@ const Menus: React.FC<Props> = ({ menus }) => {
               </Menu.Item>
             ))}
           </SubMenu>
-        )
+        ),
       )}
     </Menu>
   );

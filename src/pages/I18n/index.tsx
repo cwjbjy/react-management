@@ -1,9 +1,9 @@
-import React from 'react';
+import { Card, Button } from 'antd';
 import i18n from 'i18next';
+import React from 'react';
 // import Backend from "i18next-xhr-backend";
 // import LanguageDetector from "i18next-browser-languagedetector";
 import { useTranslation, initReactI18next } from 'react-i18next';
-import { Card, Button } from 'antd';
 import './index.scss';
 
 i18n

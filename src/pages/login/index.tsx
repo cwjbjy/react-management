@@ -1,14 +1,16 @@
-import { useCallback, useEffect } from 'react';
 import { useRequest, useLocalStorageState, useTitle } from 'ahooks';
-import produce from 'immer';
 import cn from 'classnames';
+import produce from 'immer';
+import { useCallback, useEffect } from 'react';
+
 import LoginForm from './components/form';
-import LoginOther from './components/third';
 import RegisterForm from './components/register';
+import LoginOther from './components/third';
 import { Container, Header, Main, Form } from '@/components/layout/login.jsx';
-import clearInfo from '@/utils/clearInfo.js';
+
 import { getToken } from '@/apis/token.js';
 import { REFRESH_TOKEN, ACCESS_TOKEN, USER_INFO } from '@/config/constant.js';
+import clearInfo from '@/utils/clearInfo.js';
 
 const Login = () => {
   useTitle('登录');

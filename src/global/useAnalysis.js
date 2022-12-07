@@ -1,6 +1,7 @@
-import track from "../utils/track";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import track from '../utils/track';
 
 track.start();
 

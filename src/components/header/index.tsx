@@ -1,14 +1,17 @@
-import { Menu, Dropdown } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
-import './index.scss';
-import { removeCookie } from '@/utils/cookie';
-import ThemeContext from '../../layout/themeContext';
+import { useRequest } from 'ahooks';
+import { Menu, Dropdown } from 'antd';
 import React, { useContext, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRequest } from 'ahooks';
+import { useHistory } from 'react-router-dom';
+
+import ThemeContext from '../../layout/themeContext';
+
 import API from '@/apis';
 import { SETFILENAME } from '@/store/file.js';
-import { useHistory } from 'react-router-dom';
+import { removeCookie } from '@/utils/cookie';
+
+import './index.scss';
 
 interface Props {
   userName: string;

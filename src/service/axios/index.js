@@ -1,16 +1,13 @@
-import axios from "axios";
-import { refreshAccessToken, addSubscriber } from "./refresh";
-import { clearAuthAndRedirect } from "./clear";
-import {
-  CODE_LOGGED_OTHER,
-  CODE_RELOGIN,
-  CODE_TOKEN_EXPIRED,
-  CODE_SUCCESS,
-} from "@/config/returnCodeMap";
-import { REFRESH_ACTION } from "@/config/apiMap";
-import { ACCESS_TOKEN, AUTH } from "@/config/constant";
+import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_AUTH_URL
+import { clearAuthAndRedirect } from './clear';
+import { refreshAccessToken, addSubscriber } from './refresh';
+
+import { REFRESH_ACTION } from '@/config/apiMap';
+import { ACCESS_TOKEN, AUTH } from '@/config/constant';
+import { CODE_LOGGED_OTHER, CODE_RELOGIN, CODE_TOKEN_EXPIRED, CODE_SUCCESS } from '@/config/returnCodeMap';
+
+const baseURL = process.env.REACT_APP_AUTH_URL;
 
 const instance = axios.create({
   baseURL,
@@ -29,7 +26,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 instance.interceptors.response.use(
@@ -39,10 +36,10 @@ instance.interceptors.response.use(
     let { retry } = config;
     /* 延续Promise链 */
     return new Promise((resolve, reject) => {
-      if (data["returncode"] !== CODE_SUCCESS) {
+      if (data['returncode'] !== CODE_SUCCESS) {
         if ([CODE_LOGGED_OTHER, CODE_RELOGIN].includes(data.returncode)) {
           clearAuthAndRedirect();
-        } else if (config.url !== REFRESH_ACTION && data["returncode"] === CODE_TOKEN_EXPIRED && !retry) {
+        } else if (config.url !== REFRESH_ACTION && data['returncode'] === CODE_TOKEN_EXPIRED && !retry) {
           config.retry = true;
           addSubscriber(() => resolve(instance(config)));
           refreshAccessToken();
@@ -56,7 +53,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export default instance;

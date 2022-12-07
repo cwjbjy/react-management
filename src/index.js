@@ -2,11 +2,12 @@ import 'antd/dist/antd.css';
 import './assets/icon/iconfont.css';
 
 import ReactDOM from 'react-dom';
-import store from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import renderRoutes from './routes/renderRoutes';
+
 import routeConfig from './config/routeConfig.js';
+import renderRoutes from './routes/renderRoutes';
+import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,5 +1,6 @@
-import WebsocketClass from "./WebSocket";
-import { message } from "antd";
+import { message } from 'antd';
+
+import WebsocketClass from './WebSocket';
 
 interface Message {
   type: string;
@@ -18,11 +19,11 @@ const insService = {
     WSInstance = new WebsocketClass({ closeCallBack });
     WSInstance.connect(params)
       .then(() => {
-        console.log("connect success");
-        message.success("连接成功");
+        console.log('connect success');
+        message.success('连接成功');
       })
       .catch(() => {
-        message.error("网络错误，请稍后重试");
+        message.error('网络错误，请稍后重试');
       });
   },
   sendMessage(params: Message) {
@@ -30,7 +31,7 @@ const insService = {
   },
   close(params: Message) {
     WSInstance.close(params).then(() => {
-      message.success("关闭成功");
+      message.success('关闭成功');
     });
   },
 };

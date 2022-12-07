@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import useResize from '@/hooks/useResize';
+
 import { themeColor } from '@/constant/theme';
+import useResize from '@/hooks/useResize';
 
 const BarLine: React.FC<echartsProps> = ({ theme }) => {
   const echart = useRef(null);

@@ -1,13 +1,14 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { Upload, message, Card } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { get } from 'local-storage';
 import { useRequest } from 'ahooks';
+import { Upload, message, Card } from 'antd';
+import { get } from 'local-storage';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import API from '@/apis';
+import { USER_INFO } from '@/config/constant.js';
 import { SETFILENAME } from '@/store/file.js';
 import { RootState } from '@/store/storeTypes';
-import { USER_INFO } from '@/config/constant.js';
-import API from '@/apis';
 import './index.scss';
 
 const img_url = process.env.REACT_APP_IMG_URL;

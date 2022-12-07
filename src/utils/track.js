@@ -1,6 +1,7 @@
-import { onRouterChange } from "./onRouter";
-import { getTime, browserType } from "./comFunc.js";
-import API from "@/apis";
+import { getTime, browserType } from './comFunc.js';
+import { onRouterChange } from './onRouter';
+
+import API from '@/apis';
 class Track {
   constructor() {
     this.info = {
@@ -13,7 +14,7 @@ class Track {
     }
     this.started = true;
     this.addProperties({
-      $uid: "用户ID",
+      $uid: '用户ID',
       $deviceType: browserType(), //获取设备类型
       $url: window.location.href,
       $referer: document.referrer,
@@ -37,18 +38,16 @@ class Track {
   /* 追踪单页面 */
   trackSinglePage() {
     if (!this.started) {
-      throw new Error(
-        "[Track Error]: Track has not started yet, please use `track.start()` to start Track"
-      );
+      throw new Error('[Track Error]: Track has not started yet, please use `track.start()` to start Track');
     }
-    this.send("$pageview");
+    this.send('$pageview');
   }
   send(event, props) {
-    if (event !== "$pageview") {
-      delete this.info.data["$delay"];
+    if (event !== '$pageview') {
+      delete this.info.data['$delay'];
     }
-    if (event === "$pageview") {
-      delete this.info["$element_name"];
+    if (event === '$pageview') {
+      delete this.info['$element_name'];
     }
     Object.assign(
       this.info,
@@ -57,16 +56,16 @@ class Track {
         $eventTime: Date.now(), //触发埋点的时间戳
         $localTime: getTime(), //获取用户本地时间
       },
-      props
+      props,
     );
     /* 加密发送数据 */
-    API.getUserInfo({data:JSON.stringify(this.info)})
+    API.getUserInfo({ data: JSON.stringify(this.info) });
   }
   addProperties(props) {
     Object.assign(this.info.data, props);
   }
   addDomEventHandler() {
-    ["click", "change", "submit"].forEach((e) => {
+    ['click', 'change', 'submit'].forEach((e) => {
       document.addEventListener(e, this.trackEvent.bind(this));
     });
   }
@@ -84,19 +83,19 @@ class Track {
     if (!el.tagName) return false;
     const tagName = el.tagName.toLowerCase();
     switch (tagName) {
-      case "form":
-        return eventType === "submit";
-      case "button":
-        return eventType === "click";
-      case "input":
-        if (["button", "submit"].includes(el.getAttribute("type"))) {
-          return eventType === "click";
+      case 'form':
+        return eventType === 'submit';
+      case 'button':
+        return eventType === 'click';
+      case 'input':
+        if (['button', 'submit'].includes(el.getAttribute('type'))) {
+          return eventType === 'click';
         } else {
-          return eventType === "change";
+          return eventType === 'change';
         }
-      case "select":
-      case "textarea":
-        return eventType === "change";
+      case 'select':
+      case 'textarea':
+        return eventType === 'change';
       default:
         return false;
     }
