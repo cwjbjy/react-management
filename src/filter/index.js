@@ -1,5 +1,4 @@
 export const register = (value) => {
-    if(!value) return "";
-    let array = value.split(" ")
-    return array[0]
-}
+  if (!value) return '';
+  return value.substring(0, 10);
+};

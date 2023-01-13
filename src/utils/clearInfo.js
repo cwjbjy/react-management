@@ -1,10 +1,10 @@
 import ls from 'local-storage';
 
-import { removeCookie } from './cookie';
+import { ACCESS_TOKEN, USER_MENU } from '@/config/constant';
 
 const clearInfo = () => {
-  removeCookie('token');
-  ls.remove('menu');
+  ls.remove(ACCESS_TOKEN); //清除token
+  ls.remove(USER_MENU); //清除菜单栏
 };
 
 export default clearInfo;

@@ -2,42 +2,48 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Form, Input, message } from 'antd';
 import produce from 'immer';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, memo } from 'react';
 
 import { FormButton } from './form';
 
 import API from '@/apis';
+import { CODE_EXIST } from '@/config/returnCodeMap';
 import { getTime } from '@/utils/comFunc';
 import './register.scss';
 
 interface Props {
   setUser: any;
+  onRegister: (params: any) => void;
 }
 
 const icon = {
   color: '#c0c4cc',
 };
 
-const RegisterForm: React.FC<Props> = ({ setUser }) => {
+const RegisterForm = ({ setUser, onRegister }: Props) => {
   const [verifyCode, set_verifyCode] = useState<any>(null);
 
   const { run } = useRequest(API.register, {
     manual: true,
     onSuccess: (data: any, params) => {
-      message.success({
-        content: data.message,
-        className: 'custom-message',
-      });
       setUser(
         produce((draft: UserInfo) => {
           draft.userName = params[0].userName;
           draft.passWord = params[0].passWord;
-          draft.flag = true;
         }),
       );
+      message.success({
+        content: data.msg,
+        className: 'custom-message',
+      });
+      onRegister({
+        userName: params[0].userName,
+        passWord: params[0].passWord,
+      });
     },
     onError: (error: any) => {
-      if (error.status === 403) {
+      console.log('error', error);
+      if (error.status === CODE_EXIST) {
         message.error({
           content: '用户名已存在，请重新选择用户名',
           className: 'custom-message',
@@ -78,7 +84,7 @@ const RegisterForm: React.FC<Props> = ({ setUser }) => {
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: '请输入用户名!',
           },
         ]}
       >
@@ -90,7 +96,7 @@ const RegisterForm: React.FC<Props> = ({ setUser }) => {
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: '请输入密码!',
           },
           {
             pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/,
@@ -109,14 +115,14 @@ const RegisterForm: React.FC<Props> = ({ setUser }) => {
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: '请再次输入密码!',
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue('rge_pass') === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              return Promise.reject(new Error('两次密码不一致!'));
             },
           }),
         ]}
@@ -140,4 +146,4 @@ const RegisterForm: React.FC<Props> = ({ setUser }) => {
   );
 };
 
-export default React.memo(RegisterForm);
+export default memo(RegisterForm);

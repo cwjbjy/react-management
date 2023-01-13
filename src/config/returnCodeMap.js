@@ -1,8 +1,14 @@
-// 在其它客户端被登录
-export const CODE_LOGGED_OTHER = 106;
-// 重新登陆
-export const CODE_RELOGIN = 108;
-// token过期
-export const CODE_TOKEN_EXPIRED = 104;
+// token过期或无效
+export const CODE_TOKEN_EXPIRED = 401;
+
 //接口请求成功
 export const CODE_SUCCESS = 0;
+
+//接口请求失败
+export const CODE_ERROR = -1;
+
+//密码或用户名错误
+export const CODE_NAME_PASS = 400;
+
+//注册-用户已存在
+export const CODE_EXIST = 403;

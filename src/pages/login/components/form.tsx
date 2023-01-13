@@ -2,13 +2,14 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest, useKeyPress } from 'ahooks';
 import { Form, Input, Button } from 'antd';
 import produce from 'immer';
-import { set } from 'local-storage';
-import React, { Dispatch } from 'react';
+import * as ls from 'local-storage';
+import { Dispatch, forwardRef, memo, useImperativeHandle } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import API from '@/apis';
-import { saveCookie } from '@/utils/cookie.js';
+import { USER_MENU, ACCESS_TOKEN } from '@/config/constant';
+import { CODE_NAME_PASS } from '@/config/returnCodeMap';
 
 interface Props {
   setUser: Dispatch<React.SetStateAction<any>>;
@@ -19,38 +20,43 @@ const icon = {
   color: '#c0c4cc',
 };
 
-const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
+const LoginForm = forwardRef(({ setUser, userInfo }: Props, ref) => {
+  useImperativeHandle(ref, () => ({
+    login: (params: any) => {
+      console.log('params', params);
+      run(params);
+    },
+  }));
+
   const history = useHistory();
 
   const [form] = Form.useForm();
 
   const { run, loading } = useRequest(API.login, {
     manual: true,
-    onSuccess: async (data: Record<string, any>, params) => {
-      await saveCookie('token', data.value);
-      set('menu', data.auth);
+    onSuccess: (data: Record<string, any>, params) => {
+      ls.set(ACCESS_TOKEN, data.data.token);
+      ls.set(USER_MENU, data.data.auth);
       setUser(
         produce((draft: UserInfo) => {
           draft.userName = params[0].get('userName');
           draft.passWord = params[0].get('passWord');
-          draft.flag = true;
         }),
       );
       history.push('/home/firstItem');
     },
     onError: (error: Record<string, any>) => {
-      if (error.status === 400) {
+      if (error.status === CODE_NAME_PASS) {
         form.setFields([
           {
             name: 'passWord',
-            errors: ['密码错误'],
+            errors: ['用户名或密码错误'],
           },
         ]);
-      } else if (error.status === 401) {
         form.setFields([
           {
             name: 'userName',
-            errors: ['用户名错误'],
+            errors: ['用户名或密码错误'],
           },
         ]);
       }
@@ -58,7 +64,7 @@ const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
   });
 
   const onFinish = (params: UserInfo) => {
-    let formData = new FormData();
+    let formData = new URLSearchParams();
     formData.append('userName', params.userName);
     formData.append('passWord', params.passWord);
     run(formData);
@@ -101,9 +107,9 @@ const LoginForm: React.FC<Props> = ({ setUser, userInfo }) => {
       </Form.Item>
     </Form>
   );
-};
+});
 
-export default React.memo(LoginForm);
+export default memo(LoginForm);
 
 export const FormButton = styled(Button)`
   width: 100%;

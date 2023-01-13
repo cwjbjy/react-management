@@ -13,7 +13,6 @@ import Schedule from './components/schedule';
 import UserCard from './components/userCard';
 
 import API from '@/apis';
-import { getData } from '@/apis/token.js';
 import { USER_INFO } from '@/config/constant.js';
 import { RootState } from '@/store/storeTypes';
 import './index.scss';
@@ -39,12 +38,10 @@ const HomePage = () => {
       }),
     {
       onSuccess: (res: Record<string, any>) => {
-        setCreateTime(res.Data[0].createTime);
+        setCreateTime(res.data[0].createTime);
       },
     },
   );
-
-  useRequest(getData);
 
   return (
     <section style={{ paddingLeft: 20 }}>

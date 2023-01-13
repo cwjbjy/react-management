@@ -11,6 +11,7 @@ import { SETFILENAME } from '@/store/file.js';
 import { RootState } from '@/store/storeTypes';
 import './index.scss';
 
+const baseURL = process.env.REACT_APP_AUTH_URL;
 const img_url = process.env.REACT_APP_IMG_URL;
 
 const beforeUpload = (file: any) => {
@@ -29,16 +30,12 @@ const FileUp = () => {
   const { fileName } = useSelector((state: RootState) => state.file);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const imgAction = useMemo(() => {
-    return process.env.NODE_ENV === 'development'
-      ? 'http://127.0.0.1:9000/api/uploadImage'
-      : 'https://wen.cwjbjy.online/api/uploadImage';
-  }, []);
+
   const userName = useMemo(() => get<UserInfo>(USER_INFO).userName, []);
   const { run } = useRequest(API.getImage, {
     manual: true,
     onSuccess: (res: any) => {
-      dispatch(SETFILENAME(res.Data[0].photo));
+      dispatch(SETFILENAME(res.data[0].photo));
     },
   });
 
@@ -75,7 +72,7 @@ const FileUp = () => {
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          action={imgAction}
+          action={`${baseURL}/uploadImage`}
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >

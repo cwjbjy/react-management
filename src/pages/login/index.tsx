@@ -1,44 +1,43 @@
-import { useRequest, useLocalStorageState, useTitle } from 'ahooks';
+import { useLocalStorageState, useTitle } from 'ahooks';
 import cn from 'classnames';
-import produce from 'immer';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import LoginForm from './components/form';
 import RegisterForm from './components/register';
 import LoginOther from './components/third';
 import { Container, Header, Main, Form } from '@/components/layout/login.jsx';
 
-import { getToken } from '@/apis/token.js';
-import { REFRESH_TOKEN, ACCESS_TOKEN, USER_INFO } from '@/config/constant.js';
+import { USER_INFO } from '@/config/constant.js';
 import clearInfo from '@/utils/clearInfo.js';
+
+export interface ForwardObject {
+  login: (params: any) => void;
+}
 
 const Login = () => {
   useTitle('登录');
 
   const [userInfo, setUser] = useLocalStorageState(USER_INFO, {
-    defaultValue: { userName: '一叶扁舟', passWord: '123456zx', flag: true },
+    defaultValue: { userName: '一叶扁舟', passWord: '123456zx' },
   });
 
-  useRequest(getToken, {
-    onSuccess: (res: Record<string, any>) => {
-      //存储长token
-      localStorage.setItem(REFRESH_TOKEN, res.refreshToken);
-      //存储短token
-      localStorage.setItem(ACCESS_TOKEN, res.accessToken);
-    },
-  });
+  const [flag, setFlag] = useState(true);
+  const loginRef = useRef<ForwardObject>();
 
   useEffect(() => {
     clearInfo();
   }, []);
 
   const onTab = useCallback(() => {
-    setUser(
-      produce((draft) => {
-        if (draft) draft.flag = !draft.flag;
-      }),
-    );
-  }, [setUser]);
+    setFlag((prev) => !prev);
+  }, []);
+
+  const onRegister = useCallback((params) => {
+    let formData = new URLSearchParams();
+    formData.append('userName', params.userName);
+    formData.append('passWord', params.passWord);
+    loginRef.current?.login(formData);
+  }, []);
 
   return (
     <Container>
@@ -46,21 +45,20 @@ const Login = () => {
       <Main>
         <Form>
           <div className="tab">
-            <div className={cn({ title_active: userInfo.flag }, 'tab_title')} onClick={onTab}>
+            <div className={cn({ title_active: flag }, 'tab_title')} onClick={onTab}>
               用户登录
             </div>
-            <div className={cn({ title_active: !userInfo.flag }, 'tab_title')} onClick={onTab}>
+            <div className={cn({ title_active: !flag }, 'tab_title')} onClick={onTab}>
               用户注册
             </div>
           </div>
-          {userInfo.flag ? (
-            <>
-              <LoginForm userInfo={userInfo} setUser={setUser}></LoginForm>
-              <LoginOther></LoginOther>
-            </>
-          ) : (
-            <RegisterForm setUser={setUser}></RegisterForm>
-          )}
+          <div style={{ display: flag ? '' : 'none' }}>
+            <LoginForm userInfo={userInfo} setUser={setUser} ref={loginRef}></LoginForm>
+            <LoginOther></LoginOther>
+          </div>
+          <div style={{ display: !flag ? '' : 'none' }}>
+            <RegisterForm setUser={setUser} onRegister={onRegister}></RegisterForm>
+          </div>
         </Form>
       </Main>
     </Container>

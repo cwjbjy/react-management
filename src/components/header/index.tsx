@@ -9,7 +9,6 @@ import ThemeContext from '../../layout/themeContext';
 
 import API from '@/apis';
 import { SETFILENAME } from '@/store/file.js';
-import { removeCookie } from '@/utils/cookie';
 
 import './index.scss';
 
@@ -28,7 +27,7 @@ const Header: React.FC<Props> = ({ userName }) => {
   useRequest(() => API.getImage({ user_name: userName }), {
     ready: !!userName,
     onSuccess: (res: any) => {
-      dispatch(SETFILENAME(res.Data[0].photo));
+      dispatch(SETFILENAME(res.data[0].photo));
     },
   });
 
@@ -36,7 +35,6 @@ const Header: React.FC<Props> = ({ userName }) => {
     ({ key }) => {
       if (key === '1') {
         history.push('/login');
-        removeCookie('token');
       }
     },
     [history],

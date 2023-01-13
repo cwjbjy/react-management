@@ -1,8 +1,11 @@
+import * as ls from 'local-storage';
 import qs from 'qs';
 
 import enumAuth from './auth';
 
-import { readCookie } from '@/utils/cookie.js';
+import { ACCESS_TOKEN } from '@/config/constant';
+import { CODE_TOKEN_EXPIRED } from '@/config/returnCodeMap';
+
 const baseURL = process.env.REACT_APP_AUTH_URL;
 
 class FetchClient {
@@ -22,15 +25,10 @@ class FetchClient {
     switch (auth) {
       case enumAuth.Level01: //需要token
         headers = Object.assign({}, this.headers, {
-          Authorization: `Basic ${readCookie('token')}`,
+          Authorization: `Bearer ${ls.get(ACCESS_TOKEN)}`,
         });
         break;
-      case enumAuth.Level02: //前端固定token
-        headers = Object.assign({}, this.headers, {
-          Authorization: `Basic di5j8fy85vSAX88U`,
-        });
-        break;
-      case enumAuth.Level03: //不需要token
+      case enumAuth.Level02: //不需要token
         headers = Object.assign({}, this.headers);
         break;
       default:
@@ -44,8 +42,9 @@ class FetchClient {
       });
       url = `${url}?${data}`;
     } else {
-      //传输JSON数据格式
-      if (Object.prototype.toString.call(data) !== '[object FormData]') {
+      //非form-data传输JSON数据格式
+      if (!['[object FormData]', '[object URLSearchParams]'].includes(Object.prototype.toString.call(data))) {
+        Object.assign(headers, { 'Content-Type': 'application/json' });
         data = JSON.stringify(data);
       }
       conf = {
@@ -78,6 +77,10 @@ class FetchClient {
             status: 'ok',
           });
         }
+      }
+      //token过期错误统一处理
+      if (res.status === CODE_TOKEN_EXPIRED) {
+        window.location.href = '/login';
       }
       /* 全局处理网络请求异常 */
       // alert("网络错误，请稍后重试");
