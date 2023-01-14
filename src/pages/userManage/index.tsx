@@ -44,17 +44,15 @@ const UserManage = () => {
 
   const amend = useRequest(API.updateUser, {
     manual: true,
-    onSuccess: (data: { code: number }, params) => {
-      if (data.code === 200) {
-        message.success({
-          content: '密码修改成功',
-        });
-        set(USER_INFO, {
-          userName: params[0].user_name,
-          passWord: params[0].password,
-          flag: true,
-        });
-      }
+    onSuccess: (data, params) => {
+      message.success({
+        content: '密码修改成功',
+      });
+      set(USER_INFO, {
+        userName: params[0].user_name,
+        passWord: params[0].password,
+        flag: true,
+      });
     },
   });
 
