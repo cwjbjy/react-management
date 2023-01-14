@@ -5,7 +5,7 @@ import React, { useCallback, useMemo } from 'react';
 export interface Item {
   user_name: string;
   photo: string;
-  authority: number;
+  authority: string;
   createTime: string;
 }
 
@@ -65,7 +65,7 @@ const UserTable: React.FC<Props> = ({ tableData, onModal, onDelete }) => {
         align: 'center',
         render: (_: string, record: Item) => (
           <>
-            {record.authority === 1 ? (
+            {record.authority === '1' ? (
               <Button type="text" className="blue" icon={<EditOutlined />} onClick={() => onEdit(record)}>
                 编辑
               </Button>
