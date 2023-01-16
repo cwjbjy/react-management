@@ -25,7 +25,7 @@ class FetchClient {
     switch (auth) {
       case enumAuth.Level01: //需要token
         headers = Object.assign({}, this.headers, {
-          Authorization: `Bearer ${ls.get(ACCESS_TOKEN)}`,
+          authorization: `Bearer ${ls.get(ACCESS_TOKEN)}`,
         });
         break;
       case enumAuth.Level02: //不需要token
