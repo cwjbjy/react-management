@@ -32,7 +32,7 @@ const CommonChart = () => {
     });
     myDiagram.addDiagramListener('ObjectSingleClicked', function () {});
     //上颜色
-    function colorBrushConverter(color: string) {
+    function colorBrushConverter(color) {
       if (color) return color;
       return 'orange';
     }
@@ -86,12 +86,12 @@ const CommonChart = () => {
             new window.go.Binding('text', 'name'), //这里的name命名要和下面对应
           ),
         ),
-        {
-          doubleClick: function (e: any, node: any) {
-            //在Panel块，双击获取当前节点的信息
-            // console.log("111", node.part.data);
-          },
-        },
+        // {
+        //   doubleClick: function (e, node) {
+        //     //在Panel块，双击获取当前节点的信息
+        //     console.log("111", node.part.data);
+        //   },
+        // },
       ),
     );
     myDiagram.linkTemplate = $(

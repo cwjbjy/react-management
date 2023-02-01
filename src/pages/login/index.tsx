@@ -10,8 +10,8 @@ import { Container, Header, Main, Form } from '@/components/layout/login.jsx';
 import { USER_INFO } from '@/config/constant.js';
 import clearInfo from '@/utils/clearInfo.js';
 
-export interface ForwardObject {
-  login: (params: any) => void;
+interface ForwardObject {
+  login: (params: URLSearchParams) => void;
 }
 
 const Login = () => {

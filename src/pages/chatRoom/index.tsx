@@ -59,7 +59,7 @@ const ChatRoom: React.FC<RootState> = () => {
     insService.joinMeeting({
       params: user,
       closeCallBack: _closeCallBack,
-    } as any);
+    });
     setConnectFlag(true);
     setCloseFlag(false);
   }, [userName, fileName, _closeCallBack]);

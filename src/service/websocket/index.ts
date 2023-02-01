@@ -15,7 +15,7 @@ let WSInstance: any = null;
  */
 
 const insService = {
-  joinMeeting({ params = {}, closeCallBack = null }) {
+  joinMeeting({ params = {}, closeCallBack = () => {} }) {
     WSInstance = new WebsocketClass({ closeCallBack });
     WSInstance.connect(params)
       .then(() => {

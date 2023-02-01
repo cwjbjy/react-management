@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { MenusTypes } from './config';
@@ -13,7 +13,7 @@ const { SubMenu } = Menu;
 
 const rootSubmenuKeys = ['drag', 'flowChart'];
 
-const Menus: React.FC<Props> = ({ menus }) => {
+const Menus = ({ menus }: Props) => {
   const location = useLocation();
 
   const [selectedKey, setselectedKeys] = useState(['']);
@@ -63,4 +63,4 @@ const Menus: React.FC<Props> = ({ menus }) => {
   );
 };
 
-export default React.memo(Menus);
+export default memo(Menus);

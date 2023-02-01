@@ -14,7 +14,7 @@ import './index.scss';
 const baseURL = process.env.REACT_APP_AUTH_URL;
 const img_url = process.env.REACT_APP_IMG_URL;
 
-const beforeUpload = (file: any) => {
+const beforeUpload = (file: File) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
     message.error('You can only upload JPG/PNG file!');
@@ -34,7 +34,7 @@ const FileUp = () => {
   const userName = useMemo(() => get<UserInfo>(USER_INFO).userName, []);
   const { run } = useRequest(API.getImage, {
     manual: true,
-    onSuccess: (res: any) => {
+    onSuccess: (res: Record<string, any>) => {
       dispatch(SETFILENAME(res.data[0].photo));
     },
   });

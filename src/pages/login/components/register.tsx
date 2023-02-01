@@ -2,7 +2,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Form, Input, message } from 'antd';
 import produce from 'immer';
-import { useCallback, useEffect, useState, memo } from 'react';
+import { Dispatch, useCallback, useEffect, useState, memo } from 'react';
 
 import { FormButton } from './form';
 
@@ -12,8 +12,8 @@ import { getTime } from '@/utils/comFunc';
 import './register.scss';
 
 interface Props {
-  setUser: any;
-  onRegister: (params: any) => void;
+  setUser: Dispatch<React.SetStateAction<any>>;
+  onRegister: (params: UserInfo) => void;
 }
 
 const icon = {
@@ -21,11 +21,11 @@ const icon = {
 };
 
 const RegisterForm = ({ setUser, onRegister }: Props) => {
-  const [verifyCode, set_verifyCode] = useState<any>(null);
+  const [verifyCode, set_verifyCode] = useState<{ validate: (params: string) => boolean }>();
 
   const { run } = useRequest(API.register, {
     manual: true,
-    onSuccess: (data: any, params) => {
+    onSuccess: (data: Record<string, any>, params) => {
       setUser(
         produce((draft: UserInfo) => {
           draft.userName = params[0].userName;
@@ -41,8 +41,7 @@ const RegisterForm = ({ setUser, onRegister }: Props) => {
         passWord: params[0].passWord,
       });
     },
-    onError: (error: any) => {
-      console.log('error', error);
+    onError: (error: Record<string, any>) => {
       if (error.status === CODE_EXIST) {
         message.error({
           content: '用户名已存在，请重新选择用户名',
@@ -58,7 +57,7 @@ const RegisterForm = ({ setUser, onRegister }: Props) => {
 
   const onFinish = useCallback(
     (params) => {
-      if (params.authCode && verifyCode.validate(params.authCode)) {
+      if (params.authCode && verifyCode?.validate(params.authCode)) {
         const user = {
           userName: params.reg_name,
           passWord: params.rge_pass,

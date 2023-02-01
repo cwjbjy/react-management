@@ -22,8 +22,7 @@ const icon = {
 
 const LoginForm = forwardRef(({ setUser, userInfo }: Props, ref) => {
   useImperativeHandle(ref, () => ({
-    login: (params: any) => {
-      console.log('params', params);
+    login: (params: URLSearchParams) => {
       run(params);
     },
   }));

@@ -246,7 +246,7 @@ const nodeDataArray = [
 
 const PositionChart = () => {
   const status = useExternal('/static/go.js');
-  const myDiagram = useRef<any>(null);
+  const myDiagram = useRef(null);
   const dealShow = () => {
     var $ = window.go.GraphObject.make; // for conciseness in defining templates
     // some constants that will be reused within templates
@@ -307,7 +307,7 @@ const PositionChart = () => {
         'RoundedRectangle',
         { fill: '#ffffff', strokeWidth: 0 },
         // 搜索时，被搜索到就变色
-        new window.go.Binding('fill', 'isHighlighted', function (h: boolean) {
+        new window.go.Binding('fill', 'isHighlighted', function (h) {
           return h ? '#409eff' : '#ffffff';
         }).ofObject(),
       ),
@@ -378,7 +378,7 @@ const PositionChart = () => {
           $(
             window.go.TextBlock,
             textStyle(),
-            new window.go.Binding('text', 'headOf', function (head: any) {
+            new window.go.Binding('text', 'headOf', function (head) {
               return '' + head;
             }),
             new window.go.Binding('margin', 'headOf', function () {
@@ -418,7 +418,7 @@ const PositionChart = () => {
     ); // tell it which Diagram to show and pan
   };
   const searchDiagram = () => {
-    var input = document.getElementById('mySearch') as HTMLInputElement;
+    var input = document.getElementById('mySearch');
     if (!input) return;
     input.focus();
 
@@ -438,10 +438,10 @@ const PositionChart = () => {
   useEffect(() => {
     if (status === 'ready') {
       dealShow();
-      let doc = document.querySelector('#myDiagramDiv')!.lastElementChild;
-      let str = doc!.getAttribute('style');
-      str = str!.replace('overflow: auto', 'overflow: hidden');
-      doc!.setAttribute('style', str);
+      let doc = document.querySelector('#myDiagramDiv').lastElementChild;
+      let str = doc.getAttribute('style');
+      str = str.replace('overflow: auto', 'overflow: hidden');
+      doc.setAttribute('style', str);
     }
   }, [status]);
   return (

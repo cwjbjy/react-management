@@ -11,7 +11,7 @@ export default class WebsocketClass {
   public reqMessageQueue: any[];
   public closeCallBack: any;
   public heartCheck: any;
-  constructor({ topic = '', closeCallBack = null } = {}) {
+  constructor({ topic = '', closeCallBack = () => {} } = {}) {
     this.client = null; //客户端WebSocket实例
     this.topic = `${ws}${topic}`;
     this.resMessageQueue = []; //获取消息队列
