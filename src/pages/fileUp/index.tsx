@@ -2,10 +2,12 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Upload, message, Card } from 'antd';
 import { get } from 'local-storage';
+import * as ls from 'local-storage';
 import React, { useState, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import API from '@/apis';
+import { ACCESS_TOKEN } from '@/config/constant';
 import { USER_INFO } from '@/config/constant.js';
 import { SETFILENAME } from '@/store/file.js';
 import { RootState } from '@/store/storeTypes';
@@ -75,6 +77,7 @@ const FileUp = () => {
           action={`${baseURL}/uploadImage`}
           beforeUpload={beforeUpload}
           onChange={handleChange}
+          headers={{ authorization: `Bearer ${ls.get(ACCESS_TOKEN)}` }}
         >
           {fileName ? <img src={`${img_url}${fileName}`} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
         </Upload>
