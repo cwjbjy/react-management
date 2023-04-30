@@ -10,4 +10,8 @@ css处理器：scss
 
 环境需求：node-v14
 
+## API地址
+
+https://github.com/cwjbjy/express-api
+
 ## 不再维护，新项目地址 https://github.com/cwjbjy/react-ts-manage
