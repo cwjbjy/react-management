@@ -22,9 +22,9 @@ css处理器：scss
 
 下载后台node服务 https://github.com/cwjbjy/express-api
 
-npm install
+yarn
 
-npm run start
+yarn dev
 
 后台服务起来后，前端即可正常访问接口
 
