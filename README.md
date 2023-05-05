@@ -1,26 +1,24 @@
 ## 技术栈
 
-js框架：react
+js 框架：react
 
-UI框架：antD
+UI 框架：antD
 
 数据可视化工具：echarts
 
-状态管理：redux,react-redux
+状态管理：react-redux，@reduxjs/toolkit
 
-路由：react-router-dom5
+路由：react-router-dom
 
 通信：fetch
 
-css处理器：scss
+css 处理器：scss
 
 打包工具：webpack4
 
-环境需求：node-v14
-
 ## 接口
 
-下载后台node服务 https://github.com/cwjbjy/express-api
+下载后台 node 服务 https://github.com/cwjbjy/express-api
 
 yarn
 
@@ -28,6 +26,6 @@ yarn dev
 
 后台服务起来后，前端即可正常访问接口
 
-## 不再维护，新项目地址 
+## 不再维护，新项目地址
 
 https://github.com/cwjbjy/react-ts-manage
