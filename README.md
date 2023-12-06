@@ -28,4 +28,6 @@ yarn dev
 
 ## 不再维护，新项目地址
 
-https://github.com/cwjbjy/react-ts-manage
+creat-react-app版：https://github.com/cwjbjy/react-ts-manage
+
+vite版：https://github.com/cwjbjy/vite-ts-react
